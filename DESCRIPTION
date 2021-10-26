@@ -1,15 +1,28 @@
 Package: herosurv
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: A Grammar of Survival Operations for CE Models
+Version: 1.0.0
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Jordan",
+           family = "Amdahl",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "jamdahl@pai2.com")
+Description: Provides functions for defining survival distributions, modifying/combining them, and generating predictions.
 License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))
 RoxygenNote: 7.1.2
+URL: https://github.com/PolicyAnalysisInc/herosurv
+BugReports: https://github.com/PolicyAnalysisInc/herosurv/issues
+Imports:
+    stats,
+    tibble,
+    dplyr,
+    survival,
+    flexsurv,
+    flexsurvcure,
+    stringr
+Suggests: 
+    testthat (>= 3.0.0),
+    roxytest
+Config/testthat/edition: 3
