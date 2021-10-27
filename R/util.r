@@ -92,13 +92,13 @@ quoted_list_string <- function(x) {
     paste0(paste0('"', x, '"'), collapse = ', ')
 }
 
-get_spline_param_values <- function(distribution, ...) {
-    surv_func_params <- get_surv_dist_params(dist)
-    params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
-    names(params) <- surv_func_params
+# get_spline_param_values <- function(distribution, ...) {
+#     surv_func_params <- get_surv_dist_params(dist)
+#     params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
+#     names(params) <- surv_func_params
     
-    params
-}
+#     params
+# }
 
 # get_dist_param_values <- function(distribution, ...) {
 #     surv_func_params <- get_surv_dist_params(dist)

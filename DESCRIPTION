@@ -6,6 +6,7 @@ Authors@R:
            family = "Amdahl",
            role = c("aut", "cre"),
            email = "jamdahl@pai2.com")
+Maintainer: Jordan Amdahl <jamdahl@pai2.com>
 Description: Provides functions for defining survival distributions, modifying/combining them, and generating predictions.
 License: AGPL (>= 3)
 Encoding: UTF-8
