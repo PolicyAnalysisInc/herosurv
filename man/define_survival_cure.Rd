@@ -4,7 +4,7 @@
 \alias{define_survival_cure}
 \title{Define a Parametric Mixture or Non-Mixture Cure Distribution}
 \usage{
-define_survival_cure(distribution, theta, ..., mixture = T)
+define_survival_cure(distribution, theta, ..., mixture = TRUE)
 }
 \arguments{
 \item{distribution}{A parametric survival distribution.}
