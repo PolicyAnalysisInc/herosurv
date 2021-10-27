@@ -41,7 +41,7 @@ define_survival <- function(distribution, ...) {
 #' @examples
 #' 
 #' define_survival_cure(distribution = "exp", theta = 0.34, rate = .5)
-#' define_survival_cure(distribution = "weibull", theta = 0.5, shape = 1.5, scale = 34.43, mixture = T)
+#' define_survival_cure(distribution = "weibull", theta = 0.5, shape = 1.5, scale = 34.43, mixture = TRUE)
 #' 
 define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
     dist_string <- match.arg(distribution, choices = flexsurv_dists)
