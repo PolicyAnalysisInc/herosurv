@@ -26,5 +26,6 @@ Imports:
     stringr
 Suggests: 
     testthat (>= 3.0.0),
-    roxytest
+    roxytest,
+    covr
 Config/testthat/edition: 3

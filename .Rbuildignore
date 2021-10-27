@@ -5,3 +5,4 @@
 ^\.circleci/config\.yml$
 ^readme.md
 
+^codecov\.yml$
