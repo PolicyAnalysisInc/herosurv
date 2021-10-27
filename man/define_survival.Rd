@@ -16,7 +16,8 @@ respective distribution help pages).}
 A \code{surv_dist} object.
 }
 \description{
-Define a parametric survival distribution.
+Define a parametric survival distribution with given
+parameter values.
 }
 \examples{
 

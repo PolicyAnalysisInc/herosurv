@@ -18,6 +18,7 @@ Imports:
     stats,
     tibble,
     dplyr,
+    purrr,
     survival,
     flexsurv,
     flexsurvcure,

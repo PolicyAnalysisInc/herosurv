@@ -9,17 +9,56 @@ test_that("Function get_surv_dist() @ L5", {
 })
 
 
-test_that("Function check_param_names() @ L20", {
-  expect_error(check_param_names(list(shape=1,foo=2), 'weibullPH'), 'Error defining "weibull" distribution, parameters missing from function call: "scale".'
+test_that("Function get_surv_dist_params() @ L21", {
+  expect_equal(
+   get_surv_dist_params('weibull'), c('shape', 'scale')
+  )
+  expect_equal(
+   get_surv_dist_params('gengamma'),
+   c('mu', 'sigma', 'Q')
+  )
+  expect_equal(
+   get_surv_dist_params('genf'),
+   c('mu', 'sigma', 'Q', 'P')
+  )
 })
 
 
-test_that("Function create_list_object() @ L41", {
-  expect_equal(class(create_list_object(c('a','b'), list())), c('a','b'))
+test_that("Function check_param_names() @ L35", {
+  expect_equal(
+   check_param_names(list(shape=1,foo=2), 'weibullPH'), 
+   'Error defining "weibullPH" distribution, parameters missing from function call: "scale".'
+  )
 })
 
 
-test_that("Function quoted_list_string() @ L48", {
-  expect_equal(quoted_list_string(c('a','b','c')), '"a", "b", "c"')
+test_that("Function check_theta() @ L65", {
+  expect_equal(check_theta(1), NULL)
+  expect_equal(check_theta(0.5), NULL)
+  expect_equal(check_theta(0), NULL)
+  expect_equal(
+   check_theta(-0.01),
+   'Error defining cure model, cure fraction (theta) must be in range (0-1).'
+  )
+  expect_equal(
+   check_theta(1.01),
+   'Error defining cure model, cure fraction (theta) must be in range (0-1).'
+  )
+})
+
+
+test_that("Function create_list_object() @ L81", {
+  expect_equal(
+   class(create_list_object(c('a','b'),
+   list())), c('a','b')
+  )
+})
+
+
+test_that("Function quoted_list_string() @ L91", {
+  expect_equal(
+   quoted_list_string(c('a','b','c')),
+   '"a", "b", "c"'
+  )
 })
 
