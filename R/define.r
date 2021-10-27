@@ -43,7 +43,7 @@ define_survival <- function(distribution, ...) {
 #' define_survival_cure(distribution = "exp", theta = 0.34, rate = .5)
 #' define_survival_cure(distribution = "weibull", theta = 0.5, shape = 1.5, scale = 34.43, mixture = T)
 #' 
-define_survival_cure <- function(distribution, theta, ..., mixture = T) {
+define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
     dist_string <- match.arg(distribution, choices = flexsurv_dists)
     errors <- list(
         check_param_names(list(...), dist_string),
@@ -100,47 +100,47 @@ define_survival_cure <- function(distribution, theta, ..., mixture = T) {
 # )
 #' 
 #' @export
-define_spline_survival <- function(scale, ...) {
+# define_spline_survival <- function(scale, ...) {
   
-  scale <- match.arg(scale, choices = spline_scales)
-  list_arg <- lapply(list(...), unique)
-  n_param <- length(list_arg)
+#   scale <- match.arg(scale, choices = spline_scales)
+#   list_arg <- lapply(list(...), unique)
+#   n_param <- length(list_arg)
   
-  stopifnot(
-    all(unlist(lapply(list_arg, length)) == 1),
-    n_param >= 4,
-    n_param %% 2 == 0
-  )
+#   stopifnot(
+#     all(unlist(lapply(list_arg, length)) == 1),
+#     n_param >= 4,
+#     n_param %% 2 == 0
+#   )
   
   
-  if (! requireNamespace("flexsurv")) {
-    stop("'flexsurv' package required.")
-  }
+#   if (! requireNamespace("flexsurv")) {
+#     stop("'flexsurv' package required.")
+#   }
   
-  pf <- flexsurv::unroll.function(
-    flexsurv::psurvspline,
-    gamma = seq_len(n_param/2),
-    knots = seq_len(n_param/2)
-  )
+#   pf <- flexsurv::unroll.function(
+#     flexsurv::psurvspline,
+#     gamma = seq_len(n_param/2),
+#     knots = seq_len(n_param/2)
+#   )
   
-  names_fun <- setdiff(names(list_arg), "scale")
-  names_par <- setdiff(names(formals(pf)), "q")
+#   names_fun <- setdiff(names(list_arg), "scale")
+#   names_par <- setdiff(names(formals(pf)), "q")
   
-  correct_names <- names_fun %in% names_par
+#   correct_names <- names_fun %in% names_par
   
-  if (! all(correct_names)) {
-    stop(sprintf(
-      "Incorrect argument%s: %s.",
-      plur(sum(! correct_names)),
-      paste(names_fun[! correct_names], collapse = ", ")))
-  }
+#   if (! all(correct_names)) {
+#     stop(sprintf(
+#       "Incorrect argument%s: %s.",
+#       plur(sum(! correct_names)),
+#       paste(names_fun[! correct_names], collapse = ", ")))
+#   }
   
-  structure(
-    list(
-      distribution = "survspline",
-      scale = scale,
-      ...
-    ),
-    class = c("surv_object", "surv_dist_spline")
-  )
-}
+#   structure(
+#     list(
+#       distribution = "survspline",
+#       scale = scale,
+#       ...
+#     ),
+#     class = c("surv_object", "surv_dist_spline")
+#   )
+# }

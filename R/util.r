@@ -100,36 +100,36 @@ get_spline_param_values <- function(distribution, ...) {
     params
 }
 
-get_dist_param_values <- function(distribution, ...) {
-    surv_func_params <- get_surv_dist_params(dist)
-    params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
-    names(params) <- surv_func_params
+# get_dist_param_values <- function(distribution, ...) {
+#     surv_func_params <- get_surv_dist_params(dist)
+#     params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
+#     names(params) <- surv_func_params
     
-    params
-}
+#     params
+# }
 
-get_param_value_from_args <- function(param, ...) {
+# get_param_value_from_args <- function(param, ...) {
 
-    values <- list(...)[param]
-    unique_values <- unique(values)
+#     values <- list(...)[param]
+#     unique_values <- unique(values)
 
-    # Warn user if meaningful truncation will occur
-    if (length(unique_values) > 1) {
+#     # Warn user if meaningful truncation will occur
+#     if (length(unique_values) > 1) {
         
-    }
+#     }
 
-    values[1]
-}
+#     values[1]
+# }
 
-truncate_vector <- function(vector) {
+# truncate_vector <- function(vector) {
 
-    unique_values <- unique(vector)
+#     unique_values <- unique(vector)
 
-    # Warn user if meaningful truncation will occur
-    if (length(unique_values) > 1) {
+#     # Warn user if meaningful truncation will occur
+#     if (length(unique_values) > 1) {
         
-    }
+#     }
 
-    vector[1]
+#     vector[1]
 
-}
+# }
