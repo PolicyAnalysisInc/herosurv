@@ -26,6 +26,6 @@ Define a parametric cure survival model.
 \examples{
 
 define_survival_cure(distribution = "exp", theta = 0.34, rate = .5)
-define_survival_cure(distribution = "weibull", theta = 0.5, shape = 1.5, scale = 34.43, mixture = T)
+define_survival_cure(distribution = "weibull", theta = 0.5, shape = 1.5, scale = 34.43, mixture = TRUE)
 
 }
