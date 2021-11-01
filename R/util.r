@@ -1,75 +1,39 @@
 #' @tests
-#' expect_equal(get_surv_dist('weibull'), pweibull)
-#' expect_equal(get_surv_dist('genf'), pgenf)
-#' expect_equal(get_surv_dist('llogis'), pllogis)
-get_surv_dist <- function(name) {
-    get(paste0("p", name))
+#' expect_equal(
+#'  get_and_populate_message('missing_parameters', dist = 'a', params = 'b'),
+#'  'Error defining a distribution, parameters missing from function call: b.'
+#' )
+get_and_populate_message <- function(type, ...) {
+    error_msg <- str_glue_data(list(...), messages[[type]])
+    as.character(error_msg)
+}
+
+#' @tests
+#' expect_equal(get_flexsurv_dist('weibull'), pweibull)
+#' expect_equal(get_flexsurv_dist('genf'), pgenf)
+#' expect_equal(get_flexsurv_dist('llogis'), pllogis)
+get_flexsurv_dist <- function(dist_name) {
+    get(paste0("p", dist_name))
 }
 
 #' @tests
 #' expect_equal(
-#'  get_surv_dist_params('weibull'), c('shape', 'scale')
+#'  get_flexsurv_dist_params('weibull'), c('shape', 'scale')
 #' )
 #' expect_equal(
-#'  get_surv_dist_params('gengamma'),
+#'  get_flexsurv_dist_params('gengamma'),
 #'  c('mu', 'sigma', 'Q')
 #' )
 #' expect_equal(
-#'  get_surv_dist_params('genf'),
+#'  get_flexsurv_dist_params('genf'),
 #'  c('mu', 'sigma', 'Q', 'P')
 #' )
-get_surv_dist_params <- function(name) {
-    dist <- get_surv_dist(name)
+get_flexsurv_dist_params <- function(dist_name) {
+    dist <- get_flexsurv_dist(dist_name)
     all_param_names <- names(formals(dist))
     dist_param_names <- setdiff(all_param_names, c('q', 'lower.tail', 'log.p'))
 
     dist_param_names
-}
-
-#' @tests
-#' expect_equal(
-#'  check_param_names(list(shape=1,foo=2), 'weibullPH'), 
-#'  'Error defining "weibullPH" distribution, parameters missing from function call: "scale".'
-#' )
-#' 
-check_param_names <- function(params, dist) {
-    surv_func_params <- get_surv_dist_params(dist)
-    missing_params <- surv_func_params[!surv_func_params %in% names(params)]
-    if (length(missing_params) > 0) {
-        dist_str <- quoted_list_string(dist)
-        param_str <- quoted_list_string(missing_params)
-        res <- get_error_msg(
-            'missing_parameters',
-            dist = dist_str,
-            params = param_str
-        )
-    } else {
-        res <- NULL
-    }
-
-    res
-}
-
-#' @tests
-#' expect_equal(check_theta(1), NULL)
-#' expect_equal(check_theta(0.5), NULL)
-#' expect_equal(check_theta(0), NULL)
-#' expect_equal(
-#'  check_theta(-0.01),
-#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).'
-#' )
-#' expect_equal(
-#'  check_theta(1.01),
-#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).'
-#' )
-check_theta <- function(theta) {
-    if (any(theta > 1 | theta < 0)) {
-        res <- errors$invalid_theta
-    } else {
-        res <- NULL
-    }
-    
-    res
 }
 
 #' @tests
@@ -92,44 +56,70 @@ quoted_list_string <- function(x) {
     paste0(paste0('"', x, '"'), collapse = ', ')
 }
 
-# get_spline_param_values <- function(distribution, ...) {
-#     surv_func_params <- get_surv_dist_params(dist)
-#     params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
-#     names(params) <- surv_func_params
+get_dist_params_from_args <- function(distribution, args) {
+
+    param_names <- get_flexsurv_dist_params(distribution)
+    params <- map(param_names, function(name) get_dist_param_from_args(name, args))
+    names(params) <- param_names
     
-#     params
-# }
+    params
+}
 
-# get_dist_param_values <- function(distribution, ...) {
-#     surv_func_params <- get_surv_dist_params(dist)
-#     params <- map(surv_func_params, function(name) get_parameter_value(name, ...))
-#     names(params) <- surv_func_params
-    
-#     params
-# }
+get_dist_param_from_args <- function(name, args) {
 
-# get_param_value_from_args <- function(param, ...) {
+    values <- args[[name]]
+    truncate_param(name, values)
 
-#     values <- list(...)[param]
-#     unique_values <- unique(values)
+}
 
-#     # Warn user if meaningful truncation will occur
-#     if (length(unique_values) > 1) {
-        
-#     }
+truncate_param <- function(name, values) {
 
-#     values[1]
-# }
+    unique_values <- unique(values)
 
-# truncate_vector <- function(vector) {
+    # Warn user if meaningful truncation will occur
+    if (length(unique_values) > 1) {
+        msg <- get_and_populate_message('truncated_vector', param = name)
+        warning()
+    }
 
-#     unique_values <- unique(vector)
+    values[1]
 
-#     # Warn user if meaningful truncation will occur
-#     if (length(unique_values) > 1) {
-        
-#     }
+}
 
-#     vector[1]
+show_call_error <- function() {
+    nm <- 'herosurv.show_call_signature_in_errors'
+    getOption(nm, default = default_options[[nm]]) 
+}
 
-# }
+show_call_warn <- function() {
+    nm <- 'herosurv.show_call_signature_in_errors'
+    getOption(nm, default = default_options[[nm]]) 
+}
+
+get_dist_display_name <- function(name) {
+    if (!name %in% names(flexsurv_dist_aliases)) {
+        return(name)
+    }
+
+    flexsurv_dist_aliases[[name]]
+}
+
+get_indefinite_article <- function(word) {
+    if(substr(word, 0, 1) %in% word_start_vowels) {
+        return('an')
+    }
+
+    'a'
+}
+
+create_param_formatter <- function(...) {
+    args <- list(...)
+    args$trim <- TRUE
+    if (is.null(args$digits)) {
+        args$digits <- 3
+    }
+    function(x) {
+        format_args <- append(list(x), args)
+        do.call(format, format_args)
+    }
+}
