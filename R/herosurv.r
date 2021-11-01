@@ -6,6 +6,17 @@
 #' @import flexsurv
 NULL 
 
+#' @tests
+#' 
+#' .onLoad()
+#' expect_equal(
+#'  c(
+#'      'herosurv.show_call_signature_in_errors',
+#'      'herosurv.show_call_signature_in_warnings'
+#'  ) %in% names(options()),
+#'  c(TRUE, TRUE)
+#' )
+#' 
 .onLoad <- function(libname, pkgname) {
 
 
