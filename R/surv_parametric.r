@@ -64,9 +64,6 @@ define_parametric_surv <- function(distribution, ...) {
   # Match distribution against list
   dist_string <- match.arg(distribution, choices = flexsurv_dists)
 
-  # Run checks
-  check_param_names(args, dist_string)
-
   # Extract params from arguments
   params <- get_dist_params_from_args(dist_string, args)
 
@@ -140,4 +137,90 @@ surv_prob.surv_parametric <- function(x, time, ...) {
     ret <- do.call(surv_dist, args_for_surv_dist)
 
     ret
+}
+
+#' @tests
+#' expect_equal(get_flexsurv_dist('weibull'), pweibull)
+#' expect_equal(get_flexsurv_dist('genf'), pgenf)
+#' expect_equal(get_flexsurv_dist('llogis'), pllogis)
+get_flexsurv_dist <- function(dist_name) {
+    get(paste0("p", dist_name))
+}
+
+#' @tests
+#' expect_equal(
+#'  get_flexsurv_dist_params('weibull'), c('shape', 'scale')
+#' )
+#' expect_equal(
+#'  get_flexsurv_dist_params('gengamma'),
+#'  c('mu', 'sigma', 'Q')
+#' )
+#' expect_equal(
+#'  get_flexsurv_dist_params('genf'),
+#'  c('mu', 'sigma', 'Q', 'P')
+#' )
+get_flexsurv_dist_params <- function(dist_name) {
+    dist <- get_flexsurv_dist(dist_name)
+    all_param_names <- names(formals(dist))
+    dist_param_names <- setdiff(all_param_names, c('q', 'lower.tail', 'log.p'))
+
+    dist_param_names
+}
+
+#' @tests
+#' expect_equal(
+#'  get_dist_params_from_args(
+#'      'weibull',
+#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+#' ),
+#'  list(shape=2,scale=3)
+#' )
+#' 
+get_dist_params_from_args <- function(distribution, args) {
+
+  # Run checks
+  check_param_names(args, distribution)
+
+  # Extract parameter names
+  param_names <- get_flexsurv_dist_params(distribution)
+
+  # Create named list with parameters
+  params <- map(param_names, function(name) get_dist_param_from_args(name, args))
+  names(params) <- param_names
+  
+  params
+}
+
+#' @tests
+#' expect_equal(
+#'  get_dist_param_from_args(
+#'      'scale',
+#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+#' ),
+#'  3
+#' )
+get_dist_param_from_args <- function(name, args) {
+
+    values <- args[[name]]
+    truncate_param(name, values)
+
+}
+
+#' @tests
+#' 
+#' expect_equal(
+#'  get_dist_display_name('foo'),
+#'  'foo'
+#' )
+#' 
+#' expect_equal(
+#'  get_dist_display_name('exp'),
+#'  'exponential'
+#' )
+get_dist_display_name <- function(name) {
+    if (!name %in% names(flexsurv_dist_aliases)) {
+        return(name)
+    }
+
+    flexsurv_dist_aliases[[name]]
 }

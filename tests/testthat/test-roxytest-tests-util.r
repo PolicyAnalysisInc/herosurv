@@ -10,29 +10,7 @@ test_that("Function get_and_populate_message() @ L6", {
 })
 
 
-test_that("Function get_flexsurv_dist() @ L15", {
-  expect_equal(get_flexsurv_dist('weibull'), pweibull)
-  expect_equal(get_flexsurv_dist('genf'), pgenf)
-  expect_equal(get_flexsurv_dist('llogis'), pllogis)
-})
-
-
-test_that("Function get_flexsurv_dist_params() @ L31", {
-  expect_equal(
-   get_flexsurv_dist_params('weibull'), c('shape', 'scale')
-  )
-  expect_equal(
-   get_flexsurv_dist_params('gengamma'),
-   c('mu', 'sigma', 'Q')
-  )
-  expect_equal(
-   get_flexsurv_dist_params('genf'),
-   c('mu', 'sigma', 'Q', 'P')
-  )
-})
-
-
-test_that("Function create_list_object() @ L45", {
+test_that("Function create_list_object() @ L17", {
   expect_equal(
    class(create_list_object(c('a','b'),
    list())), c('a','b')
@@ -40,7 +18,7 @@ test_that("Function create_list_object() @ L45", {
 })
 
 
-test_that("Function quoted_list_string() @ L55", {
+test_that("Function quoted_list_string() @ L27", {
   expect_equal(
    quoted_list_string(c('a','b','c')),
    '"a", "b", "c"'
@@ -48,29 +26,7 @@ test_that("Function quoted_list_string() @ L55", {
 })
 
 
-test_that("Function get_dist_params_from_args() @ L69", {
-  expect_equal(
-   get_dist_params_from_args(
-       'weibull',
-       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
-  ),
-   list(shape=2,scale=3)
-  )
-})
-
-
-test_that("Function get_dist_param_from_args() @ L86", {
-  expect_equal(
-   get_dist_param_from_args(
-       'scale',
-       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
-  ),
-   3
-  )
-})
-
-
-test_that("Function truncate_param() @ L115", {
+test_that("Function truncate_param() @ L53", {
   expect_equal(
    truncate_param('foo', c(1)),
    1
@@ -94,20 +50,7 @@ test_that("Function truncate_param() @ L115", {
 })
 
 
-test_that("Function get_dist_display_name() @ L150", {
-  expect_equal(
-   get_dist_display_name('foo'),
-   'foo'
-  )
-  
-  expect_equal(
-   get_dist_display_name('exp'),
-   'exponential'
-  )
-})
-
-
-test_that("Function get_indefinite_article() @ L170", {
+test_that("Function get_indefinite_article() @ L89", {
   expect_equal(
    get_indefinite_article('fruit'),
    'a'
@@ -120,7 +63,7 @@ test_that("Function get_indefinite_article() @ L170", {
 })
 
 
-test_that("Function create_param_formatter() @ L188", {
+test_that("Function create_param_formatter() @ L107", {
   expect_equal(
    create_param_formatter(
        foo = 0.1234567,

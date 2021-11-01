@@ -1,6 +1,6 @@
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom glue glue
-#' @importFrom purrr walk map discard
+#' @importFrom purrr walk map discard map_chr map2 set_names
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
 #' @import stats
 #' @import flexsurv

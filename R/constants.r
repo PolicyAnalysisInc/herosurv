@@ -2,7 +2,10 @@
 messages <- list(
     missing_parameters = 'Error defining {dist} distribution, parameters missing from function call: {params}.',
     invalid_theta = 'Error defining cure model, cure fraction (theta) must be in range (0-1).',
-    truncated_vector = 'Parameter {param} was length > 1 and only the first element will be used.'
+    truncated_vector = 'Parameter {param} was length > 1 and only the first element will be used.',
+    n_spline_params = 'Error defining restricted cubic spline distribution, must provide at least two parameter values followed by a matching number of knot times.',
+    spline_param_type = 'Error defining restricted cubic spline distribution, parameter was of type "{class}" instead of "numeric".',
+    spline_param_names = 'Error defining restricted cubic spline distribution, incorrect argument names were provided.'
 )
 
 # Possible values for distribution argument to flexsurvreg
@@ -24,7 +27,7 @@ flexsurv_dist_aliases <- list(
 )
 
 # Possible values for scale argument to flexsurvspline
-spline_scales <- c("hazard", "odds", "normal")
+flexsurv_spline_scales <- c("hazard", "odds", "normal")
 
 # Default values for options
 default_options <- list(

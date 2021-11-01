@@ -36,7 +36,7 @@ check_param_names <- function(params, dist) {
 #' )
 check_theta <- function(theta) {
     if (any(theta > 1 | theta < 0)) {
-        err <- messages$invalid_theta
+        err <- get_and_populate_message('invalid_theta')
         stop(err, call. = show_call_error())
     }
 }

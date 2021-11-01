@@ -16,7 +16,7 @@ test_that("Function define_parametric_surv() @ L60", {
 })
 
 
-test_that("Function print.surv_parametric() @ L95", {
+test_that("Function print.surv_parametric() @ L92", {
   surv_dist1 <- define_parametric_surv('weibull', shape = 1.2438, scale = 20.3984)
   expect_output(
    print(surv_dist1),
@@ -31,7 +31,7 @@ test_that("Function print.surv_parametric() @ L95", {
 })
 
 
-test_that("Function surv_prob.surv_parametric() @ L125", {
+test_that("Function surv_prob.surv_parametric() @ L122", {
   dist1 <- define_parametric_surv('exp', rate = 0.12)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, 3)),
@@ -44,6 +44,63 @@ test_that("Function surv_prob.surv_parametric() @ L125", {
    surv_prob(dist1, c(0, 1, 2, 3)),
    c(1.0000000, 1.0000000, 0.9999393, 0.9979701),
    tolerance = 0.00001
+  )
+})
+
+
+test_that("Function get_flexsurv_dist() @ L146", {
+  expect_equal(get_flexsurv_dist('weibull'), pweibull)
+  expect_equal(get_flexsurv_dist('genf'), pgenf)
+  expect_equal(get_flexsurv_dist('llogis'), pllogis)
+})
+
+
+test_that("Function get_flexsurv_dist_params() @ L162", {
+  expect_equal(
+   get_flexsurv_dist_params('weibull'), c('shape', 'scale')
+  )
+  expect_equal(
+   get_flexsurv_dist_params('gengamma'),
+   c('mu', 'sigma', 'Q')
+  )
+  expect_equal(
+   get_flexsurv_dist_params('genf'),
+   c('mu', 'sigma', 'Q', 'P')
+  )
+})
+
+
+test_that("Function get_dist_params_from_args() @ L179", {
+  expect_equal(
+   get_dist_params_from_args(
+       'weibull',
+       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+  ),
+   list(shape=2,scale=3)
+  )
+})
+
+
+test_that("Function get_dist_param_from_args() @ L202", {
+  expect_equal(
+   get_dist_param_from_args(
+       'scale',
+       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+  ),
+   3
+  )
+})
+
+
+test_that("Function get_dist_display_name() @ L220", {
+  expect_equal(
+   get_dist_display_name('foo'),
+   'foo'
+  )
+  
+  expect_equal(
+   get_dist_display_name('exp'),
+   'exponential'
   )
 })
 

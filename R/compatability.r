@@ -37,3 +37,24 @@ define_survival <- function(distribution, ...) {
 define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
     define_cure_surv(distribution, theta, ..., mixture = mixture)
 }
+
+#' @export
+#' 
+#' @rdname define_cure_surv
+#'  
+#' @tests
+#' expect_equal(
+#'  define_spline_surv(
+#'      scale = 'hazard',
+#'      gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'      knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#'  ),
+#'  define_spline_survival(
+#'      scale = 'hazard',
+#'      gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'      knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#'  )
+#' )
+define_spline_survival <- function(scale, ...) {
+    define_spline_surv(scale, ...)
+}

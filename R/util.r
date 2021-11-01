@@ -9,34 +9,6 @@ get_and_populate_message <- function(type, ...) {
 }
 
 #' @tests
-#' expect_equal(get_flexsurv_dist('weibull'), pweibull)
-#' expect_equal(get_flexsurv_dist('genf'), pgenf)
-#' expect_equal(get_flexsurv_dist('llogis'), pllogis)
-get_flexsurv_dist <- function(dist_name) {
-    get(paste0("p", dist_name))
-}
-
-#' @tests
-#' expect_equal(
-#'  get_flexsurv_dist_params('weibull'), c('shape', 'scale')
-#' )
-#' expect_equal(
-#'  get_flexsurv_dist_params('gengamma'),
-#'  c('mu', 'sigma', 'Q')
-#' )
-#' expect_equal(
-#'  get_flexsurv_dist_params('genf'),
-#'  c('mu', 'sigma', 'Q', 'P')
-#' )
-get_flexsurv_dist_params <- function(dist_name) {
-    dist <- get_flexsurv_dist(dist_name)
-    all_param_names <- names(formals(dist))
-    dist_param_names <- setdiff(all_param_names, c('q', 'lower.tail', 'log.p'))
-
-    dist_param_names
-}
-
-#' @tests
 #' expect_equal(
 #'  class(create_list_object(c('a','b'),
 #'  list())), c('a','b')
@@ -54,40 +26,6 @@ create_list_object <- function(class, ...) {
 #' 
 quoted_list_string <- function(x) {
     paste0(paste0('"', x, '"'), collapse = ', ')
-}
-
-
-#' @tests
-#' expect_equal(
-#'  get_dist_params_from_args(
-#'      'weibull',
-#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
-#' ),
-#'  list(shape=2,scale=3)
-#' )
-#' 
-get_dist_params_from_args <- function(distribution, args) {
-
-    param_names <- get_flexsurv_dist_params(distribution)
-    params <- map(param_names, function(name) get_dist_param_from_args(name, args))
-    names(params) <- param_names
-    
-    params
-}
-
-#' @tests
-#' expect_equal(
-#'  get_dist_param_from_args(
-#'      'scale',
-#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
-#' ),
-#'  3
-#' )
-get_dist_param_from_args <- function(name, args) {
-
-    values <- args[[name]]
-    truncate_param(name, values)
-
 }
 
 #' @tests
@@ -134,25 +72,6 @@ show_call_error <- function() {
 show_call_warn <- function() {
     nm <- 'herosurv.show_call_signature_in_errors'
     getOption(nm, default = default_options[[nm]]) 
-}
-
-#' @tests
-#' 
-#' expect_equal(
-#'  get_dist_display_name('foo'),
-#'  'foo'
-#' )
-#' 
-#' expect_equal(
-#'  get_dist_display_name('exp'),
-#'  'exponential'
-#' )
-get_dist_display_name <- function(name) {
-    if (!name %in% names(flexsurv_dist_aliases)) {
-        return(name)
-    }
-
-    flexsurv_dist_aliases[[name]]
 }
 
 
