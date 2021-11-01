@@ -48,7 +48,29 @@ test_that("Function quoted_list_string() @ L55", {
 })
 
 
-test_that("Function truncate_param() @ L97", {
+test_that("Function get_dist_params_from_args() @ L69", {
+  expect_equal(
+   get_dist_params_from_args(
+       'weibull',
+       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+  ),
+   list(shape=2,scale=3)
+  )
+})
+
+
+test_that("Function get_dist_param_from_args() @ L86", {
+  expect_equal(
+   get_dist_param_from_args(
+       'scale',
+       list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+  ),
+   3
+  )
+})
+
+
+test_that("Function truncate_param() @ L115", {
   expect_equal(
    truncate_param('foo', c(1)),
    1
@@ -59,15 +81,53 @@ test_that("Function truncate_param() @ L97", {
    1
   )
   
-  expect_equal(
-   suppressWarnings(truncate_param('foo', c(1,2,3))),
-   1
-  )
-  
   expect_warning(
    truncate_param('foo', c(1,2,3)),
    'Parameter foo was length > 1 and only the first element will be used.',
    fixed = T
+  )
+  
+  expect_equal(
+   suppressWarnings(truncate_param('foo', c(1,2,3))),
+   1
+  )
+})
+
+
+test_that("Function get_dist_display_name() @ L150", {
+  expect_equal(
+   get_dist_display_name('foo'),
+   'foo'
+  )
+  
+  expect_equal(
+   get_dist_display_name('exp'),
+   'exponential'
+  )
+})
+
+
+test_that("Function get_indefinite_article() @ L170", {
+  expect_equal(
+   get_indefinite_article('fruit'),
+   'a'
+  )
+  
+  expect_equal(
+   get_indefinite_article('apple'),
+   'an'
+  )
+})
+
+
+test_that("Function create_param_formatter() @ L188", {
+  expect_equal(
+   create_param_formatter(
+       foo = 0.1234567,
+       bar = 0.1234567,
+       digits = 4
+   )(0.1234567),
+   "0.1235"
   )
 })
 

@@ -56,6 +56,16 @@ quoted_list_string <- function(x) {
     paste0(paste0('"', x, '"'), collapse = ', ')
 }
 
+
+#' @tests
+#' expect_equal(
+#'  get_dist_params_from_args(
+#'      'weibull',
+#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+#' ),
+#'  list(shape=2,scale=3)
+#' )
+#' 
 get_dist_params_from_args <- function(distribution, args) {
 
     param_names <- get_flexsurv_dist_params(distribution)
@@ -65,6 +75,14 @@ get_dist_params_from_args <- function(distribution, args) {
     params
 }
 
+#' @tests
+#' expect_equal(
+#'  get_dist_param_from_args(
+#'      'scale',
+#'      list(foo=1,shape=2,scale=c(3,3,3),bar=4)
+#' ),
+#'  3
+#' )
 get_dist_param_from_args <- function(name, args) {
 
     values <- args[[name]]
@@ -118,6 +136,17 @@ show_call_warn <- function() {
     getOption(nm, default = default_options[[nm]]) 
 }
 
+#' @tests
+#' 
+#' expect_equal(
+#'  get_dist_display_name('foo'),
+#'  'foo'
+#' )
+#' 
+#' expect_equal(
+#'  get_dist_display_name('exp'),
+#'  'exponential'
+#' )
 get_dist_display_name <- function(name) {
     if (!name %in% names(flexsurv_dist_aliases)) {
         return(name)
@@ -126,6 +155,18 @@ get_dist_display_name <- function(name) {
     flexsurv_dist_aliases[[name]]
 }
 
+
+#' @tests
+#' 
+#' expect_equal(
+#'  get_indefinite_article('fruit'),
+#'  'a'
+#' )
+#' 
+#' expect_equal(
+#'  get_indefinite_article('apple'),
+#'  'an'
+#' )
 get_indefinite_article <- function(word) {
     if(substr(word, 0, 1) %in% word_start_vowels) {
         return('an')
@@ -134,6 +175,16 @@ get_indefinite_article <- function(word) {
     'a'
 }
 
+#' @tests
+#' 
+#' expect_equal(
+#'  create_param_formatter(
+#'      foo = 0.1234567,
+#'      bar = 0.1234567,
+#'      digits = 4
+#'  )(0.1234567),
+#'  "0.1235"
+#' )
 create_param_formatter <- function(...) {
     args <- list(...)
     args$trim <- TRUE
