@@ -67,7 +67,7 @@ define_cure_surv <- function(distribution, theta, ..., mixture = TRUE) {
 
   # Extract params from arguments
   params <- append(
-    list(theta = theta),
+    list(theta = truncate_param('theta', theta)),
     get_dist_params_from_args(dist_string, args)
   )
 

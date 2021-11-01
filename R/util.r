@@ -72,6 +72,28 @@ get_dist_param_from_args <- function(name, args) {
 
 }
 
+#' @tests
+#' 
+#' expect_equal(
+#'  truncate_param('foo', c(1)),
+#'  1
+#' )
+#' 
+#' expect_equal(
+#'  truncate_param('foo', c(1,1,1)),
+#'  1
+#' )
+#' 
+#' expect_warning(
+#'  truncate_param('foo', c(1,2,3)),
+#'  'Parameter foo was length > 1 and only the first element will be used.',
+#'  fixed = T
+#' )
+#' 
+#' expect_equal(
+#'  suppressWarnings(truncate_param('foo', c(1,2,3))),
+#'  1
+#' )
 truncate_param <- function(name, values) {
 
     unique_values <- unique(values)
@@ -79,7 +101,7 @@ truncate_param <- function(name, values) {
     # Warn user if meaningful truncation will occur
     if (length(unique_values) > 1) {
         msg <- get_and_populate_message('truncated_vector', param = name)
-        warning()
+        warning(msg, call. = show_call_warn())
     }
 
     values[1]

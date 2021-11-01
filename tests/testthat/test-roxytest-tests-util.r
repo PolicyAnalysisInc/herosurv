@@ -47,3 +47,27 @@ test_that("Function quoted_list_string() @ L55", {
   )
 })
 
+
+test_that("Function truncate_param() @ L97", {
+  expect_equal(
+   truncate_param('foo', c(1)),
+   1
+  )
+  
+  expect_equal(
+   truncate_param('foo', c(1,1,1)),
+   1
+  )
+  
+  expect_equal(
+   suppressWarnings(truncate_param('foo', c(1,2,3))),
+   1
+  )
+  
+  expect_warning(
+   truncate_param('foo', c(1,2,3)),
+   'Parameter foo was length > 1 and only the first element will be used.',
+   fixed = T
+  )
+})
+
