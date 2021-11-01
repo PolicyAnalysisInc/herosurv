@@ -2,7 +2,13 @@
 
 # File R/herosurv.r: @tests
 
-test_that("Function .onLoad() @ L20", {
+test_that("Function .onLoad() @ L25", {
+  options(
+   list(
+       herosurv.show_call_signature_in_errors = NULL,
+       herosurv.show_call_signature_in_warnings = NULL
+   )
+  )
   .onLoad()
   expect_equal(
    c(
