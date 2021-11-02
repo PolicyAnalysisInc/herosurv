@@ -81,13 +81,15 @@ define_parametric_surv <- function(distribution, ...) {
 #' surv_dist1 <- define_parametric_surv('weibull', shape = 1.2438, scale = 20.3984)
 #' expect_output(
 #'  print(surv_dist1),
-#'  "A Weibull \\(AFT\\) distribution \\(shape = 1\\.24, scale = 20\\.40\\)\\."
+#'  "A Weibull (AFT) distribution (shape = 1.24, scale = 20.40).",
+#'  fixed = TRUE
 #' )
 #' 
 #' surv_dist2 <- define_parametric_surv('exp', rate = 0.34)
 #' expect_output(
 #'  print(surv_dist2),
-#'  "An exponential distribution \\(rate = 0\\.34)\\."
+#'  "An exponential distribution (rate = 0.34).",
+#'  fixed = TRUE
 #' )
 print.surv_parametric <- function(x, ...) {
     formatter <- create_param_formatter(...)

@@ -97,11 +97,7 @@ get_indefinite_article <- function(word) {
 #' @tests
 #' 
 #' expect_equal(
-#'  create_param_formatter(
-#'      foo = 0.1234567,
-#'      bar = 0.1234567,
-#'      digits = 4
-#'  )(0.1234567),
+#'  create_param_formatter(digits = 4)(0.1234567),
 #'  "0.1235"
 #' )
 create_param_formatter <- function(...) {

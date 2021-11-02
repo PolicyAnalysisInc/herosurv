@@ -30,15 +30,7 @@ Define a Royston & Parmar restricted cubic spline parametric
 survival distribution.
 }
 \examples{
-define_spline_surv(
- scale = 'hazard',
- gamma1 = -2.08,
- gamma2 = 2.75,
- gamma3 = 0.23,
- knots1 = -1.62,
- knots2 = 0.57,
- knots3 = 1.191
-)
+,
 
 define_spline_surv(
  scale = 'hazard',

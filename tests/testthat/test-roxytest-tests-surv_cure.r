@@ -2,7 +2,7 @@
 
 # File R/surv_cure.r: @tests
 
-test_that("Function print.surv_dist_cure() @ L99", {
+test_that("Function print.surv_cure() @ L99", {
   surv_dist1 <- define_cure_surv('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
   expect_output(
    print(surv_dist1),
@@ -19,7 +19,7 @@ test_that("Function print.surv_dist_cure() @ L99", {
 })
 
 
-test_that("Function surv_prob.surv_dist_cure() @ L129", {
+test_that("Function surv_prob.surv_cure() @ L129", {
   dist1 <- define_cure_surv('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, Inf)),

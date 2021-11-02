@@ -63,13 +63,9 @@ test_that("Function get_indefinite_article() @ L89", {
 })
 
 
-test_that("Function create_param_formatter() @ L107", {
+test_that("Function create_param_formatter() @ L103", {
   expect_equal(
-   create_param_formatter(
-       foo = 0.1234567,
-       bar = 0.1234567,
-       digits = 4
-   )(0.1234567),
+   create_param_formatter(digits = 4)(0.1234567),
    "0.1235"
   )
 })

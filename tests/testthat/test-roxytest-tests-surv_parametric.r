@@ -16,22 +16,24 @@ test_that("Function define_parametric_surv() @ L60", {
 })
 
 
-test_that("Function print.surv_parametric() @ L92", {
+test_that("Function print.surv_parametric() @ L94", {
   surv_dist1 <- define_parametric_surv('weibull', shape = 1.2438, scale = 20.3984)
   expect_output(
    print(surv_dist1),
-   "A Weibull \\(AFT\\) distribution \\(shape = 1\\.24, scale = 20\\.40\\)\\."
+   "A Weibull (AFT) distribution (shape = 1.24, scale = 20.40).",
+   fixed = TRUE
   )
   
   surv_dist2 <- define_parametric_surv('exp', rate = 0.34)
   expect_output(
    print(surv_dist2),
-   "An exponential distribution \\(rate = 0\\.34)\\."
+   "An exponential distribution (rate = 0.34).",
+   fixed = TRUE
   )
 })
 
 
-test_that("Function surv_prob.surv_parametric() @ L122", {
+test_that("Function surv_prob.surv_parametric() @ L124", {
   dist1 <- define_parametric_surv('exp', rate = 0.12)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, 3)),
@@ -48,14 +50,14 @@ test_that("Function surv_prob.surv_parametric() @ L122", {
 })
 
 
-test_that("Function get_flexsurv_dist() @ L146", {
+test_that("Function get_flexsurv_dist() @ L148", {
   expect_equal(get_flexsurv_dist('weibull'), pweibull)
   expect_equal(get_flexsurv_dist('genf'), pgenf)
   expect_equal(get_flexsurv_dist('llogis'), pllogis)
 })
 
 
-test_that("Function get_flexsurv_dist_params() @ L162", {
+test_that("Function get_flexsurv_dist_params() @ L164", {
   expect_equal(
    get_flexsurv_dist_params('weibull'), c('shape', 'scale')
   )
@@ -70,7 +72,7 @@ test_that("Function get_flexsurv_dist_params() @ L162", {
 })
 
 
-test_that("Function get_dist_params_from_args() @ L179", {
+test_that("Function get_dist_params_from_args() @ L181", {
   expect_equal(
    get_dist_params_from_args(
        'weibull',
@@ -81,7 +83,7 @@ test_that("Function get_dist_params_from_args() @ L179", {
 })
 
 
-test_that("Function get_dist_param_from_args() @ L202", {
+test_that("Function get_dist_param_from_args() @ L204", {
   expect_equal(
    get_dist_param_from_args(
        'scale',
@@ -92,7 +94,7 @@ test_that("Function get_dist_param_from_args() @ L202", {
 })
 
 
-test_that("Function get_dist_display_name() @ L220", {
+test_that("Function get_dist_display_name() @ L222", {
   expect_equal(
    get_dist_display_name('foo'),
    'foo'

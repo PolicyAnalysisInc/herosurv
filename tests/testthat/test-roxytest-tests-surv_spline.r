@@ -2,7 +2,7 @@
 
 # File R/surv_spline.r: @tests
 
-test_that("Function get_spline_params_from_args() @ L100", {
+test_that("Function get_spline_params_from_args() @ L92", {
   expect_equal(
    get_spline_params_from_args(list(1,2,3,4,5,c(6, 6))),
    list(
@@ -39,7 +39,7 @@ test_that("Function get_spline_params_from_args() @ L100", {
 })
 
 
-test_that("Function check_spline_params() @ L164", {
+test_that("Function check_spline_params() @ L156", {
   expect_error(
    check_spline_params(list(1,2,3,4,5)),
    'must provide at least two parameter values',
@@ -56,6 +56,46 @@ test_that("Function check_spline_params() @ L164", {
    check_spline_params(list(1,2,3,4,"foo", 6)),
    'parameter was of type "character" instead of "numeric"',
    fixed =T
+  )
+})
+
+
+test_that("Function print.surv_spline() @ L188", {
+  dist1 <- define_spline_surv(
+   scale = 'hazard',
+   gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+   knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+  )
+  expect_output(
+   print(dist1),
+   "A Royston & Parmar spline model of log cumulative hazard with 3 knots (gamma = [-2.08, 2.75, 0.23], knots = [-1.62, 0.57, 1.19]).",
+   fixed = TRUE
+  )
+})
+
+
+test_that("Function surv_prob.surv_spline() @ L214", {
+  dist1 <- define_spline_surv(
+   scale = 'hazard',
+   gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+   knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+  )
+  expect_equal(
+   surv_prob(dist1, c(0, 1, 2, 3)),
+   c(1.0000000, 0.9042421, 0.6387142, 0.3847163),
+   tolerance = 0.00001
+  )
+})
+
+
+test_that("Function get_spline_scale_display_name() @ L251", {
+  expect_equal(
+   get_spline_scale_display_name('hazard'),
+   'log cumulative hazard'
+  )
+  expect_equal(
+   get_spline_scale_display_name('odds'),
+   'log cumulative odds'
   )
 })
 

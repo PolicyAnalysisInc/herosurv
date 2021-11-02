@@ -22,16 +22,7 @@
 #' @rdname define_spline_surv
 #' @aliases define_spline_survival
 #' 
-#' @examples
-#' define_spline_surv(
-#'  scale = 'hazard',
-#'  gamma1 = -2.08,
-#'  gamma2 = 2.75,
-#'  gamma3 = 0.23,
-#'  knots1 = -1.62,
-#'  knots2 = 0.57,
-#'  knots3 = 1.191
-#' )
+#' @examples,
 #' 
 #' define_spline_surv(
 #'  scale = 'hazard',
@@ -57,7 +48,8 @@ define_spline_surv <- function(scale, ...) {
   create_list_object(
     c("surv_spline", "surv_dist"),
     scale = scale_string,
-    parameters = params
+    parameters = params,
+    k = length(params) / 2
   )
 
 }
@@ -178,4 +170,89 @@ check_spline_params <- function(args) {
         stop(err, call. = show_call_error())
     }
 
+}
+
+
+#' @export
+#' @tests
+#' dist1 <- define_spline_surv(
+#'  scale = 'hazard',
+#'  gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'  knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#' )
+#' expect_output(
+#'  print(dist1),
+#'  "A Royston & Parmar spline model of log cumulative hazard with 3 knots (gamma = [-2.08, 2.75, 0.23], knots = [-1.62, 0.57, 1.19]).",
+#'  fixed = TRUE
+#' )
+print.surv_spline <- function(x, ...) {
+    gamma <- as.numeric(x$parameters[seq_len(x$k)])
+    knots <- as.numeric(x$parameters[x$k + seq_len(x$k)])
+    formatter <- create_param_formatter(...)
+    scale_name <- get_spline_scale_display_name(x$scale)
+    gamma_str <- paste0(formatter(gamma), collapse = ', ')
+    knot_str <- paste0(formatter(knots), collapse = ', ')
+    output <- glue('A Royston & Parmar spline model of {scale_name} with {x$k} knots (gamma = [{gamma_str}], knots = [{knot_str}]).')
+
+    cat(output)
+}
+
+#' @rdname surv_prob
+#' @export
+#' 
+#' @tests
+#' dist1 <- define_spline_surv(
+#'  scale = 'hazard',
+#'  gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'  knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#' )
+#' expect_equal(
+#'  surv_prob(dist1, c(0, 1, 2, 3)),
+#'  c(1.0000000, 0.9042421, 0.6387142, 0.3847163),
+#'  tolerance = 0.00001
+#' )
+surv_prob.surv_spline <- function(x, time, ...) {
+
+    # Collect extra arguments
+    args <- list(...)
+
+    # Get survival distribution function that will take arguments
+    # in this format. This is done through "unrolling" psurvspline
+    # from flexsurv package.
+    param_seq <- seq_len(x$k)
+    dist_func <- unroll.function(
+        psurvspline,
+        gamma = param_seq,
+        knots = param_seq
+    )
+
+    # Assemble arguments to call to generic cure survial function
+    arg_list <- append(
+        list(time, scale = x$scale, lower.tail = FALSE),
+        x$parameters
+    )
+
+    # Call generic cure survival function with arguments
+    ret <- do.call(dist_func, arg_list)
+
+    ret
+
+}
+
+#' @tests
+#' expect_equal(
+#'  get_spline_scale_display_name('hazard'),
+#'  'log cumulative hazard'
+#' )
+#' expect_equal(
+#'  get_spline_scale_display_name('odds'),
+#'  'log cumulative odds'
+#' )
+get_spline_scale_display_name <- function(name) {
+
+    if (!name %in% names(flexsurv_spline_scale_aliases)) {
+        return(name)
+    }
+
+    flexsurv_spline_scale_aliases[[name]]
 }

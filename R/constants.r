@@ -29,6 +29,12 @@ flexsurv_dist_aliases <- list(
 # Possible values for scale argument to flexsurvspline
 flexsurv_spline_scales <- c("hazard", "odds", "normal")
 
+flexsurv_spline_scale_aliases <- list(
+    hazard = 'log cumulative hazard',
+    odds = 'log cumulative odds',
+    normal = 'inverse normal CDF'
+)
+
 # Default values for options
 default_options <- list(
     herosurv.show_call_signature_in_errors = FALSE,

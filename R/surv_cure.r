@@ -73,7 +73,7 @@ define_cure_surv <- function(distribution, theta, ..., mixture = TRUE) {
 
   # Return object
   create_list_object(
-      c("surv_dist_cure", "surv_dist"),
+      c("surv_cure", "surv_dist"),
       distribution = dist_string,
       mixture = mixture,
       parameters = params
@@ -96,7 +96,7 @@ define_cure_surv <- function(distribution, theta, ..., mixture = TRUE) {
 #'  "A log-logistic mixture cure distribution (theta = 0.214, shape = 1.244, scale = 20.398).",
 #'  fixed = T
 #' )
-print.surv_dist_cure <- function(x, ...) {
+print.surv_cure <- function(x, ...) {
     formatter <- create_param_formatter(...)
     dist_name <- get_dist_display_name(x$dist)
     mix_str <- ifelse(x$mixture, 'mixture', 'non-mixture')
@@ -126,7 +126,7 @@ print.surv_dist_cure <- function(x, ...) {
 #'  c(1.0000000, 0.9324775, 0.8554689, 0.2000000),
 #'  tolerance = 0.00001
 #' )
-surv_prob.surv_dist_cure <- function(x, time, ...) {
+surv_prob.surv_cure <- function(x, time, ...) {
 
     # Collect extra arguments
     args <- list(...)
