@@ -248,6 +248,10 @@ surv_prob.surv_spline <- function(x, time, ...) {
 #'  get_spline_scale_display_name('odds'),
 #'  'log cumulative odds'
 #' )
+#' expect_equal(
+#'  get_spline_scale_display_name('blah'),
+#'  'blah'
+#' )
 get_spline_scale_display_name <- function(name) {
 
     if (!name %in% names(flexsurv_spline_scale_aliases)) {
