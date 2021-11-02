@@ -88,7 +88,7 @@ test_that("Function surv_prob.surv_spline() @ L214", {
 })
 
 
-test_that("Function get_spline_scale_display_name() @ L251", {
+test_that("Function get_spline_scale_display_name() @ L255", {
   expect_equal(
    get_spline_scale_display_name('hazard'),
    'log cumulative hazard'
@@ -96,6 +96,10 @@ test_that("Function get_spline_scale_display_name() @ L251", {
   expect_equal(
    get_spline_scale_display_name('odds'),
    'log cumulative odds'
+  )
+  expect_equal(
+   get_spline_scale_display_name('blah'),
+   'blah'
   )
 })
 
