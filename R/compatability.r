@@ -40,7 +40,7 @@ define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
 
 #' @export
 #' 
-#' @rdname define_cure_surv
+#' @rdname define_spline_surv
 #'  
 #' @tests
 #' expect_equal(

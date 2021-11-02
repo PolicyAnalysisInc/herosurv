@@ -4,5 +4,5 @@
 ^\.circleci$
 ^\.circleci/config\.yml$
 ^readme.md
-
+env.RData
 ^codecov\.yml$

@@ -18,6 +18,7 @@
 #'   
 #' @return A \code{surv_spline} object.
 #' 
+#' @export
 #' @rdname define_spline_surv
 #' @aliases define_spline_survival
 #' 

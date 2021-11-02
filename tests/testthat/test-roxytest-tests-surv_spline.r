@@ -2,7 +2,7 @@
 
 # File R/surv_spline.r: @tests
 
-test_that("Function get_spline_params_from_args() @ L99", {
+test_that("Function get_spline_params_from_args() @ L100", {
   expect_equal(
    get_spline_params_from_args(list(1,2,3,4,5,c(6, 6))),
    list(
@@ -39,7 +39,7 @@ test_that("Function get_spline_params_from_args() @ L99", {
 })
 
 
-test_that("Function check_spline_params() @ L163", {
+test_that("Function check_spline_params() @ L164", {
   expect_error(
    check_spline_params(list(1,2,3,4,5)),
    'must provide at least two parameter values',

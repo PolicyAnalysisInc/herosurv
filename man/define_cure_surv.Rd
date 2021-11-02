@@ -2,13 +2,10 @@
 % Please edit documentation in R/compatability.r, R/surv_cure.r
 \name{define_survival_cure}
 \alias{define_survival_cure}
-\alias{define_spline_survival}
 \alias{define_cure_surv}
 \title{Define a Parametric Mixture or Non-Mixture Cure Distribution}
 \usage{
 define_survival_cure(distribution, theta, ..., mixture = TRUE)
-
-define_spline_survival(scale, ...)
 
 define_cure_surv(distribution, theta, ..., mixture = TRUE)
 }
