@@ -22,7 +22,7 @@
 #' @rdname define_spline_surv
 #' @aliases define_spline_survival
 #' 
-#' @examples,
+#' @examples
 #' 
 #' define_spline_surv(
 #'  scale = 'hazard',
