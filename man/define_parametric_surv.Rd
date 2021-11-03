@@ -10,13 +10,13 @@ define_survival(distribution, ...)
 define_parametric_surv(distribution, ...)
 }
 \arguments{
-\item{distribution}{A parametric survival distribution.}
+\item{distribution}{a parametric survival distribution.}
 
-\item{...}{Additional distribution parameters
+\item{...}{additional distribution parameters
 (see details section below)}
 }
 \value{
-A \code{surv_parametric} object.
+a \code{surv_parametric} object.
 }
 \description{
 Define a parametric survival distribution with given

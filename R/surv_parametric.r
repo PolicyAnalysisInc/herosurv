@@ -3,11 +3,11 @@
 #' Define a parametric survival distribution with given
 #' parameter values.
 #' 
-#' @param distribution A parametric survival distribution.
-#' @param ... Additional distribution parameters
+#' @param distribution a parametric survival distribution.
+#' @param ... additional distribution parameters
 #' (see details section below)
 #'   
-#' @return A `surv_parametric` object.
+#' @return a `surv_parametric` object.
 #' @export
 #' @rdname define_parametric_surv
 #' @aliases define_survival

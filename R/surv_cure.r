@@ -11,7 +11,7 @@
 #' @param mixture a logical determining whether a mixture
 #'   or non-mixture model is being defined.
 #'   
-#' @return A `surv_dist_cure` object.
+#' @return a `surv_dist_cure` object.
 #' 
 #' @aliases define_survival_cure
 #' @rdname define_cure_surv

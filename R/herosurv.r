@@ -1,7 +1,8 @@
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom glue glue
-#' @importFrom purrr walk map discard map_chr map2 set_names
+#' @importFrom purrr walk map discard map_chr map2 set_names map_lgl
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
+#' @importFrom utils capture.output
 #' @import stats
 #' @import flexsurv
 NULL 

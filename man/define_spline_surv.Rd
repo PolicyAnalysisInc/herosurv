@@ -16,14 +16,14 @@ addition to the boundaries, these models reduce to the
 Weibull, log-logistic and log-normal respectively. The
 scale must be common to all times.}
 
-\item{...}{Parameters and knot log times of spline distribution,
+\item{...}{parameters and knot log times of spline distribution,
 which can be provided either in order starting with spline
 parameters followed by knot log times, or by names (e.g
 gamma1, gamma2, ... gammaN, knots1, knots2, ... knotsN). See
 examples below for named and unnamed calls.}
 }
 \value{
-A \code{surv_spline} object.
+a \code{surv_spline} object.
 }
 \description{
 Define a Royston & Parmar restricted cubic spline parametric

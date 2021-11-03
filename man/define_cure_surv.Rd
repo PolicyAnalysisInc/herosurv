@@ -22,7 +22,7 @@ details for a listing of valid distributions.}
 or non-mixture model is being defined.}
 }
 \value{
-A \code{surv_dist_cure} object.
+a \code{surv_dist_cure} object.
 }
 \description{
 Define a parametric mixture or not mixture cure distribution
