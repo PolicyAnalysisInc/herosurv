@@ -3,7 +3,7 @@
 # File R/surv_function.r: @tests
 
 test_that("Function surv_prob.surv_function() @ L35", {
-  dist1 <- define_surv_function(
+  dist1 <- define_function_surv(
    pweibull,
    lower.tail = FALSE,
    shape = 1.2,
@@ -18,27 +18,27 @@ test_that("Function surv_prob.surv_function() @ L35", {
 
 
 test_that("Function print.surv_function() @ L73", {
-  surv_dist1 <- define_surv_function(function(x) x+1, shape=1.2,scale=30.1,lower.tail = FALSE)
+  surv_dist1 <- define_function_surv(function(x) x+1, shape=1.2,scale=30.1,lower.tail = FALSE)
   expect_output(
    print(surv_dist1),
    "A survival distribution based on a custom function.\n  Arguments: shape = 1.2, scale = 30.1, lower.tail = FALSE\n  Function: function(x) x+1",
    fixed = T
   )
-  surv_dist2 <- define_surv_function(pweibull, shape=1.2,scale=30.1,lower.tail = FALSE)
+  surv_dist2 <- define_function_surv(pweibull, shape=1.2,scale=30.1,lower.tail = FALSE)
   fun <- function(x) x+1
   expect_output(
    print(surv_dist2),
    "A survival distribution based on a custom function.\n  Arguments: shape = 1.2, scale = 30.1, lower.tail = FALSE\n  Function:\n    function (q, shape, scale = 1, lower.tail = TRUE, log.p = FALSE)",
    fixed = T
   )
-  surv_dist3 <- define_surv_function(function(x) x+1, shape=1.2,scale=c(30.1, 30.2),lower.tail = FALSE)
+  surv_dist3 <- define_function_surv(function(x) x+1, shape=1.2,scale=c(30.1, 30.2),lower.tail = FALSE)
   expect_output(
    print(surv_dist3),
    "A survival distribution based on a custom function.\n  Arguments:\n    $shape\n    [1] 1.2",
    fixed = T
   )
   
-  surv_dist4 <- define_surv_function(function(x) x+1)
+  surv_dist4 <- define_function_surv(function(x) x+1)
   expect_output(
    print(surv_dist4),
    "A survival distribution based on a custom function: function(x) x+1",

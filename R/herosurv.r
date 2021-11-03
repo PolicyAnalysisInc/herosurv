@@ -1,10 +1,14 @@
+#' @importFrom dplyr left_join mutate filter summarize select distinct `%>%` slice group_by
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom glue glue
 #' @importFrom purrr walk map discard map_chr map2 set_names map_lgl
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
-#' @importFrom utils capture.output
-#' @import stats
+#' @importFrom utils capture.output head
+#' @importFrom stats pweibull dweibull rweibull qweibull plnorm dlnorm rlnorm qlnorm as.formula model.matrix
+#' @importFrom formula.tools rhs
+#' @importFrom rlang .data
 #' @import flexsurv
+#' @import survival
 NULL 
 
 #' @tests

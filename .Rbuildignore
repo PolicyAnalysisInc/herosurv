@@ -6,3 +6,4 @@
 ^readme.md
 env.RData
 ^codecov\.yml$
+.radian_history

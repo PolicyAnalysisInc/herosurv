@@ -24,7 +24,9 @@ Imports:
     flexsurv,
     flexsurvcure,
     stringr,
-    glue
+    glue,
+    formula.tools,
+    rlang
 Suggests: 
     testthat (>= 3.0.0),
     roxytest,

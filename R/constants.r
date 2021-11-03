@@ -5,7 +5,8 @@ messages <- list(
     truncated_vector = 'Parameter {param} was length > 1 and only the first element will be used.',
     n_spline_params = 'Error defining restricted cubic spline distribution, must provide at least two parameter values followed by a matching number of knot times.',
     spline_param_type = 'Error defining restricted cubic spline distribution, parameter was of type "{class}" instead of "numeric".',
-    spline_param_names = 'Error defining restricted cubic spline distribution, incorrect argument names were provided.'
+    spline_param_names = 'Error defining restricted cubic spline distribution, incorrect argument names were provided.',
+    flexsurv_no_covariates = 'Generating prediction from model with covariates but no covariates were provided. Predictions will reflect weighted average of predictions for subjects used to fit model.'
 )
 
 # Possible values for distribution argument to flexsurvreg

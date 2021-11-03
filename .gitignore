@@ -5,3 +5,4 @@
 .DS_Store
 env.Rdata
 .vscode
+.radian_history
