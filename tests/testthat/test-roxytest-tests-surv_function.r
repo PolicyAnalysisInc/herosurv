@@ -17,7 +17,7 @@ test_that("Function surv_prob.surv_function() @ L35", {
 })
 
 
-test_that("Function print.surv_function() @ L66", {
+test_that("Function print.surv_function() @ L73", {
   surv_dist1 <- define_surv_function(function(x) x+1, shape=1.2,scale=30.1,lower.tail = FALSE)
   expect_output(
    print(surv_dist1),
@@ -35,6 +35,13 @@ test_that("Function print.surv_function() @ L66", {
   expect_output(
    print(surv_dist3),
    "A survival distribution based on a custom function.\n  Arguments:\n    $shape\n    [1] 1.2",
+   fixed = T
+  )
+  
+  surv_dist4 <- define_surv_function(function(x) x+1)
+  expect_output(
+   print(surv_dist4),
+   "A survival distribution based on a custom function: function(x) x+1",
    fixed = T
   )
 })
