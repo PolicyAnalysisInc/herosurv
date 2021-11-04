@@ -15,4 +15,3 @@ A data frame.
 \description{
 Convert Data Frame Factor Variables to Character
 }
-\keyword{internal}

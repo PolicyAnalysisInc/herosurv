@@ -116,8 +116,29 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
 #'   
 #' @return A tidy data frame of curve parameters for each
 #'   covariate level.
-#'   
-#' @keywords internal
+#' 
+#' @tests
+#' 
+#' fs1 <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')
+#' params_no_data <- extract_flexsurv_params(fs1)
+#' expect_equal(
+#'  distinct(params_no_data),
+#'  data.frame(shape = c(1.379652, 1.379652, 1.379652), scale = c(4169.345, 2257.301, 1240.538)),
+#'  tolerance = 0.0001
+#' )
+#' expect_equal(
+#'   nrow(params_no_data),
+#'   nrow(flexsurv::bc)
+#' )
+#' params_w_data <- extract_flexsurv_params(
+#'  fs1,
+#'  data.frame(group = c('Good', 'Medium', 'Poor'))
+#' )
+#' expect_equal(
+#'  distinct(params_no_data),
+#'  params_w_data,
+#'  tolerance = 0.0001
+#' )
 #'   
 extract_flexsurv_params <- function(obj, data = NULL) {
   

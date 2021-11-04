@@ -21,4 +21,3 @@ covariate level.
 Extracts the covariate-adjusted parameters from a
 \code{\link[flexsurv:flexsurvreg]{flexsurv::flexsurvreg()}} object.
 }
-\keyword{internal}

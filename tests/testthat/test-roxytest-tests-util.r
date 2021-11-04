@@ -70,3 +70,11 @@ test_that("Function create_param_formatter() @ L103", {
   )
 })
 
+
+test_that("Function clean_factors() @ L126", {
+  expect_equal(
+   clean_factors(data.frame(a = 'foo', b = 1, stringsAsFactors = TRUE)),
+   data.frame(a = 'foo', b = 1, stringsAsFactors = FALSE)
+  )
+})
+
