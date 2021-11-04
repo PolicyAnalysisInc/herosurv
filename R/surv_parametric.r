@@ -1,16 +1,19 @@
-#' Define a Parametric Survival Distribution
+#' Define Parametric Survival Distribution
 #' 
-#' Define a parametric survival distribution with given
-#' parameter values.
+#' Define parametric survival distribution with given
+#' parameter values. A complete listing of supported
+#' distributions is provided in the details section.
+#' 
+#' @name define_surv_param
+#' @export
+#' @aliases define_survival
+#' @rdname define_surv_param
 #' 
 #' @param distribution a parametric survival distribution.
 #' @param ... additional distribution parameters
 #' (see details section below)
 #'   
 #' @return a `surv_parametric` object.
-#' @export
-#' @rdname define_parametric_surv
-#' @aliases define_survival
 #' @details
 #' Supported distributions are listed in the table below.
 #' 
@@ -39,13 +42,13 @@
 #' 
 #' @tests
 #' 
-#' dist1 <- define_survival(distribution = "exp", rate = 0.05)
+#' dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
 #' expect_equal(class(dist1), c('surv_parametric', 'surv_dist'))
 #' expect_equal(dist1$distribution, 'exp')
 #' expect_equal(dist1$parameters, list(rate = 0.05))
 #' 
 #' expect_error(
-#'  define_survival(distribution = "weibull", shape = 1.2),
+#'  define_surv_param(distribution = "weibull", shape = 1.2),
 #'  'Error defining Weibull (AFT) distribution, parameters missing from function call: "scale".',
 #'  fixed = TRUE
 #' )
@@ -53,11 +56,13 @@
 #' 
 #' @examples
 #' 
-#' define_survival(distribution = "exp", rate = 0.05)
-#' define_parametric_surv(distribution = "exp", rate = .5)
-#' define_parametric_surv(distribution = "gompertz", rate = .5, shape = 1)
+#' define_surv_param(distribution = "exp", rate = .5)
+#' define_surv_param(distribution = "gompertz", rate = .5, shape = 1)
 #' 
-define_parametric_surv <- function(distribution, ...) {
+#' # Deprecated alias included for backwards compatability with heRomod
+#' define_survival(distribution = "exp", rate = 0.05)
+#' 
+define_surv_param <- function(distribution, ...) {
 
   args <- list(...)
   
@@ -78,14 +83,14 @@ define_parametric_surv <- function(distribution, ...) {
 #' @export
 #' @tests
 #' 
-#' surv_dist1 <- define_parametric_surv('weibull', shape = 1.2438, scale = 20.3984)
+#' surv_dist1 <- define_surv_param('weibull', shape = 1.2438, scale = 20.3984)
 #' expect_output(
 #'  print(surv_dist1),
 #'  "A Weibull (AFT) distribution (shape = 1.24, scale = 20.40).",
 #'  fixed = TRUE
 #' )
 #' 
-#' surv_dist2 <- define_parametric_surv('exp', rate = 0.34)
+#' surv_dist2 <- define_surv_param('exp', rate = 0.34)
 #' expect_output(
 #'  print(surv_dist2),
 #'  "An exponential distribution (rate = 0.34).",
@@ -104,18 +109,17 @@ print.surv_parametric <- function(x, ...) {
     cat(output)
 }
 
-#' @rdname surv_prob
 #' @export
 #' 
 #' @tests
-#' dist1 <- define_parametric_surv('exp', rate = 0.12)
+#' dist1 <- define_surv_param('exp', rate = 0.12)
 #' expect_equal(
 #'  surv_prob(dist1, c(0, 1, 2, 3)),
 #'  c(1.0000000, 0.8869204, 0.7866279, 0.6976763),
 #'  tolerance = 0.00001
 #' )
 #' 
-#' dist1 <- define_parametric_surv('gengamma', mu = 2.321, sigma = 0.434, Q = -0.034)
+#' dist1 <- define_surv_param('gengamma', mu = 2.321, sigma = 0.434, Q = -0.034)
 #' expect_equal(
 #'  surv_prob(dist1, c(0, 1, 2, 3)),
 #'  c(1.0000000, 1.0000000, 0.9999393, 0.9979701),
@@ -225,4 +229,37 @@ get_dist_display_name <- function(name) {
     }
 
     flexsurv_dist_aliases[[name]]
+}
+
+#' @export
+#' @rdname define_surv_param
+#' @tests
+#' expect_equal(
+#'  define_surv_param('lnorm', meanlog = 2.1, sdlog = 0.3),
+#'  define_survival('lnorm', meanlog = 2.1, sdlog = 0.3)  
+#' )
+define_survival <- function(distribution, ...) {
+    define_surv_param(distribution, ...)
+}
+
+#' @tests
+#' expect_error(
+#'  check_param_names(list(shape=1,foo=2), 'weibullPH'), 
+#'  'Error defining Weibull (PH) distribution, parameters missing from function call: "scale".',
+#'  fixed = T
+#' )
+#' 
+check_param_names <- function(params, dist) {
+    surv_func_params <- get_flexsurv_dist_params(dist)
+    missing_params <- surv_func_params[!surv_func_params %in% names(params)]
+    if (length(missing_params) > 0) {
+        dist_str <- get_dist_display_name(dist)
+        param_str <- quoted_list_string(missing_params)
+        err <- get_and_populate_message(
+            'missing_parameters',
+            dist = dist_str,
+            params = param_str
+        )
+        stop(err, call. = show_call_error())
+    }
 }

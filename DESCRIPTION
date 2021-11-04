@@ -18,6 +18,7 @@ BugReports: https://github.com/PolicyAnalysisInc/herosurv/issues
 Imports:
     stats,
     tibble,
+    plyr,
     dplyr,
     purrr,
     survival,

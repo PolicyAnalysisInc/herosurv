@@ -61,7 +61,7 @@ test_that("Function check_spline_params() @ L156", {
 
 
 test_that("Function print.surv_spline() @ L188", {
-  dist1 <- define_spline_surv(
+  dist1 <- define_surv_spline(
    scale = 'hazard',
    gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
    knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
@@ -74,8 +74,8 @@ test_that("Function print.surv_spline() @ L188", {
 })
 
 
-test_that("Function surv_prob.surv_spline() @ L214", {
-  dist1 <- define_spline_surv(
+test_that("Function surv_prob.surv_spline() @ L213", {
+  dist1 <- define_surv_spline(
    scale = 'hazard',
    gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
    knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
@@ -88,7 +88,7 @@ test_that("Function surv_prob.surv_spline() @ L214", {
 })
 
 
-test_that("Function get_spline_scale_display_name() @ L255", {
+test_that("Function get_spline_scale_display_name() @ L254", {
   expect_equal(
    get_spline_scale_display_name('hazard'),
    'log cumulative hazard'
@@ -100,6 +100,22 @@ test_that("Function get_spline_scale_display_name() @ L255", {
   expect_equal(
    get_spline_scale_display_name('blah'),
    'blah'
+  )
+})
+
+
+test_that("Function define_spline_survival() @ L279", {
+  expect_equal(
+   define_surv_spline(
+       scale = 'hazard',
+       gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+       knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+   ),
+   define_spline_survival(
+       scale = 'hazard',
+       gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+       knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+   )
   )
 })
 

@@ -1,19 +1,17 @@
-
-#' @rdname surv_prob
 #' @export
 #' 
 #' @tests
 #' surv_dist1 <- flexsurvreg(Surv(rectime, censrec)~1, data = flexsurv::bc, dist = 'weibull')
-#' surv_dist2 <- define_parametric_surv('weibull', shape = 1.271519, scale = 2259.852523)
+#' surv_dist2 <- define_surv_param('weibull', shape = 1.271519, scale = 2259.852523)
 #' expect_equal(
 #'  surv_prob(surv_dist1, seq_len(100)),
 #'  surv_prob(surv_dist2, seq_len(100))
 #' )
 #' 
 #' surv_dist3 <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')
-#' surv_dist4 <- define_parametric_surv('weibull', shape = 1.3796518, scale = 4169.3445656)
-#' surv_dist5 <- define_parametric_surv('weibull', shape = 1.3796518, scale = 2257.301)
-#' surv_dist6 <- define_parametric_surv('weibull', shape = 1.3796518, scale = 1240.538)
+#' surv_dist4 <- define_surv_param('weibull', shape = 1.3796518, scale = 4169.3445656)
+#' surv_dist5 <- define_surv_param('weibull', shape = 1.3796518, scale = 2257.301)
+#' surv_dist6 <- define_surv_param('weibull', shape = 1.3796518, scale = 1240.538)
 #' expect_equal(
 #'  surv_prob(surv_dist3, seq_len(100), covar = data.frame(group = 'Good')),
 #'  surv_prob(surv_dist4, seq_len(100)),
@@ -49,7 +47,7 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
   n_time <- length(time_surv)
   
   if(x$ncovs > 0 && is.null(dots$covar)) {
-    msg <- get_and_populate_message('flexsurv_no_covariates')
+    msg <- get_and_populate_message('model_no_covariates')
     warning(msg, show_call_warn())
   }
   

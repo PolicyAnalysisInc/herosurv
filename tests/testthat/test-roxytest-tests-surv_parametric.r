@@ -2,29 +2,29 @@
 
 # File R/surv_parametric.r: @tests
 
-test_that("Function define_parametric_surv() @ L60", {
-  dist1 <- define_survival(distribution = "exp", rate = 0.05)
+test_that("Function define_surv_param() @ L65", {
+  dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
   expect_equal(class(dist1), c('surv_parametric', 'surv_dist'))
   expect_equal(dist1$distribution, 'exp')
   expect_equal(dist1$parameters, list(rate = 0.05))
   
   expect_error(
-   define_survival(distribution = "weibull", shape = 1.2),
+   define_surv_param(distribution = "weibull", shape = 1.2),
    'Error defining Weibull (AFT) distribution, parameters missing from function call: "scale".',
    fixed = TRUE
   )
 })
 
 
-test_that("Function print.surv_parametric() @ L94", {
-  surv_dist1 <- define_parametric_surv('weibull', shape = 1.2438, scale = 20.3984)
+test_that("Function print.surv_parametric() @ L99", {
+  surv_dist1 <- define_surv_param('weibull', shape = 1.2438, scale = 20.3984)
   expect_output(
    print(surv_dist1),
    "A Weibull (AFT) distribution (shape = 1.24, scale = 20.40).",
    fixed = TRUE
   )
   
-  surv_dist2 <- define_parametric_surv('exp', rate = 0.34)
+  surv_dist2 <- define_surv_param('exp', rate = 0.34)
   expect_output(
    print(surv_dist2),
    "An exponential distribution (rate = 0.34).",
@@ -33,15 +33,15 @@ test_that("Function print.surv_parametric() @ L94", {
 })
 
 
-test_that("Function surv_prob.surv_parametric() @ L124", {
-  dist1 <- define_parametric_surv('exp', rate = 0.12)
+test_that("Function surv_prob.surv_parametric() @ L128", {
+  dist1 <- define_surv_param('exp', rate = 0.12)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, 3)),
    c(1.0000000, 0.8869204, 0.7866279, 0.6976763),
    tolerance = 0.00001
   )
   
-  dist1 <- define_parametric_surv('gengamma', mu = 2.321, sigma = 0.434, Q = -0.034)
+  dist1 <- define_surv_param('gengamma', mu = 2.321, sigma = 0.434, Q = -0.034)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, 3)),
    c(1.0000000, 1.0000000, 0.9999393, 0.9979701),
@@ -50,14 +50,14 @@ test_that("Function surv_prob.surv_parametric() @ L124", {
 })
 
 
-test_that("Function get_flexsurv_dist() @ L148", {
+test_that("Function get_flexsurv_dist() @ L152", {
   expect_equal(get_flexsurv_dist('weibull'), pweibull)
   expect_equal(get_flexsurv_dist('genf'), pgenf)
   expect_equal(get_flexsurv_dist('llogis'), pllogis)
 })
 
 
-test_that("Function get_flexsurv_dist_params() @ L164", {
+test_that("Function get_flexsurv_dist_params() @ L168", {
   expect_equal(
    get_flexsurv_dist_params('weibull'), c('shape', 'scale')
   )
@@ -72,7 +72,7 @@ test_that("Function get_flexsurv_dist_params() @ L164", {
 })
 
 
-test_that("Function get_dist_params_from_args() @ L181", {
+test_that("Function get_dist_params_from_args() @ L185", {
   expect_equal(
    get_dist_params_from_args(
        'weibull',
@@ -83,7 +83,7 @@ test_that("Function get_dist_params_from_args() @ L181", {
 })
 
 
-test_that("Function get_dist_param_from_args() @ L204", {
+test_that("Function get_dist_param_from_args() @ L208", {
   expect_equal(
    get_dist_param_from_args(
        'scale',
@@ -94,7 +94,7 @@ test_that("Function get_dist_param_from_args() @ L204", {
 })
 
 
-test_that("Function get_dist_display_name() @ L222", {
+test_that("Function get_dist_display_name() @ L226", {
   expect_equal(
    get_dist_display_name('foo'),
    'foo'
@@ -103,6 +103,23 @@ test_that("Function get_dist_display_name() @ L222", {
   expect_equal(
    get_dist_display_name('exp'),
    'exponential'
+  )
+})
+
+
+test_that("Function define_survival() @ L241", {
+  expect_equal(
+   define_surv_param('lnorm', meanlog = 2.1, sdlog = 0.3),
+   define_survival('lnorm', meanlog = 2.1, sdlog = 0.3)  
+  )
+})
+
+
+test_that("Function check_param_names() @ L252", {
+  expect_error(
+   check_param_names(list(shape=1,foo=2), 'weibullPH'), 
+   'Error defining Weibull (PH) distribution, parameters missing from function call: "scale".',
+   fixed = T
   )
 })
 

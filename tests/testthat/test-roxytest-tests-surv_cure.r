@@ -2,15 +2,15 @@
 
 # File R/surv_cure.r: @tests
 
-test_that("Function print.surv_cure() @ L99", {
-  surv_dist1 <- define_cure_surv('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
+test_that("Function print.surv_cure() @ L100", {
+  surv_dist1 <- define_surv_cure('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
   expect_output(
    print(surv_dist1),
    "A Weibull (AFT) non-mixture cure distribution (theta = 0.214, shape = 1.244, scale = 20.398).",
    fixed = T
   )
   
-  surv_dist2 <- define_cure_surv('llogis', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = TRUE)
+  surv_dist2 <- define_surv_cure('llogis', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = TRUE)
   expect_output(
    print(surv_dist2),
    "A log-logistic mixture cure distribution (theta = 0.214, shape = 1.244, scale = 20.398).",
@@ -20,17 +20,42 @@ test_that("Function print.surv_cure() @ L99", {
 
 
 test_that("Function surv_prob.surv_cure() @ L129", {
-  dist1 <- define_cure_surv('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
+  dist1 <- define_surv_cure('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, Inf)),
    c(1.0000000, 0.9609835, 0.9238699, 0.2000000),
    tolerance = 0.00001
   )
-  dist2 <- define_cure_surv('weibull', theta = 0.2, shape = 1.2, scale = 13.4, mixture = FALSE)
+  dist2 <- define_surv_cure('weibull', theta = 0.2, shape = 1.2, scale = 13.4, mixture = FALSE)
   expect_equal(
    surv_prob(dist2, c(0, 1, 2, Inf)),
    c(1.0000000, 0.9324775, 0.8554689, 0.2000000),
    tolerance = 0.00001
+  )
+})
+
+
+test_that("Function define_survival_cure() @ L164", {
+  expect_equal(
+   define_surv_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2),
+   define_survival_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2)
+  )
+})
+
+
+test_that("Function check_theta() @ L182", {
+  expect_error(check_theta(1), NA)
+  expect_error(check_theta(0.5), NA)
+  expect_error(check_theta(0), NA)
+  expect_error(
+   check_theta(-0.01),
+   'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+   fixed = T
+  )
+  expect_error(
+   check_theta(1.01),
+   'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+   fixed = T
   )
 })
 

@@ -1,7 +1,11 @@
-#' Define a Parametric Mixture or Non-Mixture Cure Distribution
+#' Define Parametric Mixture or Non-Mixture Cure Distribution
 #' 
-#' Define a parametric mixture or not mixture cure distribution
+#' Define parametric mixture or not mixture cure distribution
 #' with given parameter values.
+#' 
+#' @name define_surv_cure
+#' @rdname define_surv_cure
+#' @export
 #' 
 #' @param distribution A parametric survival distribution. See 
 #' details for a listing of valid distributions.
@@ -12,9 +16,6 @@
 #'   or non-mixture model is being defined.
 #'   
 #' @return a `surv_dist_cure` object.
-#' 
-#' @aliases define_survival_cure
-#' @rdname define_cure_surv
 #' 
 #' @details
 #' Supported distributions are listed in the table below.
@@ -42,19 +43,19 @@
 #' R. L. Prentice (1975). Discrimination among some parametric
 #' models. Biometrika 62(3):607-614.
 #' 
-#' @export
-#' 
 #' @examples
 #' 
-#' define_cure_surv(distribution = "exp", theta = 0.34, rate = .5)
-#' define_cure_surv(
+#' define_surv_cure(distribution = "exp", theta = 0.34, rate = .5)
+#' define_surv_cure(
 #'  distribution = "weibull",
 #'  theta = 0.5, shape = 1.5,
 #'  scale = 34.43,
 #'  mixture = TRUE
 #' )
+#' # Deprecated alias included for backwards compatability with heRomod
+#' define_survival_cure(distribution = "exp", theta = 0.24, rate = 0.023)
 #' 
-define_cure_surv <- function(distribution, theta, ..., mixture = TRUE) {
+define_surv_cure <- function(distribution, theta, ..., mixture = TRUE) {
 
   args <- list(...)
 
@@ -83,14 +84,14 @@ define_cure_surv <- function(distribution, theta, ..., mixture = TRUE) {
 #' @export
 #' @tests
 #' 
-#' surv_dist1 <- define_cure_surv('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
+#' surv_dist1 <- define_surv_cure('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
 #' expect_output(
 #'  print(surv_dist1),
 #'  "A Weibull (AFT) non-mixture cure distribution (theta = 0.214, shape = 1.244, scale = 20.398).",
 #'  fixed = T
 #' )
 #' 
-#' surv_dist2 <- define_cure_surv('llogis', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = TRUE)
+#' surv_dist2 <- define_surv_cure('llogis', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = TRUE)
 #' expect_output(
 #'  print(surv_dist2),
 #'  "A log-logistic mixture cure distribution (theta = 0.214, shape = 1.244, scale = 20.398).",
@@ -110,17 +111,16 @@ print.surv_cure <- function(x, ...) {
     cat(output)
 }
 
-#' @rdname surv_prob
 #' @export
 #' 
 #' @tests
-#' dist1 <- define_cure_surv('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
+#' dist1 <- define_surv_cure('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
 #' expect_equal(
 #'  surv_prob(dist1, c(0, 1, 2, Inf)),
 #'  c(1.0000000, 0.9609835, 0.9238699, 0.2000000),
 #'  tolerance = 0.00001
 #' )
-#' dist2 <- define_cure_surv('weibull', theta = 0.2, shape = 1.2, scale = 13.4, mixture = FALSE)
+#' dist2 <- define_surv_cure('weibull', theta = 0.2, shape = 1.2, scale = 13.4, mixture = FALSE)
 #' expect_equal(
 #'  surv_prob(dist2, c(0, 1, 2, Inf)),
 #'  c(1.0000000, 0.9324775, 0.8554689, 0.2000000),
@@ -151,4 +151,37 @@ surv_prob.surv_cure <- function(x, time, ...) {
     ret <- do.call(generic_cure_func, arg_list)
 
     ret
+}
+
+#' @rdname define_surv_cure
+#' @export
+#' 
+#' @tests
+#' expect_equal(
+#'  define_surv_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2),
+#'  define_survival_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2)
+#' )
+define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
+    define_surv_cure(distribution, theta, ..., mixture = mixture)
+}
+
+#' @tests
+#' expect_error(check_theta(1), NA)
+#' expect_error(check_theta(0.5), NA)
+#' expect_error(check_theta(0), NA)
+#' expect_error(
+#'  check_theta(-0.01),
+#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+#'  fixed = T
+#' )
+#' expect_error(
+#'  check_theta(1.01),
+#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+#'  fixed = T
+#' )
+check_theta <- function(theta) {
+    if (any(theta > 1 | theta < 0)) {
+        err <- get_and_populate_message('invalid_theta')
+        stop(err, call. = show_call_error())
+    }
 }

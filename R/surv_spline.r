@@ -1,15 +1,19 @@
 
 
-#' Define a Restricted Cubic Spline Survival Distribution
+#' Define Royston & Parmar Spline Survival Distribution
 #' 
-#' Define a Royston & Parmar restricted cubic spline parametric
+#' Define Royston & Parmar restricted cubic spline parametric
 #' survival distribution.
 #' 
+#' @name define_surv_spline
+#' @rdname define_surv_spline
+#' @export
+#' 
 #' @param scale "hazard", "odds", or "normal", as described
-#'   in flexsurvspline. With the default of no knots in
-#'   addition to the boundaries, these models reduce to the
-#'   Weibull, log-logistic and log-normal respectively. The
-#'   scale must be common to all times.
+#' in flexsurvspline. With the default of no knots in
+#' addition to the boundaries, these models reduce to the
+#' Weibull, log-logistic and log-normal respectively. The
+#' scale must be common to all times.
 #' @param ... parameters and knot log times of spline distribution,
 #' which can be provided either in order starting with spline
 #' parameters followed by knot log times, or by names (e.g 
@@ -18,13 +22,9 @@
 #'   
 #' @return a \code{surv_spline} object.
 #' 
-#' @export
-#' @rdname define_spline_surv
-#' @aliases define_spline_survival
-#' 
 #' @examples
 #' 
-#' define_spline_surv(
+#' define_surv_spline(
 #'  scale = 'hazard',
 #'  -2.08, 2.75, 0.23, # parameters
 #'  -1.62, 0.57, 1.191 # knot times
@@ -34,7 +34,7 @@
 #' proportional-hazards and proportional-odds models for censored survival
 #' data, with application to prognostic modelling and estimation of treatment
 #' effects. Statistics in Medicine 21(1):2175-2197.
-define_spline_surv <- function(scale, ...) {
+define_surv_spline <- function(scale, ...) {
 
   args <- list(...)
   
@@ -175,7 +175,7 @@ check_spline_params <- function(args) {
 
 #' @export
 #' @tests
-#' dist1 <- define_spline_surv(
+#' dist1 <- define_surv_spline(
 #'  scale = 'hazard',
 #'  gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
 #'  knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
@@ -197,11 +197,10 @@ print.surv_spline <- function(x, ...) {
     cat(output)
 }
 
-#' @rdname surv_prob
 #' @export
 #' 
 #' @tests
-#' dist1 <- define_spline_surv(
+#' dist1 <- define_surv_spline(
 #'  scale = 'hazard',
 #'  gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
 #'  knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
@@ -259,4 +258,24 @@ get_spline_scale_display_name <- function(name) {
     }
 
     flexsurv_spline_scale_aliases[[name]]
+}
+
+#' @rdname define_surv_spline
+#' @export
+#'  
+#' @tests
+#' expect_equal(
+#'  define_surv_spline(
+#'      scale = 'hazard',
+#'      gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'      knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#'  ),
+#'  define_spline_survival(
+#'      scale = 'hazard',
+#'      gamma1 = -2.08, gamma2 = 2.75, gamma3 = 0.23,
+#'      knots1 = -1.62, knots2 = 0.57, knots3 = 1.191
+#'  )
+#' )
+define_spline_survival <- function(scale, ...) {
+    define_surv_spline(scale, ...)
 }
