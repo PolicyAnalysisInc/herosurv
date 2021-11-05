@@ -1,4 +1,4 @@
-#' Define Parametric Survival Distribution
+#' Define Parametric Distribution
 #' 
 #' Define parametric survival distribution with given
 #' parameter values. A complete listing of supported

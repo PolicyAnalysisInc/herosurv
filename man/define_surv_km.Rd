@@ -2,7 +2,7 @@
 % Please edit documentation in R/surv_km.r
 \name{define_surv_km}
 \alias{define_surv_km}
-\title{Define survival distribution from KM Table}
+\title{Define Kaplan-Meier Distribution}
 \usage{
 define_surv_km(x, time_col = "time", surv_col = "survival")
 }
@@ -19,7 +19,8 @@ these can be configured by via the optional parameters.}
 a \code{surv_km} object.
 }
 \description{
-Define survival distribution from KM Table
+Define a survival distribution based on a table of Kaplan-Meier
+output containing times and survival probabilities.
 }
 \examples{
 df <- data.frame(

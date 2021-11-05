@@ -3,7 +3,7 @@
 \name{define_surv_param}
 \alias{define_surv_param}
 \alias{define_survival}
-\title{Define Parametric Survival Distribution}
+\title{Define Parametric Distribution}
 \usage{
 define_surv_param(distribution, ...)
 

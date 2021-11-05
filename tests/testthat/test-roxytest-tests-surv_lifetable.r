@@ -2,7 +2,7 @@
 
 # File R/surv_lifetable.r: @tests
 
-test_that("Function define_surv_lifetable() @ L57", {
+test_that("Function define_surv_lifetable() @ L60", {
   x <- data.frame(
        age = c(0, 1, 2, 3),
        male = c(0.011, 0.005, 0.003, 0.002),
@@ -31,7 +31,7 @@ test_that("Function define_surv_lifetable() @ L57", {
 })
 
 
-test_that("Function print.surv_lifetable() @ L161", {
+test_that("Function print.surv_lifetable() @ L164", {
   dist1 <- define_surv_lifetable(
    data.frame(age=c(1,2,3),male=c(0.01,0.01,0.01),female=c(0.009,0.009,0.009)),
    percent_male = 0.49,
@@ -45,7 +45,7 @@ test_that("Function print.surv_lifetable() @ L161", {
 })
 
 
-test_that("Function surv_prob.surv_lifetable() @ L188", {
+test_that("Function surv_prob.surv_lifetable() @ L191", {
   surv_lifetable_df <- data.frame(
    age = c(0, 1, 2, 3),
    male = c(0.011, 0.004, 0.003, 0.002),

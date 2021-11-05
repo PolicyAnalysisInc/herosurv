@@ -1,4 +1,7 @@
-#' Define a survival distribution based on explicit survival probabilities
+#' Define Life-Table Distribution
+#' 
+#' Define a survival distribution based on a life-table containing mortality rates by age
+#' and gender.
 #' 
 #' @name define_surv_lifetable
 #' @rdname define_surv_lifetable

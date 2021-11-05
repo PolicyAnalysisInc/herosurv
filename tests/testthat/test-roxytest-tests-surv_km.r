@@ -2,7 +2,7 @@
 
 # File R/surv_km.r: @tests
 
-test_that("Function define_surv_km() @ L72", {
+test_that("Function define_surv_km() @ L75", {
   df <- data.frame(
        month = c(0, 1, 5, 10),
        p_surv = c(1, 0.9, 0.7, 0.5)
@@ -51,6 +51,18 @@ test_that("Function define_surv_km() @ L72", {
    define_surv_km(mutate(df, p_surv = 1.2), 'month', 'p_surv'),
    fixed = TRUE,
    'Error defining KM, values in column "p_surv" must be within the interval [0-1].'
+  )
+})
+
+
+test_that("Function print.surv_km() @ L183", {
+  #' df <- data.frame(
+       month = c(0, 1, 5, 10),
+       p_surv = c(1, 0.9, 0.7, 0.5)
+  )
+  dist1 <- define_surv_km(df, 'month', 'p_surv')
+  expect_output(
+       print(dist1)
   )
 })
 

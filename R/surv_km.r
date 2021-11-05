@@ -1,4 +1,7 @@
-#' Define survival distribution from KM Table
+#' Define Kaplan-Meier Distribution
+#' 
+#' Define a survival distribution based on a table of Kaplan-Meier
+#' output containing times and survival probabilities.
 #' 
 #' @name define_surv_km
 #' @rdname define_surv_km
@@ -154,6 +157,7 @@ define_surv_km <- function(x, time_col = 'time', surv_col = 'survival') {
         )
         stop(err, call. = show_call_error())
     }
+
     create_list_object(
         c('surv_km', 'surv_dist'),
         table = tibble(
@@ -161,5 +165,22 @@ define_surv_km <- function(x, time_col = 'time', surv_col = 'survival') {
             surv = x[[surv_col]]
         )
     )
+}
 
+
+#' @export
+#' 
+#' @tests
+#' 
+#' #' df <- data.frame(
+#'      month = c(0, 1, 5, 10),
+#'      p_surv = c(1, 0.9, 0.7, 0.5)
+#' )
+#' dist1 <- define_surv_km(df, 'month', 'p_surv')
+#' expect_output(
+#'      print(dist1)
+#' )
+print.surv_km <- function(x, ...) {
+    tibble_output <- paste0(capture.output(print(x$table))[-1], collapse = '\n')
+    cat('A Kaplan-Meier distribution:', tibble_output, sep = '\n')
 }

@@ -2,6 +2,7 @@
 
 S3method(print,surv_cure)
 S3method(print,surv_function)
+S3method(print,surv_km)
 S3method(print,surv_lifetable)
 S3method(print,surv_parametric)
 S3method(print,surv_spline)
