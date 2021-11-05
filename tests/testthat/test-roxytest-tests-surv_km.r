@@ -68,3 +68,27 @@ test_that("Function print.surv_km() @ L185", {
   )
 })
 
+
+test_that("Function define_surv_table() @ L201", {
+  df <- data.frame(
+       time = c(0, 1, 5, 10),
+       survival = c(1, 0.9, 0.7, 0.5)
+  )
+  dist1 <- define_surv_table(df)
+  dist2 <- define_surv_km(df)
+  expect_equal(dist1, dist2)
+})
+
+
+test_that("Function surv_prob.surv_km() @ L219", {
+  df <- data.frame(
+       time = c(0, 1, 5, 10),
+       survival = c(1, 0.9, 0.7, 0.5)
+  )
+  dist1 <- define_surv_table(df)
+  expect_equal(
+   surv_prob(dist1, c(0, 0.99, 1, 1.01, 4.99, 5, 5.01, 11)),
+   c(1, 1, 0.9, 0.9, 0.9, 0.7, 0.7, NA)
+  )
+})
+

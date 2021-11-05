@@ -2,9 +2,12 @@
 % Please edit documentation in R/surv_km.r
 \name{define_surv_km}
 \alias{define_surv_km}
+\alias{define_surv_table}
 \title{Define Kaplan-Meier Distribution}
 \usage{
 define_surv_km(x, time_col = "time", surv_col = "survival")
+
+define_surv_table(x, time_col = "time", surv_col = "survival")
 }
 \arguments{
 \item{x}{a data frame with columns for time and survival probability. By

@@ -162,7 +162,7 @@ define_surv_km <- function(x, time_col = 'time', surv_col = 'survival') {
         c('surv_km', 'surv_dist'),
         table = tibble(
             time = x[[time_col]],
-            surv = x[[surv_col]]
+            survival = x[[surv_col]]
         )
     )
 }
@@ -185,4 +185,53 @@ define_surv_km <- function(x, time_col = 'time', surv_col = 'survival') {
 print.surv_km <- function(x, ...) {
     tibble_output <- paste0(capture.output(print(x$table))[-1], collapse = '\n')
     cat('A Kaplan-Meier distribution:', tibble_output, sep = '\n')
+}
+
+#' @export
+#' @rdname define_surv_km
+#' 
+#' @tests
+#' df <- data.frame(
+#'      time = c(0, 1, 5, 10),
+#'      survival = c(1, 0.9, 0.7, 0.5)
+#' )
+#' dist1 <- define_surv_table(df)
+#' dist2 <- define_surv_km(df)
+#' expect_equal(dist1, dist2)
+define_surv_table <- function(x, time_col = 'time', surv_col = 'survival') {
+    define_surv_km(x, time_col, surv_col)
+}
+
+#' @export
+#' 
+#' @tests
+#' 
+#' df <- data.frame(
+#'      time = c(0, 1, 5, 10),
+#'      survival = c(1, 0.9, 0.7, 0.5)
+#' )
+#' dist1 <- define_surv_table(df)
+#' expect_equal(
+#'  surv_prob(dist1, c(0, 0.99, 1, 1.01, 4.99, 5, 5.01, 11)),
+#'  c(1, 1, 0.9, 0.9, 0.9, 0.7, 0.7, NA)
+#' )
+#' 
+surv_prob.surv_km <- function(x, time, ...) {
+
+    # Create a numeric vector to store results
+    len <- length(time)
+    res <- vector(mode = 'numeric', length = len)
+    
+    # Determine the maximum time contained in KM table
+    max_time <- max(x$table$time)
+
+    # Set survival for any time exceeding the maximum to NA
+    over_max_time <- time > max_time
+    res[over_max_time] <- NA
+
+    # For other times, look it up using stepfun
+    lookup_fun <- stepfun(x$table$time[-1], x$table$survival)
+    res[!over_max_time] <- lookup_fun(time[!over_max_time])
+
+    res
 }
