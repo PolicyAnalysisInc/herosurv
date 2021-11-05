@@ -55,14 +55,16 @@ test_that("Function define_surv_km() @ L75", {
 })
 
 
-test_that("Function print.surv_km() @ L183", {
-  #' df <- data.frame(
+test_that("Function print.surv_km() @ L185", {
+  df <- data.frame(
        month = c(0, 1, 5, 10),
        p_surv = c(1, 0.9, 0.7, 0.5)
   )
   dist1 <- define_surv_km(df, 'month', 'p_surv')
   expect_output(
-       print(dist1)
+       print(dist1),
+       "A Kaplan-Meier distribution:",
+       fixed = T
   )
 })
 
