@@ -1,5 +1,5 @@
 #' @importFrom stats pweibull dweibull rweibull qweibull plnorm dlnorm rlnorm qlnorm as.formula model.matrix stepfun
-#' @importFrom dplyr left_join mutate filter summarize select distinct `%>%` slice group_by
+#' @importFrom dplyr transmute left_join mutate filter summarize select distinct `%>%` slice group_by
 #' @importFrom purrr walk map discard map_chr map2 set_names map_lgl
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
@@ -9,6 +9,7 @@
 #' @importFrom plyr ldply ddply
 #' @importFrom rlang .data
 #' @importFrom glue glue
+#' @importFrom msm ppexp
 #' @import flexsurv
 #' @import survival
 NULL 

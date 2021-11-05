@@ -6,7 +6,11 @@ messages <- list(
     n_spline_params = 'Error defining restricted cubic spline distribution, must provide at least two parameter values followed by a matching number of knot times.',
     spline_param_type = 'Error defining restricted cubic spline distribution, parameter was of type "{class}" instead of "numeric".',
     spline_param_names = 'Error defining restricted cubic spline distribution, incorrect argument names were provided.',
-    model_no_covariates = 'Generating prediction from model with covariates but no covariates were provided. Predictions will reflect weighted average of predictions for subjects used to fit model.'
+    model_no_covariates = 'Generating prediction from model with covariates but no covariates were provided. Predictions will reflect weighted average of predictions for subjects used to fit model.',
+    life_table_missing_gender_mix = 'Error defining life-table, must provide either "percent_male", or "percent_female", but not both.',
+    life_table_missing_columns = 'Error defining life-table, the following columns were expected but not found: {missing_cols}.',
+    life_table_dupe_age = 'Error defining life-table, column "{age_col}" contained duplicate values.',
+    life_table_varying_bands = 'Error defining life-table, life-table must use constant age bands.'
 )
 
 # Possible values for distribution argument to flexsurvreg
