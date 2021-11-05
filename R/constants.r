@@ -10,7 +10,14 @@ messages <- list(
     life_table_missing_gender_mix = 'Error defining life-table, must provide either "percent_male", or "percent_female", but not both.',
     life_table_missing_columns = 'Error defining life-table, the following columns were expected but not found: {missing_cols}.',
     life_table_dupe_age = 'Error defining life-table, column "{age_col}" contained duplicate values.',
-    life_table_varying_bands = 'Error defining life-table, life-table must use constant age bands.'
+    life_table_varying_bands = 'Error defining life-table, life-table must use constant age bands.',
+    km_missing_columns = 'Error defining KM, the following columns were expected but not found: {missing_cols}.',
+    km_dupe_time = 'Error defining KM, column "{time_col}" contained duplicate values.',
+    km_invalid_start = 'Error defining KM, column "{time_col}" must start with a value 0 and "{surv_col}" must start with a value 1.',
+    km_increasing_surv = 'Error defining KM, column "{surv_col}" may not be increasing with respect to "{time_col}".',
+    km_invalid_prob = 'Error defining KM, values in column "{surv_col}" must be within the interval [0-1].',
+    km_invalid_types = 'Error defining KM, the following columns were of invalid type: {invalid_type_cols}.',
+    km_missing_values = 'Error defining KM, the following columns contained missing values: {missing_value_cols}.'
 )
 
 # Possible values for distribution argument to flexsurvreg

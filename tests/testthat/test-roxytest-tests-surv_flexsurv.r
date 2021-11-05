@@ -40,7 +40,7 @@ test_that("Function surv_prob.flexsurvreg() @ L38", {
 })
 
 
-test_that("Function extract_flexsurv_params() @ L143", {
+test_that("Function extract_flexsurv_params() @ L130", {
   fs1 <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')
   params_no_data <- extract_flexsurv_params(fs1)
   expect_equal(

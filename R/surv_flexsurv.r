@@ -104,19 +104,6 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
   return(ret)
 }
 
-#' Extract Evaluated Parameters
-#' 
-#' Extracts the covariate-adjusted parameters from a
-#' [flexsurv::flexsurvreg()] object.
-#' 
-#' @param obj A [flexsurv::flexsurvreg()] object.
-#' @param data An optional dataset of covariate values to
-#'   generate parameters for. Defaults to the original data
-#'   to which the model was fit.
-#'   
-#' @return A tidy data frame of curve parameters for each
-#'   covariate level.
-#' 
 #' @tests
 #' 
 #' fs1 <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')

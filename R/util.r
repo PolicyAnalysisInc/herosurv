@@ -111,13 +111,7 @@ create_param_formatter <- function(...) {
         do.call(format, format_args)
     }
 }
-
-#' Convert Data Frame Factor Variables to Character
-#' 
-#' @param x A data frame.
-#'   
-#' @return A data frame.
-#'   
+   
 #' @tests
 #' expect_equal(
 #'  clean_factors(data.frame(a = 'foo', b = 1, stringsAsFactors = TRUE)),
