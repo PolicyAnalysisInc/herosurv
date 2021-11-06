@@ -2,7 +2,7 @@
 
 # File R/calculations.r: @tests
 
-test_that("Function eval_surv() @ L34", {
+test_that("Function eval_surv() @ L40", {
   dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
   expect_equal(
    surv_prob(dist1, c(1,2,3,4)),

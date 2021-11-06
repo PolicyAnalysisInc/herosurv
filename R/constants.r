@@ -17,7 +17,12 @@ messages <- list(
     km_increasing_surv = 'Error defining KM, column "{surv_col}" may not be increasing with respect to "{time_col}".',
     km_invalid_prob = 'Error defining KM, values in column "{surv_col}" must be within the interval [0-1].',
     km_invalid_types = 'Error defining KM, the following columns were of invalid type: {invalid_type_cols}.',
-    km_missing_values = 'Error defining KM, the following columns contained missing values: {missing_value_cols}.'
+    km_missing_values = 'Error defining KM, the following columns contained missing values: {missing_value_cols}.',
+    surv_prob_wrong_type = 'Error calculating survival probabilities, invalid survival distribution provided.',
+    apply_hr_wrong_type_dist = 'Error applying hazard ratio, invalid survival distribution provided.',
+    apply_hr_wrong_type_hr = 'Error applying hazard ratio, "hr" must be numeric.',
+    apply_hr_missing_hr = 'Error applying hazard ratio, "hr" cannot be NA.',
+    apply_hr_invalid_hr = 'Error applying hazard ratio, "hr" must be greater than 0.'
 )
 
 # Possible values for distribution argument to flexsurvreg

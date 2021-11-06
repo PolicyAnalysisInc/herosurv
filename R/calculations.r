@@ -20,6 +20,12 @@ surv_prob <- function(x, time, ...) {
     UseMethod("surv_prob", x)
 }
 
+#' @export
+surv_prob.default <- function(x, time, ...) {
+    err <- get_and_populate_message('surv_prob_wrong_type')
+    stop(err, call. = show_call_error())
+}
+
 # Alias functions for backwards compatability with heRomod/heemod
 
 #' @rdname surv_prob

@@ -1,4 +1,27 @@
 #' @tests
+#' 
+#' expect_equal(is_surv_dist(create_list_object('flexsurvreg')), TRUE)
+#' expect_equal(is_surv_dist(create_list_object('tibble')), FALSE)
+#' expect_equal(is_surv_dist(create_list_object(c('foo', 'surv_km'))), TRUE)
+is_surv_dist <- function(x) {
+  res <- try(suppressWarnings(surv_prob(x, 1)), silent = TRUE)
+  is_error <- inherits(res, 'try-error')
+  if (is_error) {
+    no_generic <- grepl(
+      'invalid survival distribution provided',
+      res[1],
+      fixed = TRUE
+    )
+    if (no_generic) {
+      return(FALSE)
+    }
+  }
+
+  TRUE
+}
+
+
+#' @tests
 #' expect_equal(
 #'  get_and_populate_message('missing_parameters', dist = 'a', params = 'b'),
 #'  'Error defining a distribution, parameters missing from function call: b.'
