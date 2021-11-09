@@ -141,7 +141,7 @@ surv_prob.surv_aft <- function(x, time, ...) {
 #' dist1 <- apply_af(define_surv_param('exp', rate = 0.025), 0.5)
 #' expect_output(
 #'  print(dist1),
-#'  'An accelerated failure time distribution:
+#'  'An accelerated failure time survival distribution:
 #'   * Acceleration Factor: 0.5
 #'   * Baseline Distribution: An exponential distribution (rate = 0.025).',
 #'  fixed = T
@@ -151,7 +151,7 @@ print.surv_aft <- function(x, ...) {
     bl_dist_output <- to_list_item_output(x$dist)
     output <- paste0(
         c(
-            'An accelerated failure time distribution:',
+            'An accelerated failure time survival distribution:',
             glue('    * Acceleration Factor: {x$af}'),
             glue('    * Baseline Distribution: {bl_dist_output}')
         ),

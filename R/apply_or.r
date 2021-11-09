@@ -135,7 +135,7 @@ surv_prob.surv_po <- function(x, time, ...) {
 #' dist1 <- apply_or(define_surv_param('exp', rate = 0.025), 0.5)
 #' expect_output(
 #'  print(dist1),
-#'  'A proportional odds distribution:
+#'  'A proportional odds survival distribution:
 #'   * Odds Ratio: 0.5
 #'   * Baseline Distribution: An exponential distribution (rate = 0.025).',
 #'  fixed = T
@@ -145,7 +145,7 @@ print.surv_po <- function(x, ...) {
     bl_dist_output <- to_list_item_output(x$dist)
     output <- paste0(
         c(
-            'A proportional odds distribution:',
+            'A proportional odds survival distribution:',
             glue('    * Odds Ratio: {x$or}'),
             glue('    * Baseline Distribution: {bl_dist_output}')
         ),

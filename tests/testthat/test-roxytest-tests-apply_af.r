@@ -67,7 +67,7 @@ test_that("Function print.surv_aft() @ L150", {
   dist1 <- apply_af(define_surv_param('exp', rate = 0.025), 0.5)
   expect_output(
    print(dist1),
-   'An accelerated failure time distribution:
+   'An accelerated failure time survival distribution:
     * Acceleration Factor: 0.5
     * Baseline Distribution: An exponential distribution (rate = 0.025).',
    fixed = T

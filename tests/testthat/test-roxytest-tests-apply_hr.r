@@ -63,7 +63,7 @@ test_that("Function print.surv_ph() @ L151", {
   dist1 <- apply_hr(define_surv_param('exp', rate = 0.025), 0.5)
   expect_output(
    print(dist1),
-   'A proportional hazards distribution:
+   'A proportional hazards survival distribution:
     * Hazard Ratio: 0.5
     * Baseline Distribution: An exponential distribution (rate = 0.025).',
    fixed = T

@@ -30,7 +30,10 @@ messages <- list(
     apply_or_wrong_type_dist = 'Error applying odds ratio, invalid survival distribution provided.',
     apply_or_wrong_type_or = 'Error applying odds ratio, "or" must be numeric.',
     apply_or_missing_or = 'Error applying odds ratio, "or" cannot be NA.',
-    apply_or_invalid_or = 'Error applying odds ratio, "or" must be greater than 0.'
+    apply_or_invalid_or = 'Error applying odds ratio, "or" must be greater than 0.',
+    apply_shift_wrong_type_dist = 'Error applying shift, invalid survival distribution provided.',
+    apply_shift_wrong_type_shift = 'Error applying shift, "shift" must be numeric.',
+    apply_shift_missing_shift = 'Error applying shift, "shift" cannot be NA.'
 )
 
 # Possible values for distribution argument to flexsurvreg

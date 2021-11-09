@@ -57,7 +57,7 @@ test_that("Function print.surv_po() @ L144", {
   dist1 <- apply_or(define_surv_param('exp', rate = 0.025), 0.5)
   expect_output(
    print(dist1),
-   'A proportional odds distribution:
+   'A proportional odds survival distribution:
     * Odds Ratio: 0.5
     * Baseline Distribution: An exponential distribution (rate = 0.025).',
    fixed = T

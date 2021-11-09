@@ -142,7 +142,7 @@ surv_prob.surv_ph <- function(x, time, ...) {
 #' dist1 <- apply_hr(define_surv_param('exp', rate = 0.025), 0.5)
 #' expect_output(
 #'  print(dist1),
-#'  'A proportional hazards distribution:
+#'  'A proportional hazards survival distribution:
 #'   * Hazard Ratio: 0.5
 #'   * Baseline Distribution: An exponential distribution (rate = 0.025).',
 #'  fixed = T
@@ -152,7 +152,7 @@ print.surv_ph <- function(x, ...) {
     bl_dist_output <- to_list_item_output(x$dist)
     output <- paste0(
         c(
-            'A proportional hazards distribution:',
+            'A proportional hazards survival distribution:',
             glue('    * Hazard Ratio: {x$hr}'),
             glue('    * Baseline Distribution: {bl_dist_output}')
         ),
