@@ -2,24 +2,24 @@
 % Please edit documentation in R/apply_hr.r
 \name{apply_hr}
 \alias{apply_hr}
-\title{Apply a Hazard Ratio}
+\title{Apply Hazard Ratio}
 \usage{
 apply_hr(dist, hr, log_hr = FALSE)
 }
 \arguments{
-\item{dist}{A survival distribution.}
+\item{dist}{a survival distribution}
 
-\item{hr}{A hazard ratio to be applied.}
+\item{hr}{a hazard ratio to be applied to survival distribution}
 
-\item{log_hr}{If \code{TRUE}, the hazard ratio is exponentiated
-before being applied.}
+\item{log_hr}{optional argument (defaults to \code{FALSE}) to indicate that provided
+hazard ratio is on log scale}
 }
 \value{
 A \code{surv_ph} object.
 }
 \description{
-Proportionally reduce or increase the hazard rate of a
-distribution.
+Apply hazard ratio to a distribution to proportionally reduce or increase
+the hazard rate.
 }
 \examples{
 

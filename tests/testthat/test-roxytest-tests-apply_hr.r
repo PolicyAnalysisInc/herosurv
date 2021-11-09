@@ -2,7 +2,7 @@
 
 # File R/apply_hr.r: @tests
 
-test_that("Function apply_hr() @ L59", {
+test_that("Function apply_hr() @ L62", {
   dist1 <- define_surv_param("exp", rate = 0.25)
   expect_equal(
    apply_hr(dist1, 0.5),
@@ -43,7 +43,7 @@ test_that("Function apply_hr() @ L59", {
 })
 
 
-test_that("Function surv_prob.surv_ph() @ L132", {
+test_that("Function surv_prob.surv_ph() @ L135", {
   dist1 <- define_surv_param("exp", rate = 0.50)
   dist2 <- define_surv_param("exp", rate = 0.25)
   dist3 <- apply_hr(dist1, 0.5)
@@ -55,6 +55,18 @@ test_that("Function surv_prob.surv_ph() @ L132", {
   expect_equal(
    surv_prob(dist2, seq_len(100)),
    surv_prob(dist4, seq_len(100))
+  )
+})
+
+
+test_that("Function print.surv_ph() @ L151", {
+  dist1 <- apply_hr(define_surv_param('exp', rate = 0.025), 0.5)
+  expect_output(
+   print(dist1),
+   'A proportional hazards distribution:
+    * Hazard Ratio: 0.5
+    * Baseline Distribution: An exponential distribution (rate = 0.025).',
+   fixed = T
   )
 })
 

@@ -22,7 +22,11 @@ messages <- list(
     apply_hr_wrong_type_dist = 'Error applying hazard ratio, invalid survival distribution provided.',
     apply_hr_wrong_type_hr = 'Error applying hazard ratio, "hr" must be numeric.',
     apply_hr_missing_hr = 'Error applying hazard ratio, "hr" cannot be NA.',
-    apply_hr_invalid_hr = 'Error applying hazard ratio, "hr" must be greater than 0.'
+    apply_hr_invalid_hr = 'Error applying hazard ratio, "hr" must be greater than 0.',
+    apply_af_wrong_type_dist = 'Error applying acceleration factor, invalid survival distribution provided.',
+    apply_af_wrong_type_af = 'Error applying acceleration factor, "af" must be numeric.',
+    apply_af_missing_af = 'Error applying acceleration factor, "af" cannot be NA.',
+    apply_af_invalid_af = 'Error applying acceleration factor, "af" must be greater than 0.'
 )
 
 # Possible values for distribution argument to flexsurvreg

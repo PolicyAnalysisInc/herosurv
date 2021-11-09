@@ -176,3 +176,15 @@ time_in_days <- function(x, days_per_year) {
     "years" = days_per_year
   )
 }
+
+to_list_item_output <- function(x, n = 6) {
+  output <- capture.output(print(x))
+  n_lines <- length(output)
+  if (n_lines == 1) {
+    return(output)
+  }
+  indents <- paste0(rep(' ', n + 2), collapse = '')
+  indented_output <- paste0('\n', paste0(indents, output, collapse = '\n'))
+
+  indented_output
+}

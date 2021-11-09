@@ -1,15 +1,18 @@
-#' Apply a Hazard Ratio
+#' Apply Hazard Ratio
 #' 
-#' Proportionally reduce or increase the hazard rate of a
-#' distribution.
+#' Apply hazard ratio to a distribution to proportionally reduce or increase
+#' the hazard rate.
 #' 
-#' @param dist A survival distribution.
-#' @param hr A hazard ratio to be applied.
-#' @param log_hr If `TRUE`, the hazard ratio is exponentiated
-#'   before being applied.
+#' @name apply_hr
+#' @rdname apply_hr
+#' @export
+#' 
+#' @param dist a survival distribution
+#' @param hr a hazard ratio to be applied to survival distribution
+#' @param log_hr optional argument (defaults to `FALSE`) to indicate that provided
+#' hazard ratio is on log scale
 #'   
 #' @return A `surv_ph` object.
-#' @export
 #' 
 #' @examples
 #' 
@@ -131,4 +134,29 @@ apply_hr <- function(dist, hr, log_hr = FALSE) {
 #' )
 surv_prob.surv_ph <- function(x, time, ...) {
     surv_prob(x$dist, time) ^ x$hr
+}
+
+#' @export
+#' 
+#' @tests
+#' dist1 <- apply_hr(define_surv_param('exp', rate = 0.025), 0.5)
+#' expect_output(
+#'  print(dist1),
+#'  'A proportional hazards distribution:
+#'   * Hazard Ratio: 0.5
+#'   * Baseline Distribution: An exponential distribution (rate = 0.025).',
+#'  fixed = T
+#' )
+#' 
+print.surv_ph <- function(x, ...) {
+    bl_dist_output <- to_list_item_output(x$dist)
+    output <- paste0(
+        c(
+            'A proportional hazards distribution:',
+            glue('    * Hazard Ratio: {x$hr}'),
+            glue('    * Baseline Distribution: {bl_dist_output}')
+        ),
+        collapse = '\n'
+    )
+    cat(output)
 }

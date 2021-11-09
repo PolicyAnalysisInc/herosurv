@@ -169,7 +169,7 @@ print.surv_lifetable <- function(x, ...) {
         'A life-table survival distribution ({pct_male}% male, {pct_female}% female):'
     )
     rows_used <- x$table[seq_len(nrow(x$table)) >= x$first_used_row, ]
-    tibble_output <- paste0(capture.output(print(rows_used))[-1], collapse = '\n')
+    tibble_output <- paste0(capture.output(print(rows_used, n = 5))[-1], collapse = '\n')
 
     cat(first_line, tibble_output, sep = '\n')
 }
