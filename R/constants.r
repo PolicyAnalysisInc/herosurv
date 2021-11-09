@@ -26,7 +26,11 @@ messages <- list(
     apply_af_wrong_type_dist = 'Error applying acceleration factor, invalid survival distribution provided.',
     apply_af_wrong_type_af = 'Error applying acceleration factor, "af" must be numeric.',
     apply_af_missing_af = 'Error applying acceleration factor, "af" cannot be NA.',
-    apply_af_invalid_af = 'Error applying acceleration factor, "af" must be greater than 0.'
+    apply_af_invalid_af = 'Error applying acceleration factor, "af" must be greater than 0.',
+    apply_or_wrong_type_dist = 'Error applying odds ratio, invalid survival distribution provided.',
+    apply_or_wrong_type_or = 'Error applying odds ratio, "or" must be numeric.',
+    apply_or_missing_or = 'Error applying odds ratio, "or" cannot be NA.',
+    apply_or_invalid_or = 'Error applying odds ratio, "or" must be greater than 0.'
 )
 
 # Possible values for distribution argument to flexsurvreg

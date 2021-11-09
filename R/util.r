@@ -188,3 +188,19 @@ to_list_item_output <- function(x, n = 6) {
 
   indented_output
 }
+
+prob_to_odds <- function(p) {
+  ret <- vector(mode = 'numeric', length = length(p))
+  one_index <- p == 1
+  ret[one_index] <- Inf
+  ret[!one_index] <- p / (1 - p)
+  ret
+}
+
+odds_to_prob <- function(odds) {
+  ret <- vector(mode = 'numeric', length = length(odds))
+  inf_index <- odds == Inf
+  ret[inf_index] <- 1
+  ret[!inf_index] <- odds / (odds + 1)
+  ret
+}

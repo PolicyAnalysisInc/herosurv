@@ -64,19 +64,19 @@ apply_af <- function(dist, af, log_af = FALSE) {
         stop(err, call. = show_call_error())
     }
 
-    # Check that hr is numeric
+    # Check that af is numeric
     is_numeric <- any(c('integer', 'numeric') %in% class(af))
     if (!is_numeric) {
         err <- get_and_populate_message('apply_af_wrong_type_af')
         stop(err, call. = show_call_error())
     }
 
-    # If log_hr is specified then exponentiate it
+    # If log_af is specified then exponentiate it
     if (log_af) {
         af <- exp(af)
     }
 
-    # Check that hr isn't missing
+    # Check that af isn't missing
     missing_af <- any(is.na(af))
     if (missing_af) {
         err <- get_and_populate_message('apply_af_missing_af')
