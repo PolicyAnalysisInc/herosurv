@@ -56,7 +56,7 @@
 #' )
 #' expect_error(
 #'  apply_hr(dist1, -2),
-#'  'Error applying hazard ratio, "hr" must be greater than 0.',
+#'  'Error applying hazard ratio, "hr" cannot be negative.',
 #'  fixed = TRUE
 #' )
 apply_hr <- function(dist, hr, log_hr = FALSE) {

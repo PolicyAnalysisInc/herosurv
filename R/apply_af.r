@@ -52,7 +52,7 @@
 #' )
 #' expect_error(
 #'  apply_af(dist1, -2),
-#'  'Error applying acceleration factor, "af" must be greater than 0.',
+#'  'Error applying acceleration factor, "af" cannot be negative.',
 #'  fixed = TRUE
 #' )
 apply_af <- function(dist, af, log_af = FALSE) {

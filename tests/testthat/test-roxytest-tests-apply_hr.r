@@ -37,7 +37,7 @@ test_that("Function apply_hr() @ L62", {
   )
   expect_error(
    apply_hr(dist1, -2),
-   'Error applying hazard ratio, "hr" must be greater than 0.',
+   'Error applying hazard ratio, "hr" cannot be negative.',
    fixed = TRUE
   )
 })

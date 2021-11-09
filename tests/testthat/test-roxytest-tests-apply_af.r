@@ -37,7 +37,7 @@ test_that("Function apply_af() @ L58", {
   )
   expect_error(
    apply_af(dist1, -2),
-   'Error applying acceleration factor, "af" must be greater than 0.',
+   'Error applying acceleration factor, "af" cannot be negative.',
    fixed = TRUE
   )
 })

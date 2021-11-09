@@ -22,18 +22,24 @@ messages <- list(
     apply_hr_wrong_type_dist = 'Error applying hazard ratio, invalid survival distribution provided.',
     apply_hr_wrong_type_hr = 'Error applying hazard ratio, "hr" must be numeric.',
     apply_hr_missing_hr = 'Error applying hazard ratio, "hr" cannot be NA.',
-    apply_hr_invalid_hr = 'Error applying hazard ratio, "hr" must be greater than 0.',
+    apply_hr_invalid_hr = 'Error applying hazard ratio, "hr" cannot be negative.',
     apply_af_wrong_type_dist = 'Error applying acceleration factor, invalid survival distribution provided.',
     apply_af_wrong_type_af = 'Error applying acceleration factor, "af" must be numeric.',
     apply_af_missing_af = 'Error applying acceleration factor, "af" cannot be NA.',
-    apply_af_invalid_af = 'Error applying acceleration factor, "af" must be greater than 0.',
+    apply_af_invalid_af = 'Error applying acceleration factor, "af" cannot be negative.',
     apply_or_wrong_type_dist = 'Error applying odds ratio, invalid survival distribution provided.',
     apply_or_wrong_type_or = 'Error applying odds ratio, "or" must be numeric.',
     apply_or_missing_or = 'Error applying odds ratio, "or" cannot be NA.',
-    apply_or_invalid_or = 'Error applying odds ratio, "or" must be greater than 0.',
+    apply_or_invalid_or = 'Error applying odds ratio, "or" cannot be negative.',
     apply_shift_wrong_type_dist = 'Error applying shift, invalid survival distribution provided.',
     apply_shift_wrong_type_shift = 'Error applying shift, "shift" must be numeric.',
-    apply_shift_missing_shift = 'Error applying shift, "shift" cannot be NA.'
+    apply_shift_missing_shift = 'Error applying shift, "shift" cannot be NA.',
+    join_wrong_type_cut = 'Error joining distributions, cuts times must be numeric.',
+    join_missing_cut = 'Error joining distributions, cuts times cannot be NA.',
+    join_invalid_cut = 'Error joining distributions, cut times cannot be negative.',
+    join_wrong_n_args = 'Error joining distributions, must provide an odd number of arguments corresponding to n distributions and n - 1 cut points.',
+    join_wrong_type_dist = 'Error joining distributions, invalid survival distribution provided.',
+    join_cuts_order = 'Error joining distributions, distributions and cutpoints must be provided in order.'
 )
 
 # Possible values for distribution argument to flexsurvreg

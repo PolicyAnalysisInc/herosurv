@@ -37,7 +37,7 @@ test_that("Function apply_or() @ L58", {
   )
   expect_error(
    apply_or(dist1, -2),
-   'Error applying odds ratio, "or" must be greater than 0.',
+   'Error applying odds ratio, "or" cannot be negative.',
    fixed = TRUE
   )
 })
