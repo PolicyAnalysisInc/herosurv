@@ -39,7 +39,9 @@ messages <- list(
     join_invalid_cut = 'Error joining distributions, cut times cannot be negative.',
     join_wrong_n_args = 'Error joining distributions, must provide an odd number of arguments corresponding to n distributions and n - 1 cut points.',
     join_wrong_type_dist = 'Error joining distributions, invalid survival distribution provided.',
-    join_cuts_order = 'Error joining distributions, distributions and cutpoints must be provided in order.'
+    join_cuts_order = 'Error joining distributions, distributions and cutpoints must be provided in order.',
+    set_covariates_wrong_type_dist = 'Error setting covariates, only survfit and flexsurv models are supported.',
+    set_covariates_wrong_type_data = 'Error setting covariates, "data" must be provided as a data frame.'
 )
 
 # Possible values for distribution argument to flexsurvreg

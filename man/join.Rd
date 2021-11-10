@@ -16,7 +16,7 @@ join(dist1, cut1, dist2, ...)
 \item{...}{Additional cutpoints and distributions}
 }
 \value{
-A \code{surv_join} object.
+A \code{surv_join} object
 }
 \description{
 Join two or more distributions together at the specified cut points.
