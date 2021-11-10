@@ -1,9 +1,9 @@
 #' @importFrom stats pweibull dweibull rweibull qweibull plnorm dlnorm rlnorm qlnorm as.formula model.matrix stepfun
-#' @importFrom dplyr transmute left_join mutate filter summarize select distinct `%>%` slice group_by
+#' @importFrom dplyr transmute left_join mutate filter summarize select distinct `%>%` slice group_by n
 #' @importFrom purrr walk map discard map_chr map2 set_names map_lgl imap_dbl
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
-#' @importFrom utils capture.output head
+#' @importFrom utils capture.output head tail
 #' @importFrom tibble tibble as_tibble
 #' @importFrom formula.tools rhs
 #' @importFrom plyr ldply ddply

@@ -25,7 +25,7 @@ data frame of covariate values (for multiple subjects) or by providing
 covariate values as named arguments (for a single subject).
 }
 \examples{
-
+library(flexsurv)
 fs1 <- flexsurvreg(
   Surv(rectime, censrec)~group,
   data=flexsurv::bc,

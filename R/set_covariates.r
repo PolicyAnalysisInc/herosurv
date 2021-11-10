@@ -18,7 +18,7 @@
 #' @return a `surv_model` object
 #' 
 #' @examples
-#' 
+#' library(flexsurv)
 #' fs1 <- flexsurvreg(
 #'   Surv(rectime, censrec)~group,
 #'   data=flexsurv::bc,

@@ -62,7 +62,7 @@ surv_prob.survfit <- function(x, time,  ...) {
     agg_df <- surv_df %>%
       as_tibble() %>% 
       group_by(t) %>%
-      summarize(value = sum(value * n) / sum(n))
+      summarize(value = sum(.data$value * n) / sum(n))
   } else {
     
     # If covariates are provided, join the predictions to them and then
@@ -71,7 +71,7 @@ surv_prob.survfit <- function(x, time,  ...) {
     agg_df <- clean_factors(dots$covar) %>% 
       left_join(surv_df, by = terms) %>%
       group_by(t) %>%
-      summarize(value = mean(value))
+      summarize(value = mean(.data$value))
   }
   
   # Get the vector of predictions

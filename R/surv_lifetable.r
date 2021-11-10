@@ -28,7 +28,11 @@
 #' @return a `surv_lifetable` object.
 #'
 #' @examples
-#'  x <- data.frame(age = c(0, 1, 2, 3), male = c(0.011, 0.005, 0.003, 0.002), female = c(0.010, 0.005, 0.004, 0.002))
+#'  x <- data.frame(
+#'      age = c(0, 1, 2, 3),
+#'      male = c(0.011, 0.005, 0.003, 0.002),
+#'      female = c(0.010, 0.005, 0.004, 0.002)
+#'  )
 #'  define_surv_lifetable(x, 1, 0.45)
 #'  
 #' @tests
