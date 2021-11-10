@@ -171,12 +171,12 @@ define_survival_cure <- function(distribution, theta, ..., mixture = TRUE) {
 #' expect_error(check_theta(0), NA)
 #' expect_error(
 #'  check_theta(-0.01),
-#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+#'  'Error defining cure model, cure fraction (theta) must be in range [0-1].',
 #'  fixed = T
 #' )
 #' expect_error(
 #'  check_theta(1.01),
-#'  'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+#'  'Error defining cure model, cure fraction (theta) must be in range [0-1].',
 #'  fixed = T
 #' )
 check_theta <- function(theta) {

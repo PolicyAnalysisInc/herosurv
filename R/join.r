@@ -118,7 +118,7 @@ join <- function(dist1, cut1, dist2, ...) {
             }
 
             # Check that cut >= 0
-            invalid_cut <- x < 0
+            invalid_cut <- any(x < 0)
             if (invalid_cut) {
                 err <- get_and_populate_message('join_invalid_cut')
                 stop(err, call. = show_call_error())

@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_covariates.r
 \name{set_covariates}
 \alias{set_covariates}
-\title{Set Covariates of a Survival Distribution}
+\title{Set Covariates of a Survival Model}
 \usage{
 set_covariates(dist, data, ...)
 }

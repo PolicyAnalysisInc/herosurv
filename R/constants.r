@@ -1,7 +1,7 @@
 # Error/Warning messages
 messages <- list(
     missing_parameters = 'Error defining {dist} distribution, parameters missing from function call: {params}.',
-    invalid_theta = 'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+    invalid_theta = 'Error defining cure model, cure fraction (theta) must be in range [0-1].',
     truncated_vector = 'Parameter {param} was length > 1 and only the first element will be used.',
     n_spline_params = 'Error defining restricted cubic spline distribution, must provide at least two parameter values followed by a matching number of knot times.',
     spline_param_type = 'Error defining restricted cubic spline distribution, parameter was of type "{class}" instead of "numeric".',
@@ -41,7 +41,14 @@ messages <- list(
     join_wrong_type_dist = 'Error joining distributions, invalid survival distribution provided.',
     join_cuts_order = 'Error joining distributions, distributions and cutpoints must be provided in order.',
     set_covariates_wrong_type_dist = 'Error setting covariates, only survfit and flexsurv models are supported.',
-    set_covariates_wrong_type_data = 'Error setting covariates, "data" must be provided as a data frame.'
+    set_covariates_wrong_type_data = 'Error setting covariates, "data" must be provided as a data frame.',
+    mix_wrong_type_weight = 'Error mixing distributions, weights must be numeric.',
+    mix_missing_weight = 'Error mixing distributions, weights cannot be NA.',
+    mix_invalid_weight = 'Error mixing distributions, weights must be in range [0-1].',
+    mix_wrong_n_args = 'Error mixing distributions, must provide an even number of arguments corresponding to n distributions and weights.',
+    mix_wrong_type_dist = 'Error mixing distributions, invalid survival distribution provided.',
+    mix_weights_wrong_sum = 'Error mixing distributions, weights must sum to 1.',
+    add_hazards_wrong_type_dist = 'Error adding hazards, invalid survival distribution provided.'
 )
 
 # Possible values for distribution argument to flexsurvreg

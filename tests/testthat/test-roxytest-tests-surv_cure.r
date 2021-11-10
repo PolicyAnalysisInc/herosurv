@@ -49,12 +49,12 @@ test_that("Function check_theta() @ L182", {
   expect_error(check_theta(0), NA)
   expect_error(
    check_theta(-0.01),
-   'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+   'Error defining cure model, cure fraction (theta) must be in range [0-1].',
    fixed = T
   )
   expect_error(
    check_theta(1.01),
-   'Error defining cure model, cure fraction (theta) must be in range (0-1).',
+   'Error defining cure model, cure fraction (theta) must be in range [0-1].',
    fixed = T
   )
 })
