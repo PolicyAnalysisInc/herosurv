@@ -34,4 +34,5 @@ fs1 <- flexsurvreg(
 good_model <- set_covariates(fs1, group = "Good")
 cohort <- data.frame(group=c("Good", "Good", "Medium", "Poor"))
 mixed_model <- set_covariates(fs1, data = cohort)
+
 }

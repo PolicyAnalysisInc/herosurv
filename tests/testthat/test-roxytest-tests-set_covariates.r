@@ -2,7 +2,32 @@
 
 # File R/set_covariates.r: @tests
 
-test_that("Function surv_prob.surv_model() @ L96", {
+test_that("Function set_covariates() @ L53", {
+  fs1 <- flexsurvreg(
+    Surv(rectime, censrec)~group,
+    data=flexsurv::bc,
+    dist = "llogis"
+  )
+  
+  expect_error(
+   set_covariates("foo", data.frame(group = 'Good')),
+   'Error setting covariates, only survfit and flexsurv models are supported.',
+   fixed = TRUE
+  )
+  expect_error(
+   set_covariates(fs1, "foo"),
+   'Error setting covariates, "data" must be provided as a data frame.',
+   fixed = TRUE
+  )
+  expect_error(
+   set_covariates(fs1),
+   'Error setting covariates, must provide either "data" or named arguments for covariate values.',
+   fixed = TRUE
+  )
+})
+
+
+test_that("Function surv_prob.surv_model() @ L119", {
   fs <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')
   model1 <- set_covariates(fs, group = 'Good')
   expect_equal(
@@ -20,7 +45,7 @@ test_that("Function surv_prob.surv_model() @ L96", {
 })
 
 
-test_that("Function print.surv_model() @ L114", {
+test_that("Function print.surv_model() @ L137", {
   fs <- flexsurvreg(Surv(rectime, censrec)~group, data = flexsurv::bc, dist = 'weibull')
   model <- set_covariates(fs, group = 'Good')
   expect_output(

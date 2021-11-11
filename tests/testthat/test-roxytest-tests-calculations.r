@@ -11,11 +11,16 @@ test_that("Function eval_surv() @ L42", {
 })
 
 
-test_that("Function event_prob() @ L72", {
+test_that("Function event_prob() @ L76", {
   dist1 <- define_surv_param('exp', rate = 0.12)
   expect_equal(
    event_prob(dist1, c(0,1,2), c(1,2,3)),
    rep(1-pexp(1, rate = 0.12, lower.tail = FALSE), 3)
+  )
+  expect_error(
+   event_prob('foo', 1, 2),
+   'Error calculating event probabilities, invalid survival distribution provided.',
+   fixed = TRUE
   )
 })
 

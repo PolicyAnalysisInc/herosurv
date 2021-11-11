@@ -45,6 +45,10 @@
 #'      define_surv_lifetable(x, 1, 0.45)[-4],
 #'      define_surv_lifetable(x[c(4,3,2,1), ], 1, 0.45)[-4]
 #'  )
+#'  expect_equal(
+#'      define_surv_lifetable(x, 1, 0.45)[-4],
+#'      define_surv_lifetable(x, 1, percent_female = 0.55)[-4]
+#'  )
 #'  expect_error(
 #'      define_surv_lifetable(x, 1, 0.45, age_col = "foo", male_col = "bar"),
 #'      'Error defining life-table, the following columns were expected but not found: "foo", "bar".'

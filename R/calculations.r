@@ -68,6 +68,11 @@ eval_surv <- function(x, time, ...) {
 #'  event_prob(dist1, c(0,1,2), c(1,2,3)),
 #'  rep(1-pexp(1, rate = 0.12, lower.tail = FALSE), 3)
 #' )
+#' expect_error(
+#'  event_prob('foo', 1, 2),
+#'  'Error calculating event probabilities, invalid survival distribution provided.',
+#'  fixed = TRUE
+#' )
 event_prob <- function(x, start, end, ...) {
     UseMethod("event_prob", x)
 }

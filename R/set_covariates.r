@@ -27,6 +27,29 @@
 #' good_model <- set_covariates(fs1, group = "Good")
 #' cohort <- data.frame(group=c("Good", "Good", "Medium", "Poor"))
 #' mixed_model <- set_covariates(fs1, data = cohort)
+#' 
+#' @tests
+#' fs1 <- flexsurvreg(
+#'   Surv(rectime, censrec)~group,
+#'   data=flexsurv::bc,
+#'   dist = "llogis"
+#' )
+#' 
+#' expect_error(
+#'  set_covariates("foo", data.frame(group = 'Good')),
+#'  'Error setting covariates, only survfit and flexsurv models are supported.',
+#'  fixed = TRUE
+#' )
+#' expect_error(
+#'  set_covariates(fs1, "foo"),
+#'  'Error setting covariates, "data" must be provided as a data frame.',
+#'  fixed = TRUE
+#' )
+#' expect_error(
+#'  set_covariates(fs1),
+#'  'Error setting covariates, must provide either "data" or named arguments for covariate values.',
+#'  fixed = TRUE
+#' )
 set_covariates <- function(dist, data, ...) {
 
     args <- list(...)

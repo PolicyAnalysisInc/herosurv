@@ -2,7 +2,7 @@
 
 # File R/surv_lifetable.r: @tests
 
-test_that("Function define_surv_lifetable() @ L64", {
+test_that("Function define_surv_lifetable() @ L68", {
   x <- data.frame(
        age = c(0, 1, 2, 3),
        male = c(0.011, 0.005, 0.003, 0.002),
@@ -11,6 +11,10 @@ test_that("Function define_surv_lifetable() @ L64", {
    expect_equal(
        define_surv_lifetable(x, 1, 0.45)[-4],
        define_surv_lifetable(x[c(4,3,2,1), ], 1, 0.45)[-4]
+   )
+   expect_equal(
+       define_surv_lifetable(x, 1, 0.45)[-4],
+       define_surv_lifetable(x, 1, percent_female = 0.55)[-4]
    )
    expect_error(
        define_surv_lifetable(x, 1, 0.45, age_col = "foo", male_col = "bar"),
@@ -31,7 +35,7 @@ test_that("Function define_surv_lifetable() @ L64", {
 })
 
 
-test_that("Function print.surv_lifetable() @ L168", {
+test_that("Function print.surv_lifetable() @ L172", {
   dist1 <- define_surv_lifetable(
    data.frame(age=c(1,2,3),male=c(0.01,0.01,0.01),female=c(0.009,0.009,0.009)),
    percent_male = 0.49,
@@ -45,7 +49,7 @@ test_that("Function print.surv_lifetable() @ L168", {
 })
 
 
-test_that("Function surv_prob.surv_lifetable() @ L195", {
+test_that("Function surv_prob.surv_lifetable() @ L199", {
   surv_lifetable_df <- data.frame(
    age = c(0, 1, 2, 3),
    male = c(0.011, 0.004, 0.003, 0.002),

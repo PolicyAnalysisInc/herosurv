@@ -43,6 +43,7 @@ messages <- list(
     join_cuts_order = 'Error joining distributions, distributions and cutpoints must be provided in order.',
     set_covariates_wrong_type_dist = 'Error setting covariates, only survfit and flexsurv models are supported.',
     set_covariates_wrong_type_data = 'Error setting covariates, "data" must be provided as a data frame.',
+    set_covariates_missing_data = 'Error setting covariates, must provide either "data" or named arguments for covariate values.',
     mix_wrong_type_weight = 'Error mixing distributions, weights must be numeric.',
     mix_missing_weight = 'Error mixing distributions, weights cannot be NA.',
     mix_invalid_weight = 'Error mixing distributions, weights must be in range [0-1].',
