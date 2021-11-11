@@ -97,11 +97,28 @@ apply_shift <- function(dist, shift) {
 #' dist1 <- define_surv_param("exp", rate = 0.50)
 #' dist2 <- apply_shift(dist1, 2)
 #' expect_equal(
-#'  surv_prob(dist1, seq_len(100) - 2),
-#'  surv_prob(dist2, seq_len(100))
+#'  surv_prob(dist1, seq_len(100)),
+#'  surv_prob(dist2, seq_len(100) + 2)
 #' )
 surv_prob.surv_shift <- function(x, time, ...) {
-    surv_prob(x$dist, time - x$shift)
+
+    # Check that times are valid
+    check_times(time, 'calculating survival probabilities', 'time')
+
+    # Create a vector to store results
+    ret <- vector('numeric', length(time))
+
+    # Shift the times and figure out which times are lte zero
+    shifted_times <- time - x$shift
+    zero_times <- shifted_times <= 0
+
+    # Survival for t <= 0 is 1 by definition
+    ret[zero_times] <- 1
+
+    # Survival for t > 0 given by surv_prob
+    ret[!zero_times] <- surv_prob(x$dist, shifted_times[!zero_times])
+
+    ret
 }
 
 #' @export

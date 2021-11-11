@@ -180,6 +180,7 @@ join <- function(dist1, cut1, dist2, ...) {
 #'  )
 #' )
 surv_prob.surv_join <- function(x, time, ...) {
+    check_times(time, 'calculating survival probabilities', 'time')
     n_times <- length(time)
     ret <- surv_prob(x$dists[[1]], time, ...)
     n_cuts <- length(x$cuts)

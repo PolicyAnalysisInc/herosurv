@@ -193,5 +193,6 @@ print.surv_lifetable <- function(x, ...) {
 #'  tolerance = 1e-7
 #' )
 surv_prob.surv_lifetable <- function(x, time, ...) {
+    check_times(time, 'calculating survival probabilities', 'time')
     x$surv_func(time)
 }

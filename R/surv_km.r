@@ -218,6 +218,8 @@ define_surv_table <- function(x, time_col = 'time', surv_col = 'survival') {
 #' 
 surv_prob.surv_km <- function(x, time, ...) {
 
+    check_times(time, 'calculating survival probabilities', 'time')
+
     # Create a numeric vector to store results
     len <- length(time)
     res <- vector(mode = 'numeric', length = len)

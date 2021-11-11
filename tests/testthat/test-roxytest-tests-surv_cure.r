@@ -35,7 +35,7 @@ test_that("Function surv_prob.surv_cure() @ L129", {
 })
 
 
-test_that("Function define_survival_cure() @ L164", {
+test_that("Function define_survival_cure() @ L166", {
   expect_equal(
    define_surv_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2),
    define_survival_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2)
@@ -43,7 +43,7 @@ test_that("Function define_survival_cure() @ L164", {
 })
 
 
-test_that("Function check_theta() @ L182", {
+test_that("Function check_theta() @ L184", {
   expect_error(check_theta(1), NA)
   expect_error(check_theta(0.5), NA)
   expect_error(check_theta(0), NA)

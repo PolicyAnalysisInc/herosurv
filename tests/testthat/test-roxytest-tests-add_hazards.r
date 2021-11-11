@@ -38,7 +38,7 @@ test_that("Function surv_prob.surv_add_haz() @ L74", {
 })
 
 
-test_that("Function print.surv_add_haz() @ L90", {
+test_that("Function print.surv_add_haz() @ L91", {
   dist1 <- define_surv_param('exp', rate = 0.12)
   dist2 <- define_surv_param('exp', rate = 0.18)
   expect_output(

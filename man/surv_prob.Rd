@@ -10,11 +10,11 @@ surv_prob(x, time, ...)
 eval_surv(x, time, ...)
 }
 \arguments{
-\item{x}{A surv_dist object}
+\item{x}{A \code{surv_dist} object}
 
 \item{time}{A numeric vector of times}
 
-\item{...}{additional arguments passed to methods.}
+\item{...}{additional arguments passed to methods}
 }
 \value{
 A numeric vector of survival probabilities

@@ -132,6 +132,7 @@ apply_af <- function(dist, af, log_af = FALSE) {
 #'  surv_prob(dist4, seq_len(100))
 #' )
 surv_prob.surv_aft <- function(x, time, ...) {
+    check_times(time, 'calculating survival probabilities', 'time')
     surv_prob(x$dist, time / x$af)
 }
 

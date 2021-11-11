@@ -72,6 +72,7 @@ add_hazards <- function(dist1, dist2, ...) {
 #'  surv_prob(add_hazards(dist1, dist2, dist3), seq_len(100))
 #' )
 surv_prob.surv_add_haz <- function(x, time, ...) {
+    check_times(time, 'calculating survival probabilities', 'time')
     Reduce(`*`, map(x$dists, function(dist) surv_prob(dist, time, ...)))
 }
 

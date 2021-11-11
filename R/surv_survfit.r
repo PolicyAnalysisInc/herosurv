@@ -25,6 +25,8 @@
 #' )
 surv_prob.survfit <- function(x, time,  ...) {
   
+  check_times(time, 'calculating survival probabilities', 'time')
+  
   dots <- list(...)
   
   pl_table <- extract_strata(x)

@@ -92,7 +92,7 @@ test_that("Function surv_prob.surv_join() @ L182", {
 })
 
 
-test_that("Function print.surv_join() @ L215", {
+test_that("Function print.surv_join() @ L216", {
   dist1 <- define_surv_param('exp', rate = 0.05)
   dist2 <- define_surv_param('exp', rate = 0.1)
   expect_output(

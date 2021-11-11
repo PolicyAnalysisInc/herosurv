@@ -50,14 +50,14 @@ test_that("Function surv_prob.surv_parametric() @ L128", {
 })
 
 
-test_that("Function get_flexsurv_dist() @ L152", {
+test_that("Function get_flexsurv_dist() @ L154", {
   expect_equal(get_flexsurv_dist('weibull'), pweibull)
   expect_equal(get_flexsurv_dist('genf'), pgenf)
   expect_equal(get_flexsurv_dist('llogis'), pllogis)
 })
 
 
-test_that("Function get_flexsurv_dist_params() @ L168", {
+test_that("Function get_flexsurv_dist_params() @ L170", {
   expect_equal(
    get_flexsurv_dist_params('weibull'), c('shape', 'scale')
   )
@@ -72,7 +72,7 @@ test_that("Function get_flexsurv_dist_params() @ L168", {
 })
 
 
-test_that("Function get_dist_params_from_args() @ L185", {
+test_that("Function get_dist_params_from_args() @ L187", {
   expect_equal(
    get_dist_params_from_args(
        'weibull',
@@ -83,7 +83,7 @@ test_that("Function get_dist_params_from_args() @ L185", {
 })
 
 
-test_that("Function get_dist_param_from_args() @ L208", {
+test_that("Function get_dist_param_from_args() @ L210", {
   expect_equal(
    get_dist_param_from_args(
        'scale',
@@ -94,7 +94,7 @@ test_that("Function get_dist_param_from_args() @ L208", {
 })
 
 
-test_that("Function get_dist_display_name() @ L226", {
+test_that("Function get_dist_display_name() @ L228", {
   expect_equal(
    get_dist_display_name('foo'),
    'foo'
@@ -107,7 +107,7 @@ test_that("Function get_dist_display_name() @ L226", {
 })
 
 
-test_that("Function define_survival() @ L241", {
+test_that("Function define_survival() @ L243", {
   expect_equal(
    define_surv_param('lnorm', meanlog = 2.1, sdlog = 0.3),
    define_survival('lnorm', meanlog = 2.1, sdlog = 0.3)  
@@ -115,7 +115,7 @@ test_that("Function define_survival() @ L241", {
 })
 
 
-test_that("Function check_param_names() @ L252", {
+test_that("Function check_param_names() @ L254", {
   expect_error(
    check_param_names(list(shape=1,foo=2), 'weibullPH'), 
    'Error defining Weibull (PH) distribution, parameters missing from function call: "scale".',

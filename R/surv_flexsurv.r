@@ -36,21 +36,24 @@
 #'  fixed = T
 #' )
 surv_prob.flexsurvreg <- function(x, time,  ...) {
-  
+
+  # Check survival times
+  check_times(time, 'calculating survival probabilities', 'time')
+
   dots <- list(...)
-  
+
   time_surv <- time
   # Extract parameter estimates
   coef_obj <- x$coefficients
-  
+
   n_coef <- length(coef_obj)
   n_time <- length(time_surv)
-  
+
   if(x$ncovs > 0 && is.null(dots$covar)) {
     msg <- get_and_populate_message('model_no_covariates')
     warning(msg, show_call_warn())
   }
-  
+
   # For efficiency, survival probabilities are only calculated
   # for each distinct set of covariates, then merged back onto
   # the full dataset (data_full).
@@ -65,30 +68,30 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
     data_full <- dots$covar
     data <- distinct(dots$covar)
   }
-  
+
   # If there is no data, make an empty df
   if (ncol(data) == 0) {
     data <- data.frame(value = numeric(n_time))
   }
-  
+
   # Get a data frame of parameter values for each observation
   param_df <- extract_flexsurv_params(x, data = data)
   n_obs <- nrow(param_df)
-  
+
   # Repeat rows of parameter df to match number of time points
   param_df <- slice(param_df, rep(seq_len(n_obs), each = n_time))
-  
+
   # Assumble arguments to p<dist> function
   fncall <- list(rep(time_surv, n_obs), lower.tail = FALSE) %>%
     append(x$aux) %>%
     append(param_df)
-  
+
   # Calculate survival probabilities for each distinct level/time,
   surv_df <- data %>%
     slice(rep(seq_len(n_obs), each = n_time))
   surv_df$t <- rep(time_surv, n_obs)
   surv_df$value <- do.call(x$dfns$p, fncall)
-  
+
   # Join to the full data, then summarize over times.
   if(x$ncovs > 0) {
     surv_df <- surv_df %>%
@@ -96,11 +99,11 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
       group_by(t) %>%
       summarize(value = mean(.data$value))
   }
-  
-  
+
+
   # Just get the results column
   ret <- surv_df$value
-  
+
   return(ret)
 }
 

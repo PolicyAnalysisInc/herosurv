@@ -2,11 +2,20 @@
 
 # File R/calculations.r: @tests
 
-test_that("Function eval_surv() @ L40", {
+test_that("Function eval_surv() @ L42", {
   dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
   expect_equal(
    surv_prob(dist1, c(1,2,3,4)),
    eval_surv(dist1, c(1,2,3,4))
+  )
+})
+
+
+test_that("Function event_prob() @ L72", {
+  dist1 <- define_surv_param('exp', rate = 0.12)
+  expect_equal(
+   event_prob(dist1, c(0,1,2), c(1,2,3)),
+   rep(1-pexp(1, rate = 0.12, lower.tail = FALSE), 3)
   )
 })
 

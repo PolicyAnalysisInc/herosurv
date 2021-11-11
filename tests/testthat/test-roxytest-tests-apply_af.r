@@ -63,7 +63,7 @@ test_that("Function surv_prob.surv_aft() @ L134", {
 })
 
 
-test_that("Function print.surv_aft() @ L150", {
+test_that("Function print.surv_aft() @ L151", {
   dist1 <- apply_af(define_surv_param('exp', rate = 0.025), 0.5)
   expect_output(
    print(dist1),

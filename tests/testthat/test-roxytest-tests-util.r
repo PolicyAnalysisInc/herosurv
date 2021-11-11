@@ -85,3 +85,23 @@ test_that("Function clean_factors() @ L143", {
   )
 })
 
+
+test_that("Function check_times() @ L229", {
+  expect_error(
+   check_times(c(0,1,2,3), '', ''),
+   NA
+  )
+  expect_error(
+   check_times("blah", 'foo', 'bar'),
+   'Error foo, "bar" must be numeric.'
+  )
+  expect_error(
+   check_times(c(0,1,-2,3), 'foo', 'bar'),
+   'Error foo, "bar" cannot be negative.'
+  )
+  expect_error(
+   check_times(c(0,1,NA_real_,3), 'foo', 'bar'),
+   'Error foo, "bar" cannot be NA.'
+  )
+})
+

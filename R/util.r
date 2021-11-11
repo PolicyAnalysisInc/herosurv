@@ -207,3 +207,55 @@ odds_to_prob <- function(odds) {
   ret[!inf_index] <- odds / (odds + 1)
   ret
 }
+
+#' @tests
+#' expect_error(
+#'  check_times(c(0,1,2,3), '', ''),
+#'  NA
+#' )
+#' expect_error(
+#'  check_times("blah", 'foo', 'bar'),
+#'  'Error foo, "bar" must be numeric.'
+#' )
+#' expect_error(
+#'  check_times(c(0,1,-2,3), 'foo', 'bar'),
+#'  'Error foo, "bar" cannot be negative.'
+#' )
+#' expect_error(
+#'  check_times(c(0,1,NA_real_,3), 'foo', 'bar'),
+#'  'Error foo, "bar" cannot be NA.'
+#' )
+#' @export
+check_times <- function(time, context, time_name) {
+
+    # Check that time is correct type
+    if (!inherits(time, c('numeric', 'integer'))) {
+        err <- get_and_populate_message(
+            'check_time_wrong_class',
+            context = context,
+            time_name = time_name
+        )
+        stop(err, call. = show_call_error())
+    }
+
+    # Check that times aren't missing
+    if (any(is.na(time))) {
+        err <- get_and_populate_message(
+            'check_time_missing',
+            context = context,
+            time_name = time_name
+        )
+        stop(err, call. = show_call_error())
+    }
+
+    # Check that times aren't negative
+    if (any(time < 0)) {
+        err <- get_and_populate_message(
+            'check_time_negative',
+            context = context,
+            time_name = time_name
+        )
+        stop(err, call. = show_call_error())
+    }
+    
+}

@@ -65,7 +65,7 @@
 #'  fixed = TRUE
 #' )
 mix <- function(dist1, weight1, dist2, weight2, ...) {
-    
+
     dots <- list(...)
     n_args <- length(dots)
     extra_dists <- NULL
@@ -177,5 +177,6 @@ print.surv_mix <- function(x, ...) {
 #'      pexp(seq_len(100), rate = 0.18, lower.tail = FALSE) * 0.75
 #' )
 surv_prob.surv_mix <- function(x, time, ...) {
+    check_times(time, 'calculating survival probabilities', 'time')
     Reduce(`+`, map2(x$dists, x$weights, function(x, w) surv_prob(x, time, ...) * w))
 }

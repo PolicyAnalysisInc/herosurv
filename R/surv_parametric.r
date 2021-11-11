@@ -126,6 +126,8 @@ print.surv_parametric <- function(x, ...) {
 #'  tolerance = 0.00001
 #' )
 surv_prob.surv_parametric <- function(x, time, ...) {
+    
+    check_times(time, 'calculating survival probabilities', 'time')
 
     # Collect extra arguments
     args <- list(...)

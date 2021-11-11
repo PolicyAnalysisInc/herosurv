@@ -19,6 +19,7 @@ messages <- list(
     km_invalid_types = 'Error defining KM, the following columns were of invalid type: {invalid_type_cols}.',
     km_missing_values = 'Error defining KM, the following columns contained missing values: {missing_value_cols}.',
     surv_prob_wrong_type = 'Error calculating survival probabilities, invalid survival distribution provided.',
+    event_prob_wrong_type = 'Error calculating event probabilities, invalid survival distribution provided.',
     apply_hr_wrong_type_dist = 'Error applying hazard ratio, invalid survival distribution provided.',
     apply_hr_wrong_type_hr = 'Error applying hazard ratio, "hr" must be numeric.',
     apply_hr_missing_hr = 'Error applying hazard ratio, "hr" cannot be NA.',
@@ -48,7 +49,10 @@ messages <- list(
     mix_wrong_n_args = 'Error mixing distributions, must provide an even number of arguments corresponding to n distributions and weights.',
     mix_wrong_type_dist = 'Error mixing distributions, invalid survival distribution provided.',
     mix_weights_wrong_sum = 'Error mixing distributions, weights must sum to 1.',
-    add_hazards_wrong_type_dist = 'Error adding hazards, invalid survival distribution provided.'
+    add_hazards_wrong_type_dist = 'Error adding hazards, invalid survival distribution provided.',
+    check_time_wrong_class = 'Error {context}, "{time_name}" must be numeric.',
+    check_time_negative = 'Error {context}, "{time_name}" cannot be negative.',
+    check_time_missing = 'Error {context}, "{time_name}" cannot be NA.'
 )
 
 # Possible values for distribution argument to flexsurvreg
