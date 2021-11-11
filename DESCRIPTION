@@ -28,7 +28,8 @@ Imports:
     stringr,
     glue,
     formula.tools,
-    rlang
+    rlang,
+    magrittr
 Suggests: 
     testthat (>= 3.0.0),
     roxytest,

@@ -12,7 +12,7 @@
 #' @importFrom msm ppexp
 #' @import flexsurv
 #' @import survival
-NULL 
+NULL
 
 #' @tests
 #' options(

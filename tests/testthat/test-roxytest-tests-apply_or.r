@@ -47,13 +47,13 @@ test_that("Function surv_prob.surv_po() @ L124", {
   dist1 <- define_surv_param("exp", rate = 0.50)
   dist2 <- apply_or(dist1, 0.5)
   expect_equal(
-   odds_to_prob(prob_to_odds(surv_prob(dist1, seq_len(100))) * 0.5),
+   odds_to_prob(prob_to_odds(surv_prob(dist1, seq_len(100))) / 0.5),
    surv_prob(dist2, seq_len(100))
   )
 })
 
 
-test_that("Function print.surv_po() @ L144", {
+test_that("Function print.surv_po() @ L143", {
   dist1 <- apply_or(define_surv_param('exp', rate = 0.025), 0.5)
   expect_output(
    print(dist1),

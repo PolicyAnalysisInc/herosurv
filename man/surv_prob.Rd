@@ -3,11 +3,14 @@
 \name{surv_prob}
 \alias{surv_prob}
 \alias{eval_surv}
+\alias{compute_surv}
 \title{Evaluate Survival Probabilities}
 \usage{
 surv_prob(x, time, ...)
 
 eval_surv(x, time, ...)
+
+compute_surv(x, time, cycle_length = 1, type = "prob", ...)
 }
 \arguments{
 \item{x}{A \code{surv_dist} object}

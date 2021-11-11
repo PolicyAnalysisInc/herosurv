@@ -43,6 +43,32 @@ eval_surv <- function(x, time, ...) {
     surv_prob(x, time, ...)
 }
 
+# Alias functions for backwards compatability with heRomod/heemod
+
+#' @rdname surv_prob
+#' @export
+#' 
+#' @tests
+#' 
+#' dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
+#' 
+#' expect_equal(
+#'  surv_prob(dist1, seq(from=2,to=10,by=2)),
+#'  compute_surv(dist1, seq_len(5), 2, type = 'surv')
+#' )
+#' 
+#' expect_equal(
+#'  event_prob(dist1, seq(from=2,to=10,by=2)-2, seq(from=2,to=10,by=2)),
+#'  compute_surv(dist1, seq_len(5), 2, type = 'prob')
+#' )
+compute_surv <- function(x, time, cycle_length = 1, type = 'prob', ...) {
+    if (type == 'prob') {
+        event_prob(x, (time - 1) * cycle_length, time * cycle_length, ...)
+    } else {
+        surv_prob(x, time * cycle_length, ...)
+    }
+}
+
 #' Evaluate Event Probabilities
 #' 
 #' Generate the conditional probability of an even during an
@@ -77,6 +103,7 @@ event_prob <- function(x, start, end, ...) {
     UseMethod("event_prob", x)
 }
 
+#' @export
 event_prob.default <- function(x, start, end, ...) {
 
     # Check survival distribution

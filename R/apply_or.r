@@ -118,13 +118,13 @@ apply_or <- function(dist, or, log_or = FALSE) {
 #' dist1 <- define_surv_param("exp", rate = 0.50)
 #' dist2 <- apply_or(dist1, 0.5)
 #' expect_equal(
-#'  odds_to_prob(prob_to_odds(surv_prob(dist1, seq_len(100))) * 0.5),
+#'  odds_to_prob(prob_to_odds(surv_prob(dist1, seq_len(100))) / 0.5),
 #'  surv_prob(dist2, seq_len(100))
 #' )
 surv_prob.surv_po <- function(x, time, ...) {
     bl_prob <- surv_prob(x$dist, time)
     bl_odds <- prob_to_odds(bl_prob)
-    odds <- bl_odds * x$or
+    odds <- bl_odds * (1/ x$or)
     prob <- odds_to_prob(odds)
     prob
 }
@@ -140,7 +140,6 @@ surv_prob.surv_po <- function(x, time, ...) {
 #'   * Baseline Distribution: An exponential distribution (rate = 0.025).',
 #'  fixed = T
 #' )
-#' 
 print.surv_po <- function(x, ...) {
     bl_dist_output <- to_list_item_output(x$dist)
     output <- paste0(
