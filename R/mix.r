@@ -51,17 +51,12 @@
 #' )
 #' expect_error(
 #'  mix(dist1, 1.2, dist2, -0.2),
-#'  'Error mixing distributions, weights must be in range [0-1].',
+#'  'Error mixing distributions, weights cannot be negative.',
 #'  fixed = TRUE
 #' )
 #' expect_error(
 #'  mix(dist1, 0.5, dist2, 0.5, dist3),
 #'  'Error mixing distributions, must provide an even number of arguments corresponding to n distributions and weights.',
-#'  fixed = TRUE
-#' )
-#' expect_error(
-#'  mix(dist1, 0.4, dist2, 0.5),
-#'  'Error mixing distributions, weights must sum to 1.',
 #'  fixed = TRUE
 #' )
 mix <- function(dist1, weight1, dist2, weight2, ...) {
@@ -112,8 +107,8 @@ mix <- function(dist1, weight1, dist2, weight2, ...) {
                 stop(err, call. = show_call_error())
             }
 
-            # Check that cut >= 0
-            invalid_weight <- any(x < 0 | x > 1)
+            # Check that weights >= 0
+            invalid_weight <- any(x < 0)
             if (invalid_weight) {
                 err <- get_and_populate_message('mix_invalid_weight')
                 stop(err, call. = show_call_error())
@@ -123,15 +118,13 @@ mix <- function(dist1, weight1, dist2, weight2, ...) {
         }
     )
 
-    if (all.equal(sum(weights), 1) != TRUE) {
-        err <- get_and_populate_message('mix_weights_wrong_sum')
-        stop(err, call. = show_call_error())
-    }
+    # Normalized weights
+    pweights <- weights / sum(weights)
 
     create_list_object(
         c('surv_mix', 'surv_combined', 'surv_dist'),
         dists = dists,
-        weights = weights
+        weights = pweights
     )
 
 }

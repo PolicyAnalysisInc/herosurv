@@ -46,7 +46,7 @@ messages <- list(
     set_covariates_missing_data = 'Error setting covariates, must provide either "data" or named arguments for covariate values.',
     mix_wrong_type_weight = 'Error mixing distributions, weights must be numeric.',
     mix_missing_weight = 'Error mixing distributions, weights cannot be NA.',
-    mix_invalid_weight = 'Error mixing distributions, weights must be in range [0-1].',
+    mix_invalid_weight = 'Error mixing distributions, weights cannot be negative.',
     mix_wrong_n_args = 'Error mixing distributions, must provide an even number of arguments corresponding to n distributions and weights.',
     mix_wrong_type_dist = 'Error mixing distributions, invalid survival distribution provided.',
     mix_weights_wrong_sum = 'Error mixing distributions, weights must sum to 1.',

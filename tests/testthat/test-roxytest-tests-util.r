@@ -86,7 +86,7 @@ test_that("Function clean_factors() @ L143", {
 })
 
 
-test_that("Function check_times() @ L229", {
+test_that("Function check_times() @ L228", {
   expect_error(
    check_times(c(0,1,2,3), '', ''),
    NA

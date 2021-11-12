@@ -215,7 +215,15 @@ define_surv_table <- function(x, time_col = 'time', surv_col = 'survival') {
 #'  surv_prob(dist1, c(0, 0.99, 1, 1.01, 4.99, 5, 5.01, 11)),
 #'  c(1, 1, 0.9, 0.9, 0.9, 0.7, 0.7, NA)
 #' )
-#' 
+#' df2 <- data.frame(
+#'      time = c(0, 1, 5, 10),
+#'      survival = c(1, 0.9, 0.7, 0)
+#' )
+#' dist2 <- define_surv_table(df2)
+#' expect_equal(
+#'  surv_prob(dist2, c(0, 0.99, 1, 1.01, 4.99, 5, 5.01, 11)),
+#'  c(1, 1, 0.9, 0.9, 0.9, 0.7, 0.7, 0)
+#' )
 surv_prob.surv_km <- function(x, time, ...) {
 
     check_times(time, 'calculating survival probabilities', 'time')
@@ -227,9 +235,16 @@ surv_prob.surv_km <- function(x, time, ...) {
     # Determine the maximum time contained in KM table
     max_time <- max(x$table$time)
 
-    # Set survival for any time exceeding the maximum to NA
+    goes_to_zero <- tail(x$table$survival, 1) == 0
     over_max_time <- time > max_time
-    res[over_max_time] <- NA
+
+    if (goes_to_zero) {
+        # Set survival beyond max time to zero if KM goes to zero
+        res[over_max_time] <- 0
+    } else {
+        # Otherwise set survival beyond max time to NA
+        res[over_max_time] <- NA
+    }
 
     # For other times, look it up using stepfun
     lookup_fun <- stepfun(x$table$time[-1], x$table$survival)

@@ -11,7 +11,7 @@ test_that("Function eval_surv() @ L42", {
 })
 
 
-test_that("Function compute_surv() @ L64", {
+test_that("Function compute_surv() @ L61", {
   dist1 <- define_surv_param(distribution = "exp", rate = 0.05)
   
   expect_equal(
@@ -26,7 +26,7 @@ test_that("Function compute_surv() @ L64", {
 })
 
 
-test_that("Function event_prob() @ L102", {
+test_that("Function event_prob() @ L99", {
   dist1 <- define_surv_param('exp', rate = 0.12)
   expect_equal(
    event_prob(dist1, c(0,1,2), c(1,2,3)),

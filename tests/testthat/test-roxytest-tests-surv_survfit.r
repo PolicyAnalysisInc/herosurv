@@ -2,11 +2,16 @@
 
 # File R/surv_survfit.r: @tests
 
-test_that("Function surv_prob.survfit() @ L26", {
+test_that("Function surv_prob.survfit() @ L31", {
   sf1 <- survfit(Surv(rectime, censrec)~1, data = flexsurv::bc)
+  sf2 <- survfit(Surv(time, flag)~1, data = data.frame(time = c(2,5), flag = c(1,1)))
   expect_equal(
    surv_prob(sf1, c(0, 1000, 2000, 3000)),
    c(1.0000000, 0.6577504, 0.4624312, NA)
+  )
+  expect_equal(
+   surv_prob(sf2, c(0,1,2,3,4,5,6)),
+   c(1, 1, 0.5, 0.5, 0.5, 0, 0)
   )
   sf2 <- survfit(Surv(rectime, censrec)~group, data = flexsurv::bc)
   expect_equal(

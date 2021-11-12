@@ -2,9 +2,14 @@
 #' 
 #' @tests
 #' sf1 <- survfit(Surv(rectime, censrec)~1, data = flexsurv::bc)
+#' sf2 <- survfit(Surv(time, flag)~1, data = data.frame(time = c(2,5), flag = c(1,1)))
 #' expect_equal(
 #'  surv_prob(sf1, c(0, 1000, 2000, 3000)),
 #'  c(1.0000000, 0.6577504, 0.4624312, NA)
+#' )
+#' expect_equal(
+#'  surv_prob(sf2, c(0,1,2,3,4,5,6)),
+#'  c(1, 1, 0.5, 0.5, 0.5, 0, 0)
 #' )
 #' sf2 <- survfit(Surv(rectime, censrec)~group, data = flexsurv::bc)
 #' expect_equal(
@@ -43,11 +48,19 @@ surv_prob.survfit <- function(x, time,  ...) {
     terms,
     function(d) {
       maxtime <- max(d$time)
+      goes_to_zero <- tail(d$surv, 1) == 0
       selector <- (time > maxtime)
       # Use stepfun to look up survival probabilities
       value <- stepfun(d$time[-1], d$surv)(time)
-      # Use NA when time > max time
-      value[selector] <- as.numeric(NA)
+      if (goes_to_zero) {
+        # If KM goes to zero then survival beyond max time
+        # is zero
+        value[selector] <- 0
+      } else {
+        # If KM goes to zero then survival beyond max time
+        # is NA
+        value[selector] <- as.numeric(NA)
+      }
       tibble(
         t = time, 
         value = value,

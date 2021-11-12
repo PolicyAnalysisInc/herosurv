@@ -44,10 +44,7 @@ eval_surv <- function(x, time, ...) {
 }
 
 # Alias functions for backwards compatability with heRomod/heemod
-
-#' @rdname surv_prob
-#' @export
-#' 
+# Not exported, mainly just here to enable running of tests
 #' @tests
 #' 
 #' dist1 <- define_surv_param(distribution = "exp", rate = 0.05)

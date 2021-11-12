@@ -2,7 +2,7 @@
 
 # File R/mix.r: @tests
 
-test_that("Function mix() @ L67", {
+test_that("Function mix() @ L62", {
   dist1 <- define_surv_param("exp", rate = .5)
   dist2 <- define_surv_param("gompertz", rate = .5, shape = 1)
   dist3 <- define_surv_param("weibull", shape = 1.2, scale = 20)
@@ -31,7 +31,7 @@ test_that("Function mix() @ L67", {
   )
   expect_error(
    mix(dist1, 1.2, dist2, -0.2),
-   'Error mixing distributions, weights must be in range [0-1].',
+   'Error mixing distributions, weights cannot be negative.',
    fixed = TRUE
   )
   expect_error(
@@ -39,15 +39,10 @@ test_that("Function mix() @ L67", {
    'Error mixing distributions, must provide an even number of arguments corresponding to n distributions and weights.',
    fixed = TRUE
   )
-  expect_error(
-   mix(dist1, 0.4, dist2, 0.5),
-   'Error mixing distributions, weights must sum to 1.',
-   fixed = TRUE
-  )
 })
 
 
-test_that("Function print.surv_mix() @ L151", {
+test_that("Function print.surv_mix() @ L144", {
   dist1 <- define_surv_param('exp', rate = 0.12)
   dist2 <- define_surv_param('exp', rate = 0.18)
   expect_output(
@@ -60,7 +55,7 @@ test_that("Function print.surv_mix() @ L151", {
 })
 
 
-test_that("Function surv_prob.surv_mix() @ L179", {
+test_that("Function surv_prob.surv_mix() @ L172", {
   dist1 <- define_surv_param('exp', rate = 0.12)
   dist2 <- define_surv_param('exp', rate = 0.18)
   expect_equal(

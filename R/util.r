@@ -196,7 +196,7 @@ prob_to_odds <- function(p) {
   ret <- vector(mode = 'numeric', length = length(p))
   one_index <- p == 1
   ret[one_index] <- Inf
-  ret[!one_index] <- p / (1 - p)
+  ret[!one_index] <- p[!one_index] / (1 - p[!one_index])
   ret
 }
 
@@ -204,7 +204,7 @@ odds_to_prob <- function(odds) {
   ret <- vector(mode = 'numeric', length = length(odds))
   inf_index <- odds == Inf
   ret[inf_index] <- 1
-  ret[!inf_index] <- odds / (odds + 1)
+  ret[!inf_index] <- odds[!inf_index] / (odds[!inf_index] + 1)
   ret
 }
 
@@ -225,7 +225,6 @@ odds_to_prob <- function(odds) {
 #'  check_times(c(0,1,NA_real_,3), 'foo', 'bar'),
 #'  'Error foo, "bar" cannot be NA.'
 #' )
-#' @export
 check_times <- function(time, context, time_name) {
 
     # Check that time is correct type
