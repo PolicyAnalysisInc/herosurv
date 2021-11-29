@@ -40,7 +40,7 @@ install_github("PolicyAnalysisInc/herosurv")
 - Mix together survival distributions with specified weights: `mix()`
 - Combine distributions as independent risks: `add_hazards()`
 
-## Generate Predicted Values
+## Generating Predicted Values
 
 - Generate survival probabilities: `surv_prob()`
 - Generate event probabilities: `event_prob()`
