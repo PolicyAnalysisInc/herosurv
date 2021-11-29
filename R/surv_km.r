@@ -252,3 +252,12 @@ surv_prob.surv_km <- function(x, time, ...) {
 
     res
 }
+
+#' @export
+plot.surv_km <- function(x, max_time, steps = 1000, ...) {
+    df <- x$table
+    ggplot(aes(x = time, y = survival), data = df) +
+        geom_step() +
+        coord_cartesian(xlim = c(0, max_time), ylim = c(0, 1)) +
+        labs(x = 'Time', y = 'Survival')
+}

@@ -29,7 +29,8 @@ Imports:
     glue,
     formula.tools,
     rlang,
-    magrittr
+    magrittr,
+    ggplot2
 Suggests: 
     testthat (>= 3.0.0),
     roxytest,

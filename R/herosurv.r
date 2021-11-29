@@ -1,6 +1,7 @@
+#' @importFrom ggplot2 ggplot geom_line scale_x_continuous scale_y_continuous aes labs theme_bw coord_cartesian geom_step
 #' @importFrom stats pweibull dweibull rweibull qweibull plnorm dlnorm rlnorm qlnorm as.formula model.matrix stepfun
 #' @importFrom dplyr transmute left_join mutate filter summarize select distinct `%>%` slice group_by n
-#' @importFrom purrr walk map discard map_chr map2 set_names map_lgl imap_dbl
+#' @importFrom purrr walk map discard map_chr map_dbl map2 set_names map_lgl imap_dbl
 #' @importFrom stringr str_glue_data str_to_title
 #' @importFrom flexsurvcure pmixsurv pnmixsurv
 #' @importFrom utils capture.output head tail

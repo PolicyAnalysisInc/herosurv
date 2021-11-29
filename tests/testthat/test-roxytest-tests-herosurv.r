@@ -2,7 +2,7 @@
 
 # File R/herosurv.r: @tests
 
-test_that("Function .onLoad() @ L33", {
+test_that("Function .onLoad() @ L34", {
   options(
    list(
        herosurv.show_call_signature_in_errors = NULL,
