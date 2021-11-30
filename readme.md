@@ -23,6 +23,7 @@ install_github("PolicyAnalysisInc/herosurv")
 - Royston & Parmar spline models with specified parameter values: `define_surv_spline()`
 - Life-tables: `define_surv_lifetable()`
 - Kaplan-Meiers based on product-limit table: `define_surv_km()`
+- Custom Functions: `define_surv_func()`
 - Full support for models estimated using [flexsurv](https://cran.r-project.org/web/packages/flexsurv/index.html) package
 - Partial support for KMs & Cox Models estimated using [survival](https://cran.r-project.org/web/packages/survival/index.html) package
 
