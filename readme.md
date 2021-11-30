@@ -33,7 +33,7 @@ install_github("PolicyAnalysisInc/herosurv")
 - Apply odds ratio: `apply_or()`
 - Apply acceleration factor: `apply_af()`
 - Apply shift in time: `apply_shift()`
-- Set covariate levels of models with covariates: `set_covaraiates()`
+- Set covariate levels of models with covariates: `set_covariates()`
 
 ## Combining Survival Distributions
 
