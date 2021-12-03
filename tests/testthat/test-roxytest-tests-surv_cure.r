@@ -2,7 +2,7 @@
 
 # File R/surv_cure.r: @tests
 
-test_that("Function print.surv_cure() @ L100", {
+test_that("Function print.surv_cure() @ L99", {
   surv_dist1 <- define_surv_cure('weibull', theta = 0.21434, shape = 1.2438, scale = 20.3984, mixture = FALSE)
   expect_output(
    print(surv_dist1),
@@ -19,7 +19,7 @@ test_that("Function print.surv_cure() @ L100", {
 })
 
 
-test_that("Function surv_prob.surv_cure() @ L129", {
+test_that("Function surv_prob.surv_cure() @ L128", {
   dist1 <- define_surv_cure('exp', theta = 0.2, rate = 0.05, mixture = TRUE)
   expect_equal(
    surv_prob(dist1, c(0, 1, 2, Inf)),
@@ -35,7 +35,7 @@ test_that("Function surv_prob.surv_cure() @ L129", {
 })
 
 
-test_that("Function define_survival_cure() @ L166", {
+test_that("Function define_survival_cure() @ L165", {
   expect_equal(
    define_surv_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2),
    define_survival_cure('weibull', theta = 0.41, shape = 1.04, scale = 10.2)
@@ -43,7 +43,7 @@ test_that("Function define_survival_cure() @ L166", {
 })
 
 
-test_that("Function check_theta() @ L184", {
+test_that("Function check_theta() @ L183", {
   expect_error(check_theta(1), NA)
   expect_error(check_theta(0.5), NA)
   expect_error(check_theta(0), NA)

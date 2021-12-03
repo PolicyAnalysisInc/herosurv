@@ -83,7 +83,7 @@ test_that("Function get_dist_params_from_args() @ L187", {
 })
 
 
-test_that("Function get_dist_param_from_args() @ L210", {
+test_that("Function get_dist_param_from_args() @ L214", {
   expect_equal(
    get_dist_param_from_args(
        'scale',
@@ -94,7 +94,7 @@ test_that("Function get_dist_param_from_args() @ L210", {
 })
 
 
-test_that("Function get_dist_display_name() @ L228", {
+test_that("Function get_dist_display_name() @ L232", {
   expect_equal(
    get_dist_display_name('foo'),
    'foo'
@@ -107,7 +107,7 @@ test_that("Function get_dist_display_name() @ L228", {
 })
 
 
-test_that("Function define_survival() @ L243", {
+test_that("Function define_survival() @ L247", {
   expect_equal(
    define_surv_param('lnorm', meanlog = 2.1, sdlog = 0.3),
    define_survival('lnorm', meanlog = 2.1, sdlog = 0.3)  
@@ -115,7 +115,7 @@ test_that("Function define_survival() @ L243", {
 })
 
 
-test_that("Function check_param_names() @ L254", {
+test_that("Function check_param_names() @ L258", {
   expect_error(
    check_param_names(list(shape=1,foo=2), 'weibullPH'), 
    'Error defining Weibull (PH) distribution, parameters missing from function call: "scale".',

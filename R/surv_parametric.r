@@ -76,7 +76,7 @@ define_surv_param <- function(distribution, ...) {
   create_list_object(
     c("surv_parametric", "surv_dist"),
     distribution = dist_string,
-    parameters = args
+    parameters = params
   )
 }
 
@@ -186,16 +186,20 @@ get_flexsurv_dist_params <- function(dist_name) {
 #' 
 get_dist_params_from_args <- function(distribution, args) {
 
-  # Run checks
-  check_param_names(args, distribution)
-
   # Extract parameter names
   param_names <- get_flexsurv_dist_params(distribution)
+
+  if (!is.null(names(args)) || length(args) != length(param_names)) {
+    # Run checks
+    check_param_names(args, distribution)
+  } else {
+      names(args) <- param_names
+  }
 
   # Create named list with parameters
   params <- map(param_names, function(name) get_dist_param_from_args(name, args))
   names(params) <- param_names
-  
+
   params
 }
 

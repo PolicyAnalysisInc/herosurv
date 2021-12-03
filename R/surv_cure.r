@@ -63,7 +63,6 @@ define_surv_cure <- function(distribution, theta, ..., mixture = TRUE) {
   dist_string <- match.arg(distribution, choices = flexsurv_dists)
 
   # Run checks
-  check_param_names(args, dist_string)
   check_theta(theta)
 
   # Extract params from arguments
