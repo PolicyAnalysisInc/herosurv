@@ -1,4 +1,5 @@
 url: https://policyanalysisinc.github.io/herosurv
 template:
   bootstrap: 5
-  bootswatch: litera
+  theme: sandstone
+
