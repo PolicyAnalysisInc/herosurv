@@ -7,3 +7,5 @@
 env.RData
 ^codecov\.yml$
 .radian_history
+^doc$
+^Meta$

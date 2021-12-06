@@ -6,3 +6,6 @@
 env.Rdata
 .vscode
 .radian_history
+inst/doc
+/doc/
+/Meta/

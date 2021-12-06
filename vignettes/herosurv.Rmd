@@ -1,0 +1,256 @@
+---
+title: "herosurv"
+output: rmarkdown::html_vignette
+description: >
+  An introduction to using herosurv. You will learn the basics
+  of defining survival distributions, modifying/combining them,
+  and using them to generate survival/event probabilities.
+vignette: >
+  %\VignetteIndexEntry{herosurv}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = F, message = F}
+library(herosurv)
+```
+
+## Introduction
+
+The herosurv package makes it easier to perform applied survival modeling in the context of Markov or partitioned survial models. This is accomplished by providing a series functions for defining survival distribution objects as well as a series of S3 methods that can operate on them. These S3 methods also include generics that provide support for survival distributions estimated from supported third-party packages (e.g. survival, flexsurv, flexsurvcure). All survival distribution functions, except those for generating predicted probabilities, return survival distribution objects allowing multiple function calls to be strung together.
+
+## Defining Survival Distributions
+
+The herosurv package provides functions for defining a wide variety of survival distributions of different types.
+
+### Defining a Parametric Survival Model
+
+The `define_surv_param` function allows you to define a parametric survival model with specified distribution and parameter values. Parameterization is based on the [flexsurv](https://cran.r-project.org/web/packages/flexsurv/index.html) package.
+
+```{r}
+  param_surv <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  print(param_surv)
+```
+
+### Defining a Parametric Mixture/Non-Mixture Cure Model
+
+The `define_surv_cure` function allows you to define a parametric mixture/non-mixture cure model with specified distribution, cure fraction, and parameter values.
+
+```{r}
+  cure_surv <- define_surv_cure('exp', theta = 0.21, rate = 0.04, mixture = TRUE)
+  print(cure_surv)
+```
+
+### Defining a Royston & Parmar Spline Model
+
+The `define_surv_spline` function allows you to define a Royston & Parmar restricted cubic spline model with the specified scale, parameter values, and knot times.
+
+```{r}
+  spline_dist <- define_surv_spline(
+    scale = 'hazard', # spline used to model log cumulative hazards
+    -2.08, 2.75, 0.23, # parameters
+    -1.62, 0.57, 1.191 # knot times
+  )
+  print(spline_dist)
+```
+
+### Defining a Survival Distribution from Kaplan-Meier Output
+
+The `define_surv_km` function allows you to define a survival distribution based on the times and survival probabilities from a Kaplan-Meier.
+```{r}
+  km_output <- data.frame(
+    times = c(0, 2, 5, 10, 17, 21),
+    surv_prob = c(1, 0.98, 0.94, 0.89, 0.78, 0.78)
+  )
+  km_dist <- define_surv_km(km_output, "times", "surv_prob")
+  print(km_dist)
+```
+
+### Defining a Survival Distribution from a Life-Table
+
+The `define_surv_lifetable` function allows you to define a survival distribution based on a life-table, starting age, and gender mix.
+
+```{r}
+  life_table <- data.frame(
+    age_in_years = c(50, 51, 52, 53, 54, 55),
+    p_death_male = c(0.0021, 0.0022, 0.0022, 0.0023, 0.0022, 0.0024),
+    p_death_female = c(0.0018, 0.0018, 0.0018, 0.0019, 0.0019, 0.0020)
+  )
+  lifetable_dist <- define_surv_lifetable(
+    life_table, # data.frame containing life-table
+    51, # starting age
+    0.48, # percent male
+    age_col = 'age_in_years', # column in life-table containing age
+    male_col = 'p_death_male', # column in life-table containing male p(death)
+    female_col = 'p_death_female' # column in life-table containing female p(death)
+  )
+  print(lifetable_dist)
+```
+
+### Defining a Survival Distributions from a Custom Function
+
+The `define_surv_func` function allows you to define a survival distribution based on a custom function.
+
+```{r}
+  custom_dist <- define_surv_func(function(t) pweibull(t, 1.2, 20.1, lower.tail = FALSE))
+  print(custom_dist)
+```
+
+### Support for Survival Distributions from Other Packages
+
+In addition to the functions provided by herosurv, you can also create survial distributions recognized by herosurv using supported functions from other packages.
+
+```{r}
+  library(survival)
+  library(flexsurv)
+  survfit_dist <- survfit(Surv(recyrs, censrec)~1, data = bc)
+  flexsurv_dist <- flexsurvreg(Surv(recyrs, censrec)~1, data = bc, dist = 'lnorm')
+```
+
+## Modifying & Combining Survival Distributions
+
+Once you've created survival distributions, herosurv provides various methods for combining modifying them.
+
+### Applying a Hazard Ratio:
+
+Hazard ratios can be applied to a survival distribution using the `apply_hr` function.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- apply_hr(dist1, 0.85)
+  print(dist2)
+```
+
+### Applying an Odds Ratio
+
+Odds ratios can be applied to a survival distribution using the `apply_or` function.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- apply_or(dist1, 0.45)
+  print(dist2)
+```
+
+### Applying an Accleration Factor
+
+Accleration factors, which proportionally scale event times, can be applied using the `apply_af` function.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- apply_af(dist1, 0.75)
+  print(dist2)
+```
+
+### Applying a Shift in Time
+
+Hazards for a distribution can be shifted forward or backward by a fixed amount of time using the `apply_shift` function. Note that a positive value of shift will move hazards forward and a negative value will shift hazards backward (resulting in an initial period with no event risk).
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- apply_shift(dist1, 2.1)
+  print(dist2)
+```
+
+
+### Mixing Distributions Accordingy to Specified Weights
+
+Survival distributions can be mixed according to specified weights using the `mix` function.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- define_surv_param('weibull', shape = 1.4, scale = 4.1)
+  dist3 <- mix(dist1, 0.8, dist2, 0.2) # Mix of 80% dist1 and 20% dist2
+  print(dist3)
+```
+
+### Joining Two or More Distributions at Specified Cutpoints
+
+Survival distributions can be joined together at specified cutpoints using the `join` function.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- define_surv_param('weibull', shape = 1.4, scale = 4.1)
+  dist3 <- join(dist1, 3, dist2) # Join dist2 and dist3 at time 3
+  print(dist3)
+```
+
+### Combining Two or More Distributions as Indepedent Risks
+
+Survival distributions can be combined as independent risks using the `add_hazards` function. This results in a survival distribution with survival function equal to the product of the survival functions of combined distributions.
+
+```{r}
+  dist1 <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  dist2 <- define_surv_param('weibull', shape = 1.4, scale = 4.1)
+  dist3 <- add_hazards(dist1, dist2) # combined hazards of dist1 and dist2
+  print(dist3)
+```
+
+### Setting Covariates For Model with Predictors
+
+Models fitted using `survfit` or `flexsurvreg` with predictors can be used to generate a survival distribution representing a subject or set of subjects using `set_covariates`.
+
+```{r}
+library(flexsurv)
+library(tibble)
+
+# Fit a model using bc dataset using good as predictor
+print(as_tibble(bc))
+fs1 <- flexsurvreg(Surv(recyrs, censrec)~group, data = bc, dist = 'weibull')
+
+# Survival distribution representing patient w/ group = "Good"
+good_model <- set_covariates(fs1, data.frame(group = 'Good'))
+print(good_model)
+
+# Survival distribution with patient representing cohort w/
+# equal mix of group = "Good" and group = "Poor"
+good_and_poor_model <- set_covariates(fs1, data.frame(group = c('Good', 'Poor')))
+print(good_and_poor_model)
+
+```
+
+## Survival Distribution Composition
+
+More complicated survival distributions can be created by stringing together multiple herosurv operations. Use of the `%>%` operator from magrittr is supported.
+
+```{r}
+  dist1 <- define_surv_param('exp', rate = 0.04)
+  dist2 <- define_surv_func(function(t) pweibull(t, 1.2, 20.1, lower.tail = FALSE))
+  dist3 <- define_surv_spline(
+    scale = 'hazard', # spline used to model log cumulative hazards
+    -2.08, 2.75, 0.23, # parameters
+    -1.62, 0.57, 1.191
+  )
+
+  dist4 <- dist1 %>% # take dist1
+      apply_hr(0.4) %>% # apply a hazard ratio of 0.4 to it
+      join(4, dist2) %>% # join it to dist2 at time 4
+      mix(0.25, dist3, 0.75) # mix the result with dist4 with weights of 25% and 75% respectively
+  print(dist4)
+```
+
+## Generating Predicted Values
+
+### Survival Probabilities
+
+Predicted survival probabilities can be generated for a given survival distribution and set of times using the `surv_prob` function.
+
+```{r}
+  dist1 <- define_surv_param('exp', rate = 0.04)
+  surv_prob(dist1, c(0, 1, 2, 3))
+```
+
+### Event Probabilities
+
+Event probabilities can be generated for a given survival distributon and set of time intervals using the `event_prob` function.
+
+```{r}
+  dist1 <- define_surv_cure('exp', theta = 0.21, rate = 0.04, mixture = TRUE)
+  event_prob(dist1, c(0, 1, 2, 3), c(1, 2, 3, 4))
+```
