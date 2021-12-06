@@ -60,8 +60,82 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-Provides functions for defining survival distributions, modifying/combining them, and generating predictions.
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="herosurv">herosurv<a class="anchor" aria-label="anchor" href="#herosurv"></a>
+</h1></div>
+<!-- badges: start -->
+
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>herosurv is a grammar of survival modeling for use in health economic modeling. It provides a series of verbs that help you define, combine, and modify survival distributions.</p>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Install latest version from github</span>
+<span class="fu">install_github</span><span class="op">(</span><span class="st">"PolicyAnalysisInc/herosurv"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="defining-survival-distributions">Defining Survival Distributions<a class="anchor" aria-label="anchor" href="#defining-survival-distributions"></a>
+</h2>
+<ul>
+<li>Parametric distributions with specified parameter values: <code><a href="reference/define_surv_param.html">define_surv_param()</a></code>
+</li>
+<li>Parametric mixture &amp; non-mixture cure models with specified parameter values: <code><a href="reference/define_surv_cure.html">define_surv_cure()</a></code>
+</li>
+<li>Royston &amp; Parmar spline models with specified parameter values: <code><a href="reference/define_surv_spline.html">define_surv_spline()</a></code>
+</li>
+<li>Life-tables: <code><a href="reference/define_surv_lifetable.html">define_surv_lifetable()</a></code>
+</li>
+<li>Kaplan-Meiers based on product-limit table: <code><a href="reference/define_surv_km.html">define_surv_km()</a></code>
+</li>
+<li>Custom Functions: <code><a href="reference/define_surv_func.html">define_surv_func()</a></code>
+</li>
+<li>Full support for models estimated using <a href="https://cran.r-project.org/web/packages/flexsurv/index.html" class="external-link">flexsurv</a> package</li>
+<li>Partial support for KMs &amp; Cox Models estimated using <a href="https://cran.r-project.org/web/packages/survival/index.html" class="external-link">survival</a> package</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="modifying-survival-distributions">Modifying Survival Distributions<a class="anchor" aria-label="anchor" href="#modifying-survival-distributions"></a>
+</h2>
+<ul>
+<li>Apply hazard ratio: <code><a href="reference/apply_hr.html">apply_hr()</a></code>
+</li>
+<li>Apply odds ratio: <code><a href="reference/apply_or.html">apply_or()</a></code>
+</li>
+<li>Apply acceleration factor: <code><a href="reference/apply_af.html">apply_af()</a></code>
+</li>
+<li>Apply shift in time: <code><a href="reference/apply_shift.html">apply_shift()</a></code>
+</li>
+<li>Set covariate levels of models with covariates: <code><a href="reference/set_covariates.html">set_covariates()</a></code>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="combining-survival-distributions">Combining Survival Distributions<a class="anchor" aria-label="anchor" href="#combining-survival-distributions"></a>
+</h2>
+<ul>
+<li>Join survival distributions together at specified times: <code><a href="reference/join.html">join()</a></code>
+</li>
+<li>Mix together survival distributions with specified weights: <code><a href="reference/mix.html">mix()</a></code>
+</li>
+<li>Combine distributions as independent risks: <code><a href="reference/add_hazards.html">add_hazards()</a></code>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="generating-predicted-values">Generating Predicted Values<a class="anchor" aria-label="anchor" href="#generating-predicted-values"></a>
+</h2>
+<ul>
+<li>Generate survival probabilities: <code><a href="reference/surv_prob.html">surv_prob()</a></code>
+</li>
+<li>Generate event probabilities: <code><a href="reference/event_prob.html">event_prob()</a></code>
+</li>
+</ul>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -93,7 +167,13 @@ Provides functions for defining survival distributions, modifying/combining them
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://circleci.com/gh/PolicyAnalysisInc/herosurv" class="external-link"><img src="https://circleci.com/gh/PolicyAnalysisInc/herosurv.svg?style=svg" alt="CircleCI build status"></a></li>
+<li><a href="https://codecov.io/gh/PolicyAnalysisInc/herosurv?branch=master" class="external-link"><img src="https://codecov.io/gh/PolicyAnalysisInc/herosurv/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

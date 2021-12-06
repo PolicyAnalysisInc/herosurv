@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/herosurv.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/articles/herosurv.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/articles/index.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/index.html</loc>
   </url>
   <url>
-    <loc>/readme.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/readme.html</loc>
   </url>
   <url>
-    <loc>/reference/add_hazards.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/add_hazards.html</loc>
   </url>
   <url>
-    <loc>/reference/apply_af.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/apply_af.html</loc>
   </url>
   <url>
-    <loc>/reference/apply_hr.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/apply_hr.html</loc>
   </url>
   <url>
-    <loc>/reference/apply_or.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/apply_or.html</loc>
   </url>
   <url>
-    <loc>/reference/apply_shift.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/apply_shift.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_cure.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_cure.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_func.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_func.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_km.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_km.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_lifetable.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_lifetable.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_param.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_param.html</loc>
   </url>
   <url>
-    <loc>/reference/define_surv_spline.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/define_surv_spline.html</loc>
   </url>
   <url>
-    <loc>/reference/event_prob.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/event_prob.html</loc>
   </url>
   <url>
-    <loc>/reference/extract_strata.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/extract_strata.html</loc>
   </url>
   <url>
-    <loc>/reference/extract_stratum.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/extract_stratum.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/join.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/join.html</loc>
   </url>
   <url>
-    <loc>/reference/mix.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/mix.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/set_covariates.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/set_covariates.html</loc>
   </url>
   <url>
-    <loc>/reference/surv_prob.html</loc>
+    <loc>https://policyanalysisinc.github.io/herosurv/reference/surv_prob.html</loc>
   </url>
 </urlset>
