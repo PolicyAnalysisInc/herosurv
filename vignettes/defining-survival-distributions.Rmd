@@ -20,7 +20,7 @@ library(herosurv)
 
 The herosurv package provides functions for defining a wide variety of survival distributions of different types.
 
-## Defining a Parametric Survival Model
+## Parametric
 
 The `define_surv_param` function allows you to define a parametric survival model with specified distribution and parameter values. Parameterization is based on the [flexsurv](https://cran.r-project.org/web/packages/flexsurv/index.html) package.
 
@@ -29,7 +29,7 @@ The `define_surv_param` function allows you to define a parametric survival mode
   print(param_surv)
 ```
 
-## Defining a Parametric Mixture/Non-Mixture Cure Model
+## Mixture/Non-Mixture Cure
 
 The `define_surv_cure` function allows you to define a parametric mixture/non-mixture cure model with specified distribution, cure fraction, and parameter values.
 
@@ -38,7 +38,7 @@ The `define_surv_cure` function allows you to define a parametric mixture/non-mi
   print(cure_surv)
 ```
 
-## Defining a Royston & Parmar Spline Model
+## Royston & Parmar Spline
 
 The `define_surv_spline` function allows you to define a Royston & Parmar restricted cubic spline model with the specified scale, parameter values, and knot times.
 
@@ -51,7 +51,7 @@ The `define_surv_spline` function allows you to define a Royston & Parmar restri
   print(spline_dist)
 ```
 
-## Defining a Survival Distribution from Kaplan-Meier Output
+## Kaplan-Meier
 
 The `define_surv_km` function allows you to define a survival distribution based on the times and survival probabilities from a Kaplan-Meier.
 ```{r}
@@ -63,7 +63,7 @@ The `define_surv_km` function allows you to define a survival distribution based
   print(km_dist)
 ```
 
-## Defining a Survival Distribution from a Life-Table
+## Life-Table
 
 The `define_surv_lifetable` function allows you to define a survival distribution based on a life-table, starting age, and gender mix.
 
@@ -84,11 +84,22 @@ The `define_surv_lifetable` function allows you to define a survival distributio
   print(lifetable_dist)
 ```
 
-## Defining a Survival Distributions from a Custom Function
+## Custom Function
 
 The `define_surv_func` function allows you to define a survival distribution based on a custom function.
 
 ```{r}
   custom_dist <- define_surv_func(function(t) pweibull(t, 1.2, 20.1, lower.tail = FALSE))
   print(custom_dist)
+```
+
+## Third-Party Support
+
+In addition to the functions provided by herosurv, you can use survival distributions created from supported third-party packages.
+
+```{r}
+  library(survival)
+  library(flexsurv)
+  survfit_dist <- survfit(Surv(recyrs, censrec)~1, data = bc)
+  flexsurv_dist <- flexsurvreg(Surv(recyrs, censrec)~1, data = bc, dist = 'lnorm')
 ```

@@ -20,7 +20,7 @@ library(herosurv)
 
 Once you've created survival distributions, herosurv provides various methods for combining modifying them.
 
-## Applying a Hazard Ratio:
+## Apply Hazard Ratio:
 
 Hazard ratios can be applied to a survival distribution using the `apply_hr` function.
 
@@ -30,7 +30,7 @@ Hazard ratios can be applied to a survival distribution using the `apply_hr` fun
   print(dist2)
 ```
 
-## Applying an Odds Ratio
+## Apply Odds Ratio
 
 Odds ratios can be applied to a survival distribution using the `apply_or` function.
 
@@ -40,7 +40,7 @@ Odds ratios can be applied to a survival distribution using the `apply_or` funct
   print(dist2)
 ```
 
-## Applying an Accleration Factor
+## Apply Accleration Factor
 
 Accleration factors, which proportionally scale event times, can be applied using the `apply_af` function.
 
@@ -50,7 +50,7 @@ Accleration factors, which proportionally scale event times, can be applied usin
   print(dist2)
 ```
 
-## Applying a Shift in Time
+## Apply Time Shift
 
 Hazards for a distribution can be shifted forward or backward by a fixed amount of time using the `apply_shift` function. Note that a positive value of shift will move hazards forward and a negative value will shift hazards backward (resulting in an initial period with no event risk).
 
@@ -61,7 +61,7 @@ Hazards for a distribution can be shifted forward or backward by a fixed amount 
 ```
 
 
-## Mixing Distributions Accordingy to Specified Weights
+## Mix Distributions
 
 Survival distributions can be mixed according to specified weights using the `mix` function.
 
@@ -72,7 +72,7 @@ Survival distributions can be mixed according to specified weights using the `mi
   print(dist3)
 ```
 
-## Joining Two or More Distributions at Specified Cutpoints
+## Join Distributions
 
 Survival distributions can be joined together at specified cutpoints using the `join` function.
 
@@ -83,7 +83,7 @@ Survival distributions can be joined together at specified cutpoints using the `
   print(dist3)
 ```
 
-## Combining Two or More Distributions as Indepedent Risks
+## Add Hazards
 
 Survival distributions can be combined as independent risks using the `add_hazards` function. This results in a survival distribution with survival function equal to the product of the survival functions of combined distributions.
 
@@ -94,7 +94,7 @@ Survival distributions can be combined as independent risks using the `add_hazar
   print(dist3)
 ```
 
-## Setting Covariates For Model with Predictors
+## Set Covariates
 
 Models fitted using `survfit` or `flexsurvreg` with predictors can be used to generate a survival distribution representing a subject or set of subjects using `set_covariates`.
 
