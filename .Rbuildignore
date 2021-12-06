@@ -9,3 +9,7 @@ env.RData
 .radian_history
 ^doc$
 ^Meta$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
