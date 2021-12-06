@@ -67,7 +67,8 @@
     
   </div>
 </nav><div class="container template-article">
-<script src="modify-combine-survival-distributions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Modifying &amp; Combining Distributions</h1>
             
@@ -80,7 +81,7 @@
     
 <p>Once you’ve created survival distributions, herosurv provides various methods for combining modifying them.</p>
 <div class="section level2">
-<h2 id="applying-a-hazard-ratio">Applying a Hazard Ratio:<a class="anchor" aria-label="anchor" href="#applying-a-hazard-ratio"></a>
+<h2 id="apply-hazard-ratio">Apply Hazard Ratio:<a class="anchor" aria-label="anchor" href="#apply-hazard-ratio"></a>
 </h2>
 <p>Hazard ratios can be applied to a survival distribution using the <code>apply_hr</code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -92,7 +93,7 @@
 <span class="co">#&gt;     * Baseline Distribution: A Weibull (AFT) distribution (shape = 1.2, scale = 5.3).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="applying-an-odds-ratio">Applying an Odds Ratio<a class="anchor" aria-label="anchor" href="#applying-an-odds-ratio"></a>
+<h2 id="apply-odds-ratio">Apply Odds Ratio<a class="anchor" aria-label="anchor" href="#apply-odds-ratio"></a>
 </h2>
 <p>Odds ratios can be applied to a survival distribution using the <code>apply_or</code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -104,7 +105,7 @@
 <span class="co">#&gt;     * Baseline Distribution: A Weibull (AFT) distribution (shape = 1.2, scale = 5.3).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="applying-an-accleration-factor">Applying an Accleration Factor<a class="anchor" aria-label="anchor" href="#applying-an-accleration-factor"></a>
+<h2 id="apply-accleration-factor">Apply Accleration Factor<a class="anchor" aria-label="anchor" href="#apply-accleration-factor"></a>
 </h2>
 <p>Accleration factors, which proportionally scale event times, can be applied using the <code>apply_af</code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -116,7 +117,7 @@
 <span class="co">#&gt;     * Baseline Distribution: A Weibull (AFT) distribution (shape = 1.2, scale = 5.3).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="applying-a-shift-in-time">Applying a Shift in Time<a class="anchor" aria-label="anchor" href="#applying-a-shift-in-time"></a>
+<h2 id="apply-time-shift">Apply Time Shift<a class="anchor" aria-label="anchor" href="#apply-time-shift"></a>
 </h2>
 <p>Hazards for a distribution can be shifted forward or backward by a fixed amount of time using the <code>apply_shift</code> function. Note that a positive value of shift will move hazards forward and a negative value will shift hazards backward (resulting in an initial period with no event risk).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -128,7 +129,7 @@
 <span class="co">#&gt;     * Baseline Distribution: A Weibull (AFT) distribution (shape = 1.2, scale = 5.3).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="mixing-distributions-accordingy-to-specified-weights">Mixing Distributions Accordingy to Specified Weights<a class="anchor" aria-label="anchor" href="#mixing-distributions-accordingy-to-specified-weights"></a>
+<h2 id="mix-distributions">Mix Distributions<a class="anchor" aria-label="anchor" href="#mix-distributions"></a>
 </h2>
 <p>Survival distributions can be mixed according to specified weights using the <code>mix</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -141,7 +142,7 @@
 <span class="co">#&gt;     * Distribution 2 (20%): A Weibull (AFT) distribution (shape = 1.4, scale = 4.1).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="joining-two-or-more-distributions-at-specified-cutpoints">Joining Two or More Distributions at Specified Cutpoints<a class="anchor" aria-label="anchor" href="#joining-two-or-more-distributions-at-specified-cutpoints"></a>
+<h2 id="join-distributions">Join Distributions<a class="anchor" aria-label="anchor" href="#join-distributions"></a>
 </h2>
 <p>Survival distributions can be joined together at specified cutpoints using the <code>join</code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -154,7 +155,7 @@
 <span class="co">#&gt;     * Segment 2 (t = 3 - ∞): A Weibull (AFT) distribution (shape = 1.4, scale = 4.1).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="combining-two-or-more-distributions-as-indepedent-risks">Combining Two or More Distributions as Indepedent Risks<a class="anchor" aria-label="anchor" href="#combining-two-or-more-distributions-as-indepedent-risks"></a>
+<h2 id="add-hazards">Add Hazards<a class="anchor" aria-label="anchor" href="#add-hazards"></a>
 </h2>
 <p>Survival distributions can be combined as independent risks using the <code>add_hazards</code> function. This results in a survival distribution with survival function equal to the product of the survival functions of combined distributions.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -167,7 +168,7 @@
 <span class="co">#&gt;     * Distribution 2: A Weibull (AFT) distribution (shape = 1.4, scale = 4.1).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="setting-covariates-for-model-with-predictors">Setting Covariates For Model with Predictors<a class="anchor" aria-label="anchor" href="#setting-covariates-for-model-with-predictors"></a>
+<h2 id="set-covariates">Set Covariates<a class="anchor" aria-label="anchor" href="#set-covariates"></a>
 </h2>
 <p>Models fitted using <code>survfit</code> or <code>flexsurvreg</code> with predictors can be used to generate a survival distribution representing a subject or set of subjects using <code>set_covariates</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">

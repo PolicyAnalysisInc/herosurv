@@ -67,7 +67,8 @@
     
   </div>
 </nav><div class="container template-article">
-<script src="defining-survival-distributions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Defining Survival Distributions</h1>
             
@@ -80,7 +81,7 @@
     
 <p>The herosurv package provides functions for defining a wide variety of survival distributions of different types.</p>
 <div class="section level2">
-<h2 id="defining-a-parametric-survival-model">Defining a Parametric Survival Model<a class="anchor" aria-label="anchor" href="#defining-a-parametric-survival-model"></a>
+<h2 id="parametric">Parametric<a class="anchor" aria-label="anchor" href="#parametric"></a>
 </h2>
 <p>The <code>define_surv_param</code> function allows you to define a parametric survival model with specified distribution and parameter values. Parameterization is based on the <a href="https://cran.r-project.org/web/packages/flexsurv/index.html" class="external-link">flexsurv</a> package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -89,7 +90,7 @@
 <span class="co">#&gt; A Weibull (AFT) distribution (shape = 1.2, scale = 5.3).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="defining-a-parametric-mixturenon-mixture-cure-model">Defining a Parametric Mixture/Non-Mixture Cure Model<a class="anchor" aria-label="anchor" href="#defining-a-parametric-mixturenon-mixture-cure-model"></a>
+<h2 id="mixturenon-mixture-cure">Mixture/Non-Mixture Cure<a class="anchor" aria-label="anchor" href="#mixturenon-mixture-cure"></a>
 </h2>
 <p>The <code>define_surv_cure</code> function allows you to define a parametric mixture/non-mixture cure model with specified distribution, cure fraction, and parameter values.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -98,7 +99,7 @@
 <span class="co">#&gt; An exponential mixture cure distribution (theta = 0.21, rate = 0.04).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="defining-a-royston-parmar-spline-model">Defining a Royston &amp; Parmar Spline Model<a class="anchor" aria-label="anchor" href="#defining-a-royston-parmar-spline-model"></a>
+<h2 id="royston-parmar-spline">Royston &amp; Parmar Spline<a class="anchor" aria-label="anchor" href="#royston-parmar-spline"></a>
 </h2>
 <p>The <code>define_surv_spline</code> function allows you to define a Royston &amp; Parmar restricted cubic spline model with the specified scale, parameter values, and knot times.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -111,7 +112,7 @@
 <span class="co">#&gt; A Royston &amp; Parmar spline model of log cumulative hazard with 3 knots (gamma = [-2.08, 2.75, 0.23], knots = [-1.62, 0.57, 1.19]).</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="defining-a-survival-distribution-from-kaplan-meier-output">Defining a Survival Distribution from Kaplan-Meier Output<a class="anchor" aria-label="anchor" href="#defining-a-survival-distribution-from-kaplan-meier-output"></a>
+<h2 id="kaplan-meier">Kaplan-Meier<a class="anchor" aria-label="anchor" href="#kaplan-meier"></a>
 </h2>
 <p>The <code>define_surv_km</code> function allows you to define a survival distribution based on the times and survival probabilities from a Kaplan-Meier.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -132,7 +133,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">6</span>    21     0.78</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="defining-a-survival-distribution-from-a-life-table">Defining a Survival Distribution from a Life-Table<a class="anchor" aria-label="anchor" href="#defining-a-survival-distribution-from-a-life-table"></a>
+<h2 id="life-table">Life-Table<a class="anchor" aria-label="anchor" href="#life-table"></a>
 </h2>
 <p>The <code>define_surv_lifetable</code> function allows you to define a survival distribution based on a life-table, starting age, and gender mix.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -160,13 +161,23 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">5</span>    55 0.002<span style="text-decoration: underline;">4</span> 0.002</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="defining-a-survival-distributions-from-a-custom-function">Defining a Survival Distributions from a Custom Function<a class="anchor" aria-label="anchor" href="#defining-a-survival-distributions-from-a-custom-function"></a>
+<h2 id="custom-function">Custom Function<a class="anchor" aria-label="anchor" href="#custom-function"></a>
 </h2>
 <p>The <code>define_surv_func</code> function allows you to define a survival distribution based on a custom function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R">  <span class="va">custom_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/define_surv_func.html">define_surv_func</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">pweibull</a></span><span class="op">(</span><span class="va">t</span>, <span class="fl">1.2</span>, <span class="fl">20.1</span>, lower.tail <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">custom_dist</span><span class="op">)</span>
 <span class="co">#&gt; A survival distribution based on a custom function: function(t) pweibull(t, 1.2, 20.1, lower.tail = FALSE)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="third-party-support">Third-Party Support<a class="anchor" aria-label="anchor" href="#third-party-support"></a>
+</h2>
+<p>In addition to the functions provided by herosurv, you can use survival distributions created from supported third-party packages.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R">  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/chjackson/flexsurv-dev" class="external-link">flexsurv</a></span><span class="op">)</span>
+  <span class="va">survfit_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/survfit.html" class="external-link">survfit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">recyrs</span>, <span class="va">censrec</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">bc</span><span class="op">)</span>
+  <span class="va">flexsurv_dist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/flexsurv/man/flexsurvreg.html" class="external-link">flexsurvreg</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">recyrs</span>, <span class="va">censrec</span><span class="op">)</span><span class="op">~</span><span class="fl">1</span>, data <span class="op">=</span> <span class="va">bc</span>, dist <span class="op">=</span> <span class="st">'lnorm'</span><span class="op">)</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
