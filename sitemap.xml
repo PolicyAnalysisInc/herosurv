@@ -7,10 +7,19 @@
     <loc>https://policyanalysisinc.github.io/herosurv/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://policyanalysisinc.github.io/herosurv/articles/defining-survival-distributions.html</loc>
+  </url>
+  <url>
+    <loc>https://policyanalysisinc.github.io/herosurv/articles/generating-probabilities.html</loc>
+  </url>
+  <url>
     <loc>https://policyanalysisinc.github.io/herosurv/articles/herosurv.html</loc>
   </url>
   <url>
     <loc>https://policyanalysisinc.github.io/herosurv/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://policyanalysisinc.github.io/herosurv/articles/modify-combine-survival-distributions.html</loc>
   </url>
   <url>
     <loc>https://policyanalysisinc.github.io/herosurv/authors.html</loc>

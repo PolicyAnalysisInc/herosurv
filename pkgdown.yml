@@ -2,8 +2,11 @@ pandoc: 2.16.2
 pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
+  defining-survival-distributions: defining-survival-distributions.html
+  generating-probabilities: generating-probabilities.html
   herosurv: herosurv.html
-last_built: 2021-12-06T21:18Z
+  modify-combine-survival-distributions: modify-combine-survival-distributions.html
+last_built: 2021-12-06T21:58Z
 urls:
   reference: https://policyanalysisinc.github.io/herosurv/reference
   article: https://policyanalysisinc.github.io/herosurv/articles
