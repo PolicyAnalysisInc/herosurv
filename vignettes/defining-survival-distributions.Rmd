@@ -1,0 +1,94 @@
+---
+title: "Defining Survival Distributions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{defining-survival-distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = F, message = F}
+library(herosurv)
+```
+
+The herosurv package provides functions for defining a wide variety of survival distributions of different types.
+
+## Defining a Parametric Survival Model
+
+The `define_surv_param` function allows you to define a parametric survival model with specified distribution and parameter values. Parameterization is based on the [flexsurv](https://cran.r-project.org/web/packages/flexsurv/index.html) package.
+
+```{r}
+  param_surv <- define_surv_param('weibull', shape = 1.2, scale = 5.3)
+  print(param_surv)
+```
+
+## Defining a Parametric Mixture/Non-Mixture Cure Model
+
+The `define_surv_cure` function allows you to define a parametric mixture/non-mixture cure model with specified distribution, cure fraction, and parameter values.
+
+```{r}
+  cure_surv <- define_surv_cure('exp', theta = 0.21, rate = 0.04, mixture = TRUE)
+  print(cure_surv)
+```
+
+## Defining a Royston & Parmar Spline Model
+
+The `define_surv_spline` function allows you to define a Royston & Parmar restricted cubic spline model with the specified scale, parameter values, and knot times.
+
+```{r}
+  spline_dist <- define_surv_spline(
+    scale = 'hazard', # spline used to model log cumulative hazards
+    -2.08, 2.75, 0.23, # parameters
+    -1.62, 0.57, 1.191 # knot times
+  )
+  print(spline_dist)
+```
+
+## Defining a Survival Distribution from Kaplan-Meier Output
+
+The `define_surv_km` function allows you to define a survival distribution based on the times and survival probabilities from a Kaplan-Meier.
+```{r}
+  km_output <- data.frame(
+    times = c(0, 2, 5, 10, 17, 21),
+    surv_prob = c(1, 0.98, 0.94, 0.89, 0.78, 0.78)
+  )
+  km_dist <- define_surv_km(km_output, "times", "surv_prob")
+  print(km_dist)
+```
+
+## Defining a Survival Distribution from a Life-Table
+
+The `define_surv_lifetable` function allows you to define a survival distribution based on a life-table, starting age, and gender mix.
+
+```{r}
+  life_table <- data.frame(
+    age_in_years = c(50, 51, 52, 53, 54, 55),
+    p_death_male = c(0.0021, 0.0022, 0.0022, 0.0023, 0.0022, 0.0024),
+    p_death_female = c(0.0018, 0.0018, 0.0018, 0.0019, 0.0019, 0.0020)
+  )
+  lifetable_dist <- define_surv_lifetable(
+    life_table, # data.frame containing life-table
+    51, # starting age
+    0.48, # percent male
+    age_col = 'age_in_years', # column in life-table containing age
+    male_col = 'p_death_male', # column in life-table containing male p(death)
+    female_col = 'p_death_female' # column in life-table containing female p(death)
+  )
+  print(lifetable_dist)
+```
+
+## Defining a Survival Distributions from a Custom Function
+
+The `define_surv_func` function allows you to define a survival distribution based on a custom function.
+
+```{r}
+  custom_dist <- define_surv_func(function(t) pweibull(t, 1.2, 20.1, lower.tail = FALSE))
+  print(custom_dist)
+```

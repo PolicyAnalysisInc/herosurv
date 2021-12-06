@@ -1,0 +1,39 @@
+---
+title: "Generating Predictions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{generating-probabilities}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo = F, message = F}
+library(herosurv)
+```
+
+Any herosurv survival object, or supported third-party distribution object, can be used to generate predicted values
+
+## Survival Probabilities
+
+Predicted survival probabilities can be generated for a given survival distribution and set of times using the `surv_prob` function.
+
+```{r}
+  dist1 <- define_surv_param('exp', rate = 0.04)
+  surv_prob(dist1, c(0, 1, 2, 3))
+```
+
+## Event Probabilities
+
+Event probabilities can be generated for a given survival distributon and set of time intervals using the `event_prob` function.
+
+```{r}
+  dist1 <- define_surv_cure('exp', theta = 0.21, rate = 0.04, mixture = TRUE)
+  event_prob(dist1, c(0, 1, 2, 3), c(1, 2, 3, 4))
+```
