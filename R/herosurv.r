@@ -13,6 +13,7 @@
 #' @importFrom msm ppexp
 #' @import flexsurv
 #' @import survival
+#' @import herotools
 NULL
 
 #' @tests

@@ -17,23 +17,7 @@ test_that("Function get_and_populate_message() @ L29", {
 })
 
 
-test_that("Function create_list_object() @ L40", {
-  expect_equal(
-   class(create_list_object(c('a','b'),
-   list())), c('a','b')
-  )
-})
-
-
-test_that("Function quoted_list_string() @ L50", {
-  expect_equal(
-   quoted_list_string(c('a','b','c')),
-   '"a", "b", "c"'
-  )
-})
-
-
-test_that("Function truncate_param() @ L76", {
+test_that("Function truncate_param() @ L56", {
   expect_equal(
    truncate_param('foo', c(1)),
    1
@@ -57,36 +41,7 @@ test_that("Function truncate_param() @ L76", {
 })
 
 
-test_that("Function get_indefinite_article() @ L112", {
-  expect_equal(
-   get_indefinite_article('fruit'),
-   'a'
-  )
-  
-  expect_equal(
-   get_indefinite_article('apple'),
-   'an'
-  )
-})
-
-
-test_that("Function create_param_formatter() @ L126", {
-  expect_equal(
-   create_param_formatter(digits = 4)(0.1234567),
-   "0.1235"
-  )
-})
-
-
-test_that("Function clean_factors() @ L143", {
-  expect_equal(
-   clean_factors(data.frame(a = 'foo', b = 1, stringsAsFactors = TRUE)),
-   data.frame(a = 'foo', b = 1, stringsAsFactors = FALSE)
-  )
-})
-
-
-test_that("Function check_times() @ L228", {
+test_that("Function check_times() @ L97", {
   expect_error(
    check_times(c(0,1,2,3), '', ''),
    NA

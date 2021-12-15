@@ -32,7 +32,8 @@ Imports:
     formula.tools,
     rlang,
     magrittr,
-    ggplot2
+    ggplot2,
+    herotools
 Suggests: 
     testthat (>= 3.0.0),
     roxytest,
