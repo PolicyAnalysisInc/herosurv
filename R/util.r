@@ -127,3 +127,31 @@ check_times <- function(time, context, time_name) {
     }
     
 }
+
+
+#' @tests
+#' expect_equal(
+#'  parse_percent_string_to_number(c('45%', '1%', '0.3434%')),
+#'  c(0.45, 0.01, 0.003434)
+#' )
+#' expect_equal(
+#'  parse_percent_string_to_number(c('45%', '1%', '0.3434%', 'dffdf')),
+#'  c('45%', '1%', '0.3434%', 'dffdf')
+#' )
+#' expect_equal(
+#'  parse_percent_string_to_number(x(1, 2, 3)),
+#'  c(1, 2, 3)
+#' )
+parse_percent_string_to_number <- function(x) {
+  if (is.character(x)) {
+    end_with_pct <- all(str_sub(x,-1,-1) == '%')
+    if (end_with_pct) {
+      num <- as.numeric(str_replace(x, '[%]$', ''))
+      if (!any(is.na(num))) {
+        return(num/100)
+      }
+    }
+  }
+  
+  x
+}

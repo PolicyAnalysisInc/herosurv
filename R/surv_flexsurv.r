@@ -95,7 +95,7 @@ surv_prob.flexsurvreg <- function(x, time,  ...) {
   # Join to the full data, then summarize over times.
   if(x$ncovs > 0) {
     surv_df <- surv_df %>%
-      left_join(data_full, by = colnames(data)) %>%
+      left_join(data_full, by = colnames(data), relationship = 'many-to-many') %>%
       group_by(t) %>%
       summarize(value = mean(.data$value))
   }

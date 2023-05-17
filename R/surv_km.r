@@ -27,11 +27,17 @@
 #'      month = c(0, 1, 5, 10),
 #'      p_surv = c(1, 0.9, 0.7, 0.5)
 #' )
+#' df2 <- data.frame(
+#'      month = c(0, 1, 5, 10),
+#'      p_surv = c('100%', '90%', '70%', '50%')
+#' )
 #' dist1 <- define_surv_km(df, 'month', 'p_surv')
 #' dist2 <- define_surv_km(df[c(4,1,3,2), ], 'month', 'p_surv')
 #' dist3 <- define_surv_km(mutate(df, time = month, survival = p_surv))
+#' dist4 <- define_surv_km(df2, 'month', 'p_surv')
 #' expect_equal(dist1, dist2)
 #' expect_equal(dist1, dist3)
+#' expect_equal(dist1, dist4)
 #' 
 #' expect_error(
 #'  define_surv_km(data.frame()),
@@ -99,6 +105,9 @@ define_surv_km <- function(x, time_col = 'time', surv_col = 'survival') {
         )
         stop(err, call. = show_call_error())
     }
+    
+    # Parse survival column to percent, if possible
+    x[[surv_col]] <- parse_percent_string_to_number(x[[surv_col]])
 
     # Check that columns are of correct type
     valid_classes <- c('integer', 'numeric')
