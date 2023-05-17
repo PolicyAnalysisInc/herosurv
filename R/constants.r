@@ -53,7 +53,8 @@ messages <- list(
     add_hazards_wrong_type_dist = 'Error adding hazards, invalid survival distribution provided.',
     check_time_wrong_class = 'Error {context}, "{time_name}" must be numeric.',
     check_time_negative = 'Error {context}, "{time_name}" cannot be negative.',
-    check_time_missing = 'Error {context}, "{time_name}" cannot be NA.'
+    check_time_missing = 'Error {context}, "{time_name}" cannot be NA.',
+    lifetable_mortality_wrong_type = 'Error defining life-table, death rates must be numeric.'
 )
 
 # Possible values for distribution argument to flexsurvreg

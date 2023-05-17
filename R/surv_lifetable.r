@@ -41,6 +41,20 @@
 #'      male = c(0.011, 0.005, 0.003, 0.002),
 #'      female = c(0.010, 0.005, 0.004, 0.002)
 #'  )
+#'  y <- data.frame(
+#'      age = c(0, 1, 2, 3),
+#'      male = c('a', 'b', 'c'),
+#'      female = c(0.010, 0.005, 0.004, 0.002)
+#'  )
+#'  z <- data.frame(
+#'      age = c(0, 1, 2, 3),
+#'      male = c('1.1%', '0.5%, '0.3%'),
+#'      female = c(0.010, 0.005, 0.004, 0.002)
+#'  )
+#'  expect_equal(
+#'      define_surv_lifetable(x, 1, 0.45),
+#'      define_surv_lifetable(z, 1, 0.45)
+#'  )
 #'  expect_equal(
 #'      define_surv_lifetable(x, 1, 0.45)[-4],
 #'      define_surv_lifetable(x[c(4,3,2,1), ], 1, 0.45)[-4]
@@ -64,6 +78,10 @@
 #'  expect_error(
 #'      define_surv_lifetable(x[c(1,3,4), ], 1, 0.45),
 #'      'Error defining life-table, life-table must use constant age bands.'
+#'  )
+#'  expect_error(
+#'      define_surv_lifetable(y, 1, 0.45),
+#'      'Error defining life-table, death rates must be numeric.'
 #'  )
 define_surv_lifetable <- function(x, start_age, percent_male, output_unit = "years", age_col = "age", male_col = "male", female_col = "female", dpy = get_dpy(), percent_female = NULL) {
 
@@ -125,8 +143,17 @@ define_surv_lifetable <- function(x, start_age, percent_male, output_unit = "yea
     indices_to_use <- seq_len(nrow(x)) >= first_index
     cut_points <- x[indices_to_use, ][[age_col]] - start_age
     cut_points[1] <- 0
-    lambdas_male <- (-log(1 - x[[male_col]]) / agediff)[indices_to_use]
-    lambdas_female <- (-log(1 - x[[female_col]]) / agediff)[indices_to_use]
+    
+    pct_male <- parse_percent_string_to_number(x[[male_col]])
+    pct_female <- parse_percent_string_to_number(x[[female_col]])
+    
+    if (!is.numeric(pct_male) || !is.numeric(pct_female)) {
+      err <- get_and_populate_message('lifetable_mortality_wrong_type')
+      stop(err, call. = show_call_error())
+    }
+    
+    lambdas_male <- (-log(1 - pct_male) / agediff)[indices_to_use]
+    lambdas_female <- (-log(1 - pct_female) / agediff)[indices_to_use]
     
     # Create piecewise exponential distributions for male & female
     func_male <- function(time) ppexp(time,  rate = lambdas_male, t = cut_points, lower.tail = F)

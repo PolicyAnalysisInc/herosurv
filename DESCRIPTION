@@ -12,7 +12,7 @@ License: AGPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "roxytest::testthat_roclet"))
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 URL: https://github.com/PolicyAnalysisInc/herosurv,
     http://www.heroapps.io/herosurv,
     https://policyanalysisinc.github.io/herosurv
